@@ -1,6 +1,6 @@
 <?php
 //The name of the following variables start as 'css' to facilitate finding their references in the page php files
-$cssIndex = "css/index.css";
+$cssHomePage = "css/index.css";
 $cssBuying = "css/buying.css";
 $cssOrders = "css/orders.csss";
 $cssReset = "css/reset.css";
@@ -24,4 +24,13 @@ function generatePageHead($title, $cssFile){
         <link rel="stylesheet" type="text/css" href="<?php echo FILE_RESET_CSS; ?>">
     </head>
 <?php
+}
+
+function generatePageFooter(){
+    ?>
+    <footer>
+        Copyright Julien Pontbriand (202135020) 2022.        
+    </footer>
+    </html>
+        <?php
 }
