@@ -24,10 +24,6 @@ generatePageHead($pageTitle, $cssHomePage)
         
     </div>
     
-    
-    
-    
-    
 </body>
 
 

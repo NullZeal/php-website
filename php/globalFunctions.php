@@ -45,3 +45,6 @@ function generatePageHead($title, $cssFile) {
     </html>
     <?php
 }
+function generateNavigationMenu(){
+    
+}
