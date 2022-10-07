@@ -3,6 +3,7 @@
 $cssIndex = "css/index.css";
 $cssBuying = "css/buying.css";
 $cssOrders = "css/orders.csss";
+$cssReset = "css/reset.css";
 
 function pageTop($title, $cssFile){
     ?>
