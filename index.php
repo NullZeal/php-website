@@ -11,7 +11,10 @@ generatePageHead($pageTitle, $cssHomePage)
 
 ?>
 
-
+<body>
+    
+    
+</body>
 
 
 <?php 
