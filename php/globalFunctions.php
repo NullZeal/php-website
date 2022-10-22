@@ -66,7 +66,9 @@ function closeBodyTag(){
 }
 
 function closeHtmlTag(){
-    ?></html><?php
+    ?>
+
+</html><?php
 }
 
 
@@ -84,16 +86,12 @@ function generateNavigationMenu()
     <?php
 }
 
-
-
-
 function generatePageFooter()
 {
     ?>
     <footer>
             Copyright Julien Pontbriand (202135020) <?php echo date("Y") ?>.
-        </footer>
-    
+        </footer>    
     <?php
 }
 
@@ -104,8 +102,6 @@ function generateLogo()
     <img id="logo" src="<?php echo FILE_PICTURES_LOGO; ?>" alt="logo of Julien Pontbriand inc." />
     <?php
 }
-
-
 
 function addCachingPreventionHeaders(){
     header("Expires: Tue, 29, Nov 2024 13:00 GMT");
