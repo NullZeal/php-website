@@ -1,12 +1,38 @@
 body{
     background-color: rgba(122,122,122,0.2);
+    padding:0;
+    margin:0;
 }
+
 
 h1, h2, p{
     text-align: center;
     margin-top: 10px;
+    font-family:monospace, arial;
 }
 
 h1{
-    font-size: 30px;
+    font-size: 5rem;
+}
+
+h2{
+    font-size: 2rem;
+}
+
+p{
+    font-size: 1rem;
+    max-width: 800px;
+    margin-left: 30vw;
+    margin-right:30vw;
+}
+
+
+.companyDescription{
+    margin-top: 15vh;
+}
+
+
+body{
+    width:100vw;
+    height:100vh;
 }

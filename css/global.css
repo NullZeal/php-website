@@ -1,14 +1,46 @@
-/*
-Logo image was open source, taken here:
-https://pixabay.com/vectors/emblem-laurel-leaves-shield-147491/
-*/
+html{
+    font-size: 20px;
+}
 
 #logo{
-    width: 200px;
-    height:200px;
+    
+    /*
+        Logo image was open source, taken here:
+        https://pixabay.com/vectors/emblem-laurel-leaves-shield-147491/
+    */
+    width: 100px;
+    height:100px;
     margin: 20px;
+    /*
+        Here I just calculate 50% of the width of the parent element - half
+        the size of the image, which is 100px
+    */
+    margin-left: calc(50% - 50px);
+}
+
+.navigation{
+    right:0;
+    top:0;
+    height: 8vh;
+    width: 100vw;
+    flex-direction: row;
+    justify-content: right;
+    display: flex;
+    background-color: rgba(166,166,166,1);
+}
+
+.navigation a{
+    height:4vh;
+    text-align: center;
+    display:inline-flex;
+    padding-top: 1vh;
+    padding-bottom: 1vh;
+    padding-left:5%;
+    padding-right:5%;
+    font-size: 2rem;
     
 }
+
 
 footer{
     position: absolute;
@@ -16,4 +48,9 @@ footer{
     right: 0;
     margin-top: 100px;
     padding: 15px;
+}
+
+body{
+    width:100vw;
+    height:100vh;
 }
