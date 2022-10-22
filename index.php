@@ -1,32 +1,46 @@
 <?php
-//Adding a page header to give more info in the html packets sent to the clients
-header('Content-type: text/html; charset=UTF-8');
-
 //Importing global functions from the relative path given in $globalFunctions
 $globalFunctions = 'php/globalFunctions.php';
 require_once $globalFunctions;
 
-//Defining the title for this page
+//Adding a page headers
+addCachingPreventionHeaders();
+addContentTypeHeader();
+
+//Creating a title variable for this page
 $pageTitle = "Home Page";
 
-//Generating the page head with the title and css references 
-generatePageHead($pageTitle, $cssHomePage);
-
-function generateIndexPage() {
+function generateIndexPage()
+{
     ?>
-    <body>
-        <div>
-            <?php generateLogo();?>
-            <h1>Pontbriand inc.</h1>
-            <h2>Privacy at it's best. Because everybody has something to                hide. And that's perfectly fine.</h2>
-            <p>At Pontbriand inc., we believe in a free and secure                      Internet. We offer the world open source technologies to                  compete agains't the products offered by companies that do                not respect your rights.</p>
+
+        <div class="companyDescription">
+            <?php generateLogo() ?>
+            <h1>
+                ShinyBridge VPN
+            </h1>
+            <h2>
+                Privacy at it's best.<br><br>Because everybody has something to hide. And that's perfectly fine.<br>
+            </h2>
+            <p>
+                ShinyBridge VPN believes in a free and secure Internet.
+                We offer the world open source technologies to compete with products offered by companies that do not respect your rights.
+            </p>
 
         </div>
 
-    </body>
     <?php
 }
 
+openDoctypeTag();
+openHtmlTag();
+generatePageHead($pageTitle, FILE_CSS_INDEX);
+openBodyTag();
+
+generateNavigationMenu();
 generateIndexPage();
 generatePageFooter();
-?>
+
+closeBodyTag();
+closeHtmlTag();
+
