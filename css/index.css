@@ -28,11 +28,47 @@ p{
 
 
 .companyDescription{
-    margin-top: 15vh;
+    margin-top: 5vh;
 }
 
 
 body{
     width:100vw;
     height:100vh;
+}
+
+.products{
+    width: 300px;
+    height:300px;
+    margin: 20px;
+    /*
+        Here I just calculate 50% of the width of the parent element - half
+        the size of the image, which is 100px
+    */
+    margin-left: calc(50% - 150px);
+    opacity: 0.8;
+    display:inline-block;
+    border: 2px solid;
+    border-color: black;
+    
+    
+}
+
+.superProduct{
+    width: 600px;
+    height:600px;
+    margin: 20px;
+    /*
+        Here I just calculate 50% of the width of the parent element - half
+        the size of the image, which is 100px
+    */
+    margin-left: calc(50% - 300px);
+    border: 6px solid;
+    border-color: green;
+    display:inline-block;
+}
+
+.title{
+    margin-top:100px;
+    font-size: 2rem;
 }

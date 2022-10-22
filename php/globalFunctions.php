@@ -15,7 +15,15 @@ define("FILE_PHPPAGE_HOME", FOLDER_MAIN . "index.php");
 define("FILE_PHPPAGE_BUYING", FOLDER_MAIN . "buying.php");
 define("FILE_PHPPAGE_ORDERS", FOLDER_MAIN . "orders.php");
 
+
+
 define("FILE_PICTURES_LOGO", FOLDER_PICTURES . "logo.png");
+
+define("FILE_PICTURES_SERVER", FOLDER_PICTURES . "server.jpg");
+define("FILE_PICTURES_ENCRYPTION", FOLDER_PICTURES . "encryption.jpg");
+define("FILE_PICTURES_PROTOCOL", FOLDER_PICTURES . "protocol.jpg");
+define("FILE_PICTURES_ADBLOCK", FOLDER_PICTURES . "adblock.jpg");
+define("FILE_PICTURES_DISK", FOLDER_PICTURES . "disk.jpg");
 
 //Creating a variable for the logo of the company
 $pictureLogo = "pictures/logo.png";
@@ -75,12 +83,6 @@ function generateNavigationMenu()
 
     <?php
 }
-
-
-
-
-
-
 
 
 
