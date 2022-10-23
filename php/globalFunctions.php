@@ -4,6 +4,7 @@
 define("FOLDER_CSS", "css/");
 define("FOLDER_PICTURES", "pictures/");
 define("FOLDER_MAIN", "./");
+define("FOLDER_ERRORS", "errors/");
 
 //Creating a constant for files
 define("FILE_CSS_INDEX", FOLDER_CSS . "index.css");
@@ -24,6 +25,9 @@ define("FILE_PICTURES_ENCRYPTION", FOLDER_PICTURES . "encryption.jpg");
 define("FILE_PICTURES_PROTOCOL", FOLDER_PICTURES . "protocol.jpg");
 define("FILE_PICTURES_ADBLOCK", FOLDER_PICTURES . "adblock.jpg");
 define("FILE_PICTURES_DISK", FOLDER_PICTURES . "disk.jpg");
+
+define("FILE_ERRORS_BUYINGPAGE_WRONGINPUT_LOG", FOLDER_ERRORS . "buyingpage_wronginput_log.txt");
+
 
 //Creating a variable for the logo of the company
 $pictureLogo = "pictures/logo.png";
