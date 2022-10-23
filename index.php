@@ -21,35 +21,37 @@ $productsArray = array(
 //This function generates the html content for the Home Page
 function generateIndexPage($productsArray)
 {
+
     ?>
 
-        <div class="companyDescription">
-        <?php generateLogo() ?>
+    <div class="companyDescription">
+    <?php generateLogo() ?>
         <h1>
-                ShinyBridge VPN
-            </h1>
-            <h2>
-                Privacy at it's best.<br><br>Because everybody has something to hide.
-                And that's perfectly fine.<br>
-            </h2>
-            <p>
-                ShinyBridge VPN believes in a free and secure Internet.
-                We offer the world open source technologies to compete 
-                with products offered by companies that do not respect your rights.
-            </p>
-            <?php generateImageSection($productsArray);?>
+            ShinyBridge VPN
+        </h1>
+        <h2>
+            Privacy at it's best.<br><br>Because everybody has something to hide.
+            And that's perfectly fine.<br>
+        </h2>
+        <p>
+            ShinyBridge VPN believes in a free and secure Internet.
+            We offer the world open source technologies to compete 
+            with products offered by companies that do not respect your rights.
+        </p>
+    <?php generateImageSection($productsArray); ?>
 
-        </div>
+    </div>
 
     <?php
 }
 
 //This function generates the section of the home page that has an image generator
-function generateImageSection($productsArray){
-    $randomNumber = random_int(0,4);
+function generateImageSection($productsArray)
+{
+    $randomNumber = random_int(0, 4);
     $productDescription = "";
     $imageClass = "products";
-    
+
     switch ($randomNumber) {
         case 0:
             $productDescription = "integrated, VPN-level ad protection";
@@ -70,19 +72,19 @@ function generateImageSection($productsArray){
         default :
             echo "";
     }
-    
+
     ?>
 
-            <section>
-                <p class="title">We offer <?php echo $productDescription ?></p>
-            
-                <a href="https://www.mozilla.org/en-US/products/vpn/">
-                    <img class="<?php echo $imageClass ?>"
-                         loading="lazy" 
-                         src="<?php echo $productsArray[$randomNumber]?>" 
-                         alt="An image representing <?php echo $productDescription ?>"/>
-                </a>
-            </section><?php
+    <section>
+        <p class="title">We offer <?php echo $productDescription ?></p>
+
+        <a href="https://www.mozilla.org/en-US/products/vpn/">
+            <img class="<?php echo $imageClass ?>"
+                 loading="lazy" 
+                 src="<?php echo $productsArray[$randomNumber] ?>" 
+                 alt="An image representing <?php echo $productDescription ?>"/>
+        </a>
+    </section><?php
 }
 // ###Now generating the actual page###
 // The next 4 functions generate the html for everything that's before the body

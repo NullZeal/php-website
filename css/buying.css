@@ -1,7 +1,7 @@
 #required{
     display:block;
     color:red;
-    margin-left:20vw;
+    margin-left:60vw;
 }
 
 #red {
@@ -9,11 +9,21 @@
 }
 
 #buyingForm{
-    margin-left:10vw;
-    margin-right:10vw;
+    margin-left:20vw;
+    margin-right:20vw;
     background-color: rgba(30,30,100, 0.2);
+    border-radius: 10px;
 }
 
 label{
-    margin:50px;
+    margin:10px;
+    vertical-align: top;
+    font-family:monospace, arial;
+}
+
+body{
+    background-color: rgba(33,122,122,0.2);
+}
+.confirmation{
+    margin-left:43vw;
 }

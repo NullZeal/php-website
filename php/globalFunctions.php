@@ -90,7 +90,7 @@ function generatePageFooter()
 {
     ?>
     <footer>
-            Copyright Julien Pontbriand (202135020) <?php echo date("Y") ?>.
+            Copyright Julien Pontbriand (202135020) <?php echo date("Y") ?>
         </footer>    
     <?php
 }
