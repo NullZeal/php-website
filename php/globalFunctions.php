@@ -31,8 +31,6 @@ define("FILE_PICTURES_ADBLOCK", FOLDER_PICTURES . "adblock.jpg");
 define("FILE_PICTURES_DISK", FOLDER_PICTURES . "disk.jpg");
 
 
-
-
 //Creating a variable for the logo of the company
 $pictureLogo = "pictures/logo.png";
 

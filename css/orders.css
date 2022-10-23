@@ -1,0 +1,23 @@
+*{
+    font-family: monospace, arial;
+}
+
+noOrdersFound{
+    width: 100vw;
+    text-align: center;
+}
+
+table{
+    border-spacing: 30px;
+    border:2px solid black;
+}
+
+td{
+    padding-left: 50px;
+    padding-right: 50px;
+    border:2px solid black;
+}
+ 
+body{
+    background-color: rgba(11,222,222,0.2)
+}

@@ -275,8 +275,8 @@ if (isset($_POST["buyingPage"])) {
         $orderConfirmation = "Order submitted successfully!";
 
         $subtotal = (float) $quantity * (float) $price;
-        $taxAmount = $subtotal * (TAX_LOCAL_TAXES_IN_PERCENTAGE / 100);
-        $total = $subtotal + $taxAmount;
+        $taxAmount = round($subtotal * (TAX_LOCAL_TAXES_IN_PERCENTAGE / 100), 2);
+        $total = round(($subtotal + $taxAmount), 2);
         
         $orderArray = array(
             $productCode,
@@ -289,7 +289,7 @@ if (isset($_POST["buyingPage"])) {
             $subtotal,
             $taxAmount,
             $total);
-            
+        
         $orderArrayJson = json_encode($orderArray);
         
         file_put_contents(FILE_TXT_ORDERS, $orderArrayJson . PHP_EOL, FILE_APPEND);
