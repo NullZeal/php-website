@@ -1,3 +1,7 @@
+*{
+    font-family: monospace, arial;
+}
+
 #required{
     display:block;
     color:red;
@@ -16,14 +20,32 @@
 }
 
 label{
-    margin:10px;
+    display:inline-block;
+    margin: 20px 0 0 50px;
     vertical-align: top;
-    font-family:monospace, arial;
+}
+
+input, textarea{
+    margin-top:20px;
 }
 
 body{
     background-color: rgba(33,122,122,0.2);
 }
 .confirmation{
-    margin-left:43vw;
+    color: green;
+    background-color: rgba(255,255,255,0.4);
+    width:100vw;
+    text-align: center;
+    font-size: 2rem;
+}
+
+#submitButton{
+    margin-left: calc(50vw - 150px - 20vw);
+    margin-bottom: 50px;
+    height: 150px;
+    width: 300px;
+    background-color: rgba(33,66,66, 0.5);
+    font-size: 2rem;
+    
 }
