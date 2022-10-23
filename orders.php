@@ -8,25 +8,123 @@ addCachingPreventionHeaders();
 addContentTypeHeader();
 
 //Creating a title variable for this page
-$pageTitle = "Buying Page";
+$pageTitle = "Orders Page";
+
+function generateOrderRows(){
+    
+    if(file_exists(FILE_JSON_ORDERS)){
+        
+        $ordersFile = file_get_contents(FILE_JSON_ORDERS);
+        $orders = json_decode($ordersFile, true);
+        var_dump($orders);
+        
+        foreach($orders as $order){ ?>
+                <tr>
+                    <td>
+                    <?php echo $order[0] ?>
+                    </td>
+                    
+                    <td>
+                        First Name
+                    </td>
+                    
+                    <td>
+                        Last Name
+                    </td>
+                    
+                    <td>
+                        City
+                    </td>
+                       
+                    <td>
+                        Comments
+                    </td>
+                    
+                    <td>
+                        Price
+                    </td>
+                    
+                    <td>
+                        Quantity
+                    </td>
+                    
+                    <td>
+                        Subtotal
+                    </td>
+                    
+                    <td>
+                        Taxes
+                    </td>
+                    
+                    <td>
+                        Grand Total
+                    </td>
+                </tr>
+                <?php
+        }
+        
+        
+    }
+    else{
+        
+        
+    }
+
+    
+
+}
 
 function generateOrdersPage()
 {
     ?>
 
-        <div class="companyDescription">
+        <div class="ordersTable">
         <?php generateLogo() ?>
-        <h1>
-                ShinyBridge VPN
-            </h1>
-            <h2>
-                Privacy at it's best.<br><br>Because everybody has something to hide. And that's perfectly fine.<br>
-            </h2>
-            <p>
-                ShinyBridge VPN believes in a free and secure Internet.
-                We offer the world open source technologies to compete with products offered by companies that do not respect your rights.
-            </p>
-            <?php generateImageSection($productsArray);?>
+            <table>
+                <tr>
+                    <th>
+                        Product ID
+                    </th>
+                    
+                    <th>
+                        First Name
+                    </th>
+                    
+                    <th>
+                        Last Name
+                    </th>
+                    
+                    <th>
+                        City
+                    </th>
+                       
+                    <th>
+                        Comments
+                    </th>
+                    
+                    <th>
+                        Price
+                    </th>
+                    
+                    <th>
+                        Quantity
+                    </th>
+                    
+                    <th>
+                        Subtotal
+                    </th>
+                    
+                    <th>
+                        Taxes
+                    </th>
+                    
+                    <th>
+                        Grand Total
+                    </th>
+                </tr>
+                <?php generateOrderRows();?>
+                
+            </table>
 
         </div>
 

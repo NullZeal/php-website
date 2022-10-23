@@ -267,7 +267,7 @@ if (isset($_POST["buyingPage"])) {
     }
 
     foreach ($errorsArray as $error) {
-        file_put_contents(FILE_ERRORS_BUYINGPAGE_WRONGINPUT_LOG, $error, FILE_APPEND);
+        file_put_contents(FILE_TXT_ERRORS_BUYINGPAGE_WRONGINPUT_LOG, $error, FILE_APPEND);
     }
 
     #if no errors occured 
@@ -285,12 +285,14 @@ if (isset($_POST["buyingPage"])) {
             $city,
             $comments,
             $price,
-            $quantity);
+            $quantity,
+            $subtotal,
+            $taxAmount,
+            $total);
             
         $orderArrayJson = json_encode($orderArray);
-        var_dump($orderArrayJson);
         
-        file_put_contents(FILE_JSON_ORDERS, $orderArrayJson . PHP_EOL, FILE_APPEND);
+        file_put_contents(FILE_TXT_ORDERS, $orderArrayJson . PHP_EOL, FILE_APPEND);
 
         $productCode = "";
         $firstName = "";
