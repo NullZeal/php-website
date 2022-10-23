@@ -46,6 +46,8 @@ define("MAX_VALUE_PRICE", 10000);
 define("MIN_VALUE_QUANTITY", 1);
 define("MAX_VALUE_QUANTITY", 99);
 
+define("TAX_LOCAL_TAXES_IN_PERCENTAGE", 16.1);
+
 function isCurrency($number)
 {
     // function taken from 
@@ -131,7 +133,7 @@ if (isset($_POST["buyingPage"])) {
             $productCode,
             Fields::ProductCode,
             $validationProductCode);
-    } elseif (mb_stripos($productCode, IMPERATIVE_LETTERS_IN_PRODUCTCODE) == false) {
+    } elseif (!is_numeric(mb_stripos($productCode, IMPERATIVE_LETTERS_IN_PRODUCTCODE))) {
         $validationProductCode = "Product code must contain the letters PRD";
         $errorsOccured = true;
         pushErrorWithTimeToArray(
@@ -273,6 +275,22 @@ if (isset($_POST["buyingPage"])) {
         $orderConfirmation = "Order submitted successfully!";
 
         $subtotal = (float) $quantity * (float) $price;
+        $taxAmount = $subtotal * (TAX_LOCAL_TAXES_IN_PERCENTAGE / 100);
+        $total = $subtotal + $taxAmount;
+        
+        $orderArray = array(
+            $productCode,
+            $firstName,
+            $lastName,
+            $city,
+            $comments,
+            $price,
+            $quantity);
+            
+        $orderArrayJson = json_encode($orderArray);
+        var_dump($orderArrayJson);
+        
+        file_put_contents(FILE_JSON_ORDERS, $orderArrayJson . PHP_EOL, FILE_APPEND);
 
         $productCode = "";
         $firstName = "";

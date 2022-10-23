@@ -5,6 +5,7 @@ define("FOLDER_CSS", "css/");
 define("FOLDER_PICTURES", "pictures/");
 define("FOLDER_MAIN", "./");
 define("FOLDER_ERRORS", "errors/");
+define("FOLDER_JSON", "json/");
 
 //Creating a constant for files
 define("FILE_CSS_INDEX", FOLDER_CSS . "index.css");
@@ -15,6 +16,9 @@ define("FILE_CSS_GLOBAL", FOLDER_CSS . "global.css");
 define("FILE_PHPPAGE_HOME", FOLDER_MAIN . "index.php");
 define("FILE_PHPPAGE_BUYING", FOLDER_MAIN . "buying.php");
 define("FILE_PHPPAGE_ORDERS", FOLDER_MAIN . "orders.php");
+
+
+define("FILE_JSON_ORDERS", FOLDER_JSON . "orders.json");
 
 
 
