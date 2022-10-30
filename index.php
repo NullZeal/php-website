@@ -7,8 +7,9 @@
 #
 #Julien Pontbriand (2135020)    Oct. 22, 2022    Added function calls to generathe page headers. Added the necessary functions and variables to generate a random image out of 5 preselected image on the home page. The function to generate the page-specific HTML sections of this file has been moved back inside of it.
 #
-
-#Julien Pontbriand (2135020)    Oct. 29, 2022    Added error handling.
+#Julien Pontbriand (2135020)    Oct. 29, 2022    Added error handling. Minor refactoring.
+#
+##Julien Pontbriand (2135020)    Oct. 30, 2022    Final refactoring and indent control. Added more comments to the file.
 #-------------------------------------------------------------------
 
 #Importing global functions from the relative path given in $globalFunctions
@@ -21,7 +22,6 @@ addErrorHandling();
 #Test it with :
 #   Trigger_error("custom error", E_USER_ERROR); #generate error
 #   Throw new Exception("custom exception"); #generate exception
-
 //Adding page headers
 addCachingPreventionHeaders();
 addContentTypeHeader();
@@ -43,34 +43,29 @@ function generateIndexPage($productsArray)
 
     ?>
 
-    <div class="companyDescription">
-    <?php generateLogo() ?>
-        <h1>
-            ShinyBridge VPN
-        </h1>
-        <h2>
-            Privacy at it's best.<br><br>Because everybody has something to hide.
-            And that's perfectly fine.<br>
-        </h2>
-        <p>
-            ShinyBridge VPN believes in a free and secure Internet.
-            We offer the world open source technologies to compete 
-            with products offered by companies that do not respect your rights.
-        </p>
-    <?php generateImageSection($productsArray); ?>
-
-    </div>
-
+            <div class="companyDescription">
+            <?php generateLogo() ?>
+            <h1>ShinyBridge VPN</h1>
+                <h2>
+                    Privacy at it's best.<br><br>Because everybody has something
+                    to hide. And that's perfectly fine.<br>
+                </h2>
+                <p>
+                    ShinyBridge VPN believes in a free and secure Internet. We 
+                    offer the world open source technologies to compete with 
+                    products offered by companies that do not respect your 
+                    rights.
+                </p>
+                <?php generateImageSection($productsArray); ?></div>
     <?php
 }
 
 //This function generates the section of the home page that has an image generator
 function generateImageSection($productsArray)
 {
-    $randomNumber = random_int(0, 4);
+    $randomNumber = random_int(0, 4); #index 0 to 4 means 5 items possible
     $productDescription = "";
     $imageClass = "products";
-
 
     switch ($randomNumber) {
         case 0:
@@ -95,16 +90,16 @@ function generateImageSection($productsArray)
 
     ?>
 
-    <section>
-        <p class="title">We offer <?php echo $productDescription ?></p>
+                <section>
+                    <p class="title">We offer <?php echo $productDescription ?></p>
 
-        <a href="https://www.mozilla.org/en-US/products/vpn/">
-            <img class="<?php echo $imageClass ?>"
-                 loading="lazy" 
-                 src="<?php echo $productsArray[$randomNumber] ?>" 
-                 alt="An image representing <?php echo $productDescription ?>"/>
-        </a>
-    </section><?php
+                    <a href="https://www.mozilla.org/en-US/products/vpn/">
+                        <img class="<?php echo $imageClass ?>"
+                            loading="lazy" 
+                            src="<?php echo $productsArray[$randomNumber] ?>" 
+                            alt="An image representing <?php echo $productDescription ?>"/>
+                    </a>
+                </section><?php
 }
 // ###Now generating the actual page###
 // The next 4 functions generate the html for everything that's before the body

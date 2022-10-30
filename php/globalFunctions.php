@@ -1,5 +1,5 @@
 <?php
-
+#-------------------------------------------------------------------
 #Revision History
 #
 #DEVELOPER                      DATE             Comments
@@ -8,8 +8,11 @@
 #Julien Pontbriand (2135020)    Oct. 22, 2022    Refactored the constants for the folders and files. Added functions to open and close some HTML tags. Added a function to generate the navigation panel. 
 #
 #Julien Pontbriand (2135020)    Oct. 23, 2022    Added functions to manage errors on pages. Minor refactoring.
-
-#Julien Pontbriand (2135020)    Oct. 29, 2022    Removed logo variable. Refactored error functions. Added constant for download button
+#
+#Julien Pontbriand (2135020)    Oct. 29, 2022    Removed logo variable. Refactored error functions. Added constant for download button. Minor code refactoring.
+#
+#Julien Pontbriand (2135020)    Oct. 29, 2022    Added more code comments to the file. Indendation has been reviewed.
+#-------------------------------------------------------------------
 
 #CONSTANTS - PLEASE PUT TO FALSE IF NOT DEBUGGING!
 define("DEBUGGING", true);
@@ -40,7 +43,6 @@ define("FILE_TXT_ERRORS_ERRORS_LOG",
 define("FILE_TXT_ERRORS_EXCEPTIONS_LOG", 
     FOLDER_TXT_ERRORS . "exceptions_logs.txt");
 
-
 define("FILE_PICTURES_LOGO", FOLDER_PICTURES . "logo.png");
 
 define("FILE_PICTURES_SERVER", FOLDER_PICTURES . "server.jpg");
@@ -50,33 +52,26 @@ define("FILE_PICTURES_ADBLOCK", FOLDER_PICTURES . "adblock.jpg");
 define("FILE_PICTURES_DISK", FOLDER_PICTURES . "disk.jpg");
 
 
-//The function generatePageHead() will take both a title and a css argument, defined in their respective php pages, to ensure a dynamic approach. This function is created to generate the html boilerplates dynamically. 
-
+#generates the doctype tag
 function openDoctypeTag(){
     ?><!DOCTYPE html><?php
 }
 
+#generates the html tag
 function openHtmlTag(){
     ?>
 
 <html lang="en"><?php
 }
 
-function generatePageHead($title, $cssFile)
-{
+#closes html tag
+function closeHtmlTag(){
+    ?>
 
-?>  
-    <head>
-        <meta charset="UTF-8">
-        <meta title="Home Page"><title><?php echo $title; ?></title>
-<?php //Below I added  the global CSS file as a constant with the define in the top of the page to show that I can use constants to reference a file.  ?>
-        <link rel="stylesheet" type="text/css" href="<?php echo FILE_CSS_GLOBAL; ?>">
-<?php //Below I added the page specific css file last with the variable taken from the function parameter  ?>
-        <link rel="stylesheet" type="text/css" href="<?php echo $cssFile; ?>">
-    </head>
-<?php
+</html><?php
 }
 
+#generates the body tag
 function openBodyTag(){
     ?>
     
@@ -98,13 +93,24 @@ function closeBodyTag(){
     ?></body><?php
 }
 
-function closeHtmlTag(){
-    ?>
+#The function generatePageHead() will take both a title and a css argument, 
+#defined in their respective php pages, to ensure a dynamic approach. 
+function generatePageHead($title, $cssFile)
+{
 
-</html><?php
+?>  
+    <head>
+        <meta charset="UTF-8">
+        <meta title="Home Page"><title><?php echo $title; ?></title>
+<?php //Below I added  the global CSS file as a constant with the define in the top of the page to show that I can use constants to reference a file.  ?>
+        <link rel="stylesheet" type="text/css" href="<?php echo FILE_CSS_GLOBAL; ?>">
+<?php //Below I added the page specific css file last with the variable taken from the function parameter  ?>
+        <link rel="stylesheet" type="text/css" href="<?php echo $cssFile; ?>">
+    </head>
+<?php
 }
 
-
+#This function generates the navigation menu
 function generateNavigationMenu()
 {
 
@@ -119,6 +125,7 @@ function generateNavigationMenu()
     <?php
 }
 
+#This function generates the footer menu
 function generatePageFooter()
 {
     ?>    <footer>
@@ -128,11 +135,11 @@ function generatePageFooter()
     <?php
 }
 
+#This function generates a logo image
 function generateLogo()
 {
 
-    ?>
-    <img id="<?php 
+    ?>    <img id="<?php 
     
             if (isset($_GET["action"]) && strtolower($_GET["action"] == "print")) 
             {
@@ -145,22 +152,27 @@ function generateLogo()
     <?php
 }
 
+#This function adds caching headers
 function addCachingPreventionHeaders(){
     header("Expires: Tue, 29, Nov 2024 13:00 GMT");
     header("Cache-Control: no-cache");
     header("Pragma: no-cache");
 }
 
+#This function adds a content header
 function addContentTypeHeader(){
     header('Content-type: text/html; charset=UTF-8');
 }
 
+#This function adds content handling functions to the page
 function addErrorHandling(){
     error_reporting(E_ALL);
     set_error_handler("manageError");
     set_exception_handler("manageException");
 }
 
+#This function manages errors catched by the global error_reporting mechanism
+#It reacts according to a debug setting and registers errors into a log ffile
 function manageError($errorNumber, $errorString, $errorFile, $errorLineNumber){
     
      if (DEBUGGING) {
@@ -182,6 +194,8 @@ function manageError($errorNumber, $errorString, $errorFile, $errorLineNumber){
     die();
 }
 
+#This function manages exceptions catched by the global error_reporting mechanism
+#It reacts according to a debug setting and registers exceptions into a log file
 function manageException($errorObject)
 {
     if (DEBUGGING) {
