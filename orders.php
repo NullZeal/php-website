@@ -1,7 +1,28 @@
 <?php
+#-------------------------------------------------------------------
+#Revision History
+#
+#DEVELOPER                      DATE             Comments
+#Julien Pontbriand (2135020)    Oct. 7, 2022     File creation. Was quick to do.
+#
+#Julien Pontbriand (2135020)    Oct. 22, 2022    Added a link to the global functions page. Added function calls to generate the page headers. Created a title for the page (with the wrong name). Added a function to generate this page's unique html, as a copy / paste of my own index page. Called functions to generate the page.
+#
+#Julien Pontbriand (2135020)    Oct. 23, 2022    Refactored the page almost completely.  9h long session. Added a function to generate the rows of the table. Refactorted the function to display this page's html.
+
+#Julien Pontbriand (2135020)    Oct. 29, 2022    Added error handling.
+
+#-------------------------------------------------------------------
+
 //Importing global functions from the relative path given in $globalFunctions
 $globalFunctions = 'php/globalFunctions.php';
 require_once $globalFunctions;
+
+//Adding error handling
+addErrorHandling();
+#To enter DEBUG mode, set DEBUGGING to true in the globalFunctions.php file
+#Test it with :
+#   Trigger_error("custom error", E_USER_ERROR); #generate error
+#   Throw new Exception("custom exception"); #generate exception
 
 //Adding a page headers
 addCachingPreventionHeaders();
@@ -20,7 +41,27 @@ function generateOrderRows()
             <tr>
                     <?php 
                         foreach ($orderArray as $order => $value) { ?>
-                        <td>
+                        <td id="<?php 
+                        
+                        if($order == 7){{
+                            if($value < 100){
+                                echo "tdRedColor";
+                            }
+                            elseif($value < 999.991){
+                                echo "tdYellowColor";
+                            }
+                            elseif($value >= 1000){
+                                echo "tdYellowColor";
+                            }
+                        }
+                            
+                        }
+                                                
+                            echo "tdRedColor";
+                        }
+                        
+                        
+                        ?>">
                         <?php 
                         if($order == 5 || $order == 7 || $order == 8 || $order == 9){
                             echo $value . "$";
@@ -86,6 +127,10 @@ function generateOrdersPage()
                 </tr>
             <?php generateOrderRows(); ?>
             </table>
+            <a id="downloadButtonContainer" href="txt/cheatsheet.html" download="CheatSheet.html">
+                <button id="btnDownload">Download the CheatSheet!</button>
+            </a>
+
 
         </div>
 

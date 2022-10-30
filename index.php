@@ -1,7 +1,26 @@
 <?php
-//Importing global functions from the relative path given in $globalFunctions
+#-------------------------------------------------------------------
+#Revision History
+#
+#DEVELOPER                      DATE             Comments
+#Julien Pontbriand (2135020)    Oct. 7, 2022     File creation. Added a link to the global functions file. Added a title. Added a function call to generate the HTML head. Added a function call to generate the Home page. Added a function call to generate the footer. 5h long code session.
+#
+#Julien Pontbriand (2135020)    Oct. 22, 2022    Added function calls to generathe page headers. Added the necessary functions and variables to generate a random image out of 5 preselected image on the home page. The function to generate the page-specific HTML sections of this file has been moved back inside of it.
+#
+
+#Julien Pontbriand (2135020)    Oct. 29, 2022    Added error handling.
+#-------------------------------------------------------------------
+
+#Importing global functions from the relative path given in $globalFunctions
 $globalFunctions = 'php/globalFunctions.php';
 require_once $globalFunctions;
+
+//Adding error handling
+addErrorHandling();
+#To enter DEBUG mode, set DEBUGGING to true in the globalFunctions.php file
+#Test it with :
+#   Trigger_error("custom error", E_USER_ERROR); #generate error
+#   Throw new Exception("custom exception"); #generate exception
 
 //Adding page headers
 addCachingPreventionHeaders();

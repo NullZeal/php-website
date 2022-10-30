@@ -1,6 +1,20 @@
-*{
-    font-family: monospace, arial;
-}
+/*
+
+#Revision History
+#
+#DEVELOPER                      DATE             Comments
+#Julien Pontbriand (2135020)    Oct. 7, 2022     File creation.
+#
+#Julien Pontbriand (2135020)    Oct. 22, 2022    Added ID css or many tags, including the requird, red, buyingform, label and body tags. Added css for the confirmation class. 
+#
+#Julien Pontbriand (2135020)    Oct. 23, 2022    Refactored some tags, added css for the submit button, input and textarea tags. Added some css for all tags with the star sign).
+
+
+
+
+
+
+*/
 
 #required{
     display:block;
@@ -23,6 +37,7 @@ label{
     display:inline-block;
     margin: 20px 0 0 50px;
     vertical-align: top;
+    font-size:1.5rem;
 }
 
 input, textarea{

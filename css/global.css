@@ -1,12 +1,26 @@
-html{
-    font-size: 20px;
-}
+/*
 
-a{
+#Revision History
+#
+#DEVELOPER                      DATE             Comments
+#Julien Pontbriand (2135020)    Oct. 7, 2022     File creation. Added some css for the logo and the footer tags.
+#
+#Julien Pontbriand (2135020)    Oct. 22, 2022    Added css for the html, anchor, navigation and body tags. 
+#
+#Julien Pontbriand (2135020)    Oct. 23, 2022    Refactored some tags.
+
+
+*/
+
+*{
     font-family:monospace, arial;
 }
 
-#logo{
+#bodyPrint{
+    background-color: white;
+}
+
+#logo, #logoPrint{
     
     width: 100px;
     height:100px;
@@ -16,6 +30,11 @@ a{
         the size of the image, which is 100px
     */
     margin-left: calc(50% - 50px);
+}
+
+#logoPrint{
+    opacity: 0.3;
+    
 }
 
 .navigation{
@@ -49,6 +68,7 @@ footer{
     margin-top: 150px;
     padding: 15px;
     text-align: right;
+    font-size: 2rem;
 }
 
 body{

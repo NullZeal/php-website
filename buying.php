@@ -1,7 +1,29 @@
 <?php
-//Importing global functions from the relative path given in $globalFunctions
+#-------------------------------------------------------------------
+#Revision History
+#
+#DEVELOPER                      DATE             Comments
+#Julien Pontbriand (2135020)    Oct. 7, 2022     File creation. Was quick to do.
+#
+#Julien Pontbriand (2135020)    Oct. 22, 2022    Added a link to the global functions page. Added function calls to generate the page headers. Created a title for the page. Added a function to generate this page's form. Added validations to the form inputs according to the requirements. 6h:30 long session.
+#
+#Julien Pontbriand (2135020)    Oct. 23, 2022    Added constants to define the validation requirements. Added comments to explain how I used a regex function. Added more validation content. Added a function that records entries on error. Added a class to contain const values (investigated this possibility). Validated proper HTML source code generation. 9h long session. 
+
+#Julien Pontbriand (2135020)    Oct. 29, 2022    Added error handling.
+
+#-------------------------------------------------------------------
+
+#Importing global functions from the relative path given in $globalFunctions
+
 $globalFunctions = 'php/globalFunctions.php';
 require_once $globalFunctions;
+
+//Adding error handling
+addErrorHandling();
+#To enter DEBUG mode, set DEBUGGING to true in the globalFunctions.php file
+#Test it with :
+#   Trigger_error("custom error", E_USER_ERROR); #generate error
+#   Throw new Exception("custom exception"); #generate exception
 
 //Adding a page headers
 addCachingPreventionHeaders();

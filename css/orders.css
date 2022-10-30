@@ -1,23 +1,61 @@
-*{
-    font-family: monospace, arial;
+/*
+
+#Revision History
+#
+#DEVELOPER                      DATE             Comments
+#Julien Pontbriand (2135020)    Oct. 7, 2022     File creation.
+#
+#Julien Pontbriand (2135020)    Oct. 23, 2022    Added css for all tags with the star symbol, for html, body, noOrdersFound, table, td tags
+
+
+*/
+
+html body{
+    font-size: 1.5rem;
 }
 
-noOrdersFound{
+
+#noOrdersFound{
     width: 100vw;
     text-align: center;
 }
 
 table{
-    border-spacing: 30px;
-    border:2px solid black;
+    width: 100vw;
+    border-top:2px solid black;
+    border-bottom:2px solid black;
 }
 
 td{
-    padding-left: 50px;
-    padding-right: 50px;
-    border:2px solid black;
-}
+    border:1px solid grey;
+    font-size: 15px;
+    text-align: center;
+    padding: 0px;
+    
+} 
  
 body{
     background-color: rgba(11,222,222,0.2)
+}
+
+#downloadButtonContainer{
+    display:block;
+    width: 100vw;
+    height:10vh;
+    margin-bottom: 50vh;
+}
+
+#btnDownload{
+    width: 30vw;
+    position: absolute;
+    margin-left: calc(50% - 15vw);
+    margin-top: 5vh;
+    font-weight: bolder;
+    font-size:2rem;
+    background-color: rgba(44,44,44,0.3);
+    border-radius: 10px;
+}
+
+#thColoredSubtotal{
+    
 }

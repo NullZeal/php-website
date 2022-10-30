@@ -1,5 +1,19 @@
 <?php
 
+#Revision History
+#
+#DEVELOPER                      DATE             Comments
+#Julien Pontbriand (2135020)    Oct. 7, 2022     File creation. Added constants for 2 folders. Added constant for some files. Added variable for a file's path. Added a function to generate page headers in other files. Added a function to generate page footers. Added a function to generate a logo.
+#
+#Julien Pontbriand (2135020)    Oct. 22, 2022    Refactored the constants for the folders and files. Added functions to open and close some HTML tags. Added a function to generate the navigation panel. 
+#
+#Julien Pontbriand (2135020)    Oct. 23, 2022    Added functions to manage errors on pages. Minor refactoring.
+
+#Julien Pontbriand (2135020)    Oct. 29, 2022    Removed logo variable. Refactored error functions. Added constant for download button
+
+#CONSTANTS - PLEASE PUT TO FALSE IF NOT DEBUGGING!
+define("DEBUGGING", false);
+
 //Creating a constant for folders
 define("FOLDER_CSS", "css/");
 define("FOLDER_PICTURES", "pictures/");
@@ -18,8 +32,9 @@ define("FILE_PHPPAGE_BUYING", FOLDER_MAIN . "buying.php");
 define("FILE_PHPPAGE_ORDERS", FOLDER_MAIN . "orders.php");
 
 define("FILE_TXT_ORDERS", FOLDER_TXT. "orders.txt");
+define("FILE_TXT_CHEATSHEET", FOLDER_TXT. "cheatsheet.txt");
 define("FILE_TXT_ERRORS_BUYINGPAGE_WRONGINPUT_LOG", 
-    FOLDER_TXT . FOLDER_TXT_ERRORS . "buyingpage_wronginput_log.txt");
+    FOLDER_TXT_ERRORS . "buyingpage_wronginput_log.txt");
 
 
 define("FILE_PICTURES_LOGO", FOLDER_PICTURES . "logo.png");
@@ -31,10 +46,7 @@ define("FILE_PICTURES_ADBLOCK", FOLDER_PICTURES . "adblock.jpg");
 define("FILE_PICTURES_DISK", FOLDER_PICTURES . "disk.jpg");
 
 
-//Creating a variable for the logo of the company
-$pictureLogo = "pictures/logo.png";
-
-//The function generatePageHead() will take both a title and a css argument, defined in their respective php pages, to ensure a dynamic approach. This function is created to generate the html boilerplates dynamically.
+//The function generatePageHead() will take both a title and a css argument, defined in their respective php pages, to ensure a dynamic approach. This function is created to generate the html boilerplates dynamically. 
 
 function openDoctypeTag(){
     ?><!DOCTYPE html><?php
@@ -64,7 +76,18 @@ function generatePageHead($title, $cssFile)
 function openBodyTag(){
     ?>
     
-    <body><?php
+    <body id="<?php 
+    
+        
+            if (isset($_GET["action"]) && strtolower($_GET["action"] == "print")) 
+            {
+                echo "bodyPrint";
+            }
+            else {
+                echo "";
+            }
+    
+    ?>"><?php
 }
 
 function closeBodyTag(){
@@ -105,7 +128,16 @@ function generateLogo()
 {
 
     ?>
-    <img id="logo" src="<?php echo FILE_PICTURES_LOGO; ?>" alt="logo of Julien Pontbriand inc." />
+    <img id="<?php 
+    
+            if (isset($_GET["action"]) && strtolower($_GET["action"] == "print")) 
+            {
+                echo "logoPrint";
+            }
+            else {
+                echo "logo";
+            }
+    ?>" src="<?php echo FILE_PICTURES_LOGO; ?>" alt="logo of Julien Pontbriand inc." />
     <?php
 }
 
@@ -119,36 +151,38 @@ function addContentTypeHeader(){
     header('Content-type: text/html; charset=UTF-8');
 }
 
-
-
-
-
-
-
-
-
-
 function addErrorHandling(){
     error_reporting(E_ALL);
     set_error_handler("manageError");
     set_exception_handler("manageException");
 }
 
-#CONSTANTS
-define("DEBUGGING", true);
+function manageError($errorObject)
+{
+    if (DEBUGGING) {
+        #detailled ERROR
+        echo "An error occured on the line "
+        . $errorObject->getLine()
+        . " of the file "
+        . $errorObject->getMessage()
+        . "("
+        . $errorObject->getCode()
+        . ")";
+    } else {
+        echo "An error has occured! The error has been reported and the IT team will look into it shortly. Thank you for your patience! :)";
+    }
 
-function manageError($errorNumber, $errorString, $errorFile, $errorLineNumber){
-    echo "an error occured on the line $errorNumber in the file $errorFile: " 
-            . "errorString ($errorNumber)";
     #save detailed error in the file
-    die();
+    #file_put_contents() 
+    #ADD DATE TO THE LOGS
 
+    die();
 }
 
 function manageException($errorObject)
 {
     if(DEBUGGING){
-        #detailled ERROR
+        #detailled EXCEPTION
      echo "An exception occured on the line "
     . $errorObject->getLine() 
     . " of the file "
@@ -159,7 +193,7 @@ function manageException($errorObject)
     }
     
     else {
-        echo "An error has occured!";
+        echo "An exception has occured! The exception has been reported and the IT team will look into it shortly. Thank you for your patience! :)";
     }
     
     #save detailed error in the file
