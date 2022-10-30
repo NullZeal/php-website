@@ -2,7 +2,7 @@
 #-------------------------------------------------------------------
 #Revision History
 #
-#DEVELOPER                      DATE             Comments
+#DEVELOPER                      DATE             COMMENTS
 #Julien Pontbriand (2135020)    Oct. 7, 2022     File creation. Added a link to the global functions file. Added a title. Added a function call to generate the HTML head. Added a function call to generate the Home page. Added a function call to generate the footer. 5h long code session.
 #
 #Julien Pontbriand (2135020)    Oct. 22, 2022    Added function calls to generathe page headers. Added the necessary functions and variables to generate a random image out of 5 preselected image on the home page. The function to generate the page-specific HTML sections of this file has been moved back inside of it.
@@ -38,6 +38,7 @@ $productsArray = array(
     FILE_PICTURES_SERVER);
 
 //This function generates the html content for the Home Page
+//By the way, ShinyBridge is a gag, because my name is Pontbriand :)
 function generateIndexPage($productsArray)
 {
 

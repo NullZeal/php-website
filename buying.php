@@ -2,7 +2,7 @@
 #-------------------------------------------------------------------
 #Revision History
 #
-#DEVELOPER                      DATE             Comments
+#DEVELOPER                      DATE             COMMENTS
 #Julien Pontbriand (2135020)    Oct. 7, 2022     File creation. Was quick to do.
 #
 #Julien Pontbriand (2135020)    Oct. 22, 2022    Added a link to the global functions page. Added function calls to generate the page headers. Created a title for the page. Added a function to generate this page's form. Added validations to the form inputs according to the requirements. 6h:30 long session.
@@ -136,6 +136,7 @@ if (isset($_POST["buyingPage"])) {
     
     #Here I will test all the validation requirements.
     #All form inputs are included in separate if-elseif chains
+    #The htmlspecialchars protects against injection
 
     $productCode = htmlspecialchars($_POST["productCode"]);
     $firstName = htmlspecialchars($_POST["firstName"]);
@@ -269,7 +270,7 @@ if (isset($_POST["buyingPage"])) {
             Fields::Quantity,
             $validationPrice);
     } elseif (!filter_var((float) $quantity, FILTER_VALIDATE_INT)) {
-        $validationQuantity = "The quantity must be an integer value";
+        $validationQuantity = "The quantity must be an integer value (round number) over 0";
         $errorsOccured = true;
         pushErrorWithTimeToArray(
             $errorsArray,

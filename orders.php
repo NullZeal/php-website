@@ -2,7 +2,7 @@
 #-------------------------------------------------------------------
 #Revision History
 #
-#DEVELOPER                      DATE             Comments
+#DEVELOPER                      DATE             COMMENTS
 #Julien Pontbriand (2135020)    Oct. 7, 2022     File creation. Was quick to do.
 #
 #Julien Pontbriand (2135020)    Oct. 22, 2022    Added a link to the global functions page. Added function calls to generate the page headers. Created a title for the page (with the wrong name). Added a function to generate this page's unique html, as a copy / paste of my own index page. Called functions to generate the page.
@@ -11,7 +11,7 @@
 #
 #Julien Pontbriand (2135020)    Oct. 29, 2022    Added error handling. Minor code refactoring
 #
-#Julien Pontbriand (2135020)    Oct. 30, 2022    Added more comments to the code. Indendation refactoring (especially for the table). The page source looks way cleaner now.
+#Julien Pontbriand (2135020)    Oct. 30, 2022    Added more comments to the code. Indendation refactoring (especially for the table). The page source looks way cleaner now. Fixed the color of the columns always being added
 #
 #-------------------------------------------------------------------
 
@@ -45,7 +45,7 @@ function generateOrderRows() #This function generates the table rows (tr)
                     <tr><?php 
             
             foreach ($orderArray as $order => $value) { ?><td id="<?php 
-                if($order == 7){
+                if($order == 7 && isset($_GET["action"]) && strtolower($_GET["action"]) == "color"){
                             if($value < 100){
                                 echo "tdRedColor";
                             }
@@ -55,7 +55,9 @@ function generateOrderRows() #This function generates the table rows (tr)
                             elseif($value >= 1000){
                                 echo "tdGreenColor";
                             }
-                        }?>"><?php if($order == 5 || $order == 7 || $order == 8 || $order == 9){
+                }?>"><?php 
+                
+                if($order == 5 || $order == 7 || $order == 8 || $order == 9){
                             echo $value . "$";
                         }
                         else{ 

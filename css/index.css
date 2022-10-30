@@ -6,16 +6,13 @@
 #Julien Pontbriand (2135020)    Oct. 7, 2022     File creation. Added css for the body, h1, h2 and p tags.
 #
 #Julien Pontbriand (2135020)    Oct. 22, 2022    Added css for the body tag and for the following classes : title, superproduct, products 
-
-
-
+#
+#Julien Pontbriand (2135020)    Oct. 30, 2022    Final indentation, minor comment adjustment
 */
-
 
 body{
     background-color: rgba(122,122,122,0.2);
 }
-
 
 h1, h2, p{
     text-align: center;
@@ -37,11 +34,9 @@ p{
     margin-right:30vw;
 }
 
-
 .companyDescription{
     margin-top: 5vh;
 }
-
 
 body{
     width:100vw;
@@ -61,8 +56,6 @@ body{
     display:inline-block;
     border: 4px solid;
     border-color: black;
-    
-    
 }
 
 .superProduct{
@@ -71,7 +64,7 @@ body{
     margin: 20px;
     /*
         Here I just calculate 50% of the width of the parent element - half
-        the size of the image, which is 100px
+        the size of the image, which is 600/2 px
     */
     margin-left: calc(50% - 300px);
     border: 6px solid;

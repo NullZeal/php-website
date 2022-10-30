@@ -2,7 +2,7 @@
 #-------------------------------------------------------------------
 #Revision History
 #
-#DEVELOPER                      DATE             Comments
+#DEVELOPER                      DATE             COMMENTS
 #Julien Pontbriand (2135020)    Oct. 7, 2022     File creation. Added constants for 2 folders. Added constant for some files. Added variable for a file's path. Added a function to generate page headers in other files. Added a function to generate page footers. Added a function to generate a logo.
 #
 #Julien Pontbriand (2135020)    Oct. 22, 2022    Refactored the constants for the folders and files. Added functions to open and close some HTML tags. Added a function to generate the navigation panel. 
@@ -11,7 +11,7 @@
 #
 #Julien Pontbriand (2135020)    Oct. 29, 2022    Removed logo variable. Refactored error functions. Added constant for download button. Minor code refactoring.
 #
-#Julien Pontbriand (2135020)    Oct. 29, 2022    Added more code comments to the file. Indendation has been reviewed.
+#Julien Pontbriand (2135020)    Oct. 29, 2022    Added more code comments to the file. Indendation has been reviewed. Fixed the logo generation function to be non case-sensititve
 #-------------------------------------------------------------------
 
 #CONSTANTS - PLEASE PUT TO FALSE IF NOT DEBUGGING!
@@ -102,6 +102,8 @@ function generatePageHead($title, $cssFile)
     <head>
         <meta charset="UTF-8">
         <meta title="Home Page"><title><?php echo $title; ?></title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <?php //Below I added  the global CSS file as a constant with the define in the top of the page to show that I can use constants to reference a file.  ?>
         <link rel="stylesheet" type="text/css" href="<?php echo FILE_CSS_GLOBAL; ?>">
 <?php //Below I added the page specific css file last with the variable taken from the function parameter  ?>
@@ -141,7 +143,7 @@ function generateLogo()
 
     ?>    <img id="<?php 
     
-            if (isset($_GET["action"]) && strtolower($_GET["action"] == "print")) 
+            if (isset($_GET["action"]) && strtolower($_GET["action"]) == "print") 
             {
                 echo "logoPrint";
             }

@@ -8,12 +8,12 @@
 #Julien Pontbriand (2135020)    Oct. 22, 2022    Added css for the html, anchor, navigation and body tags. 
 #
 #Julien Pontbriand (2135020)    Oct. 23, 2022    Refactored some tags.
-
-
+#
+#Julien Pontbriand (2135020)    Oct. 30, 2022    Final indentation, added verdana to the font family
 */
 
 *{
-    font-family:monospace, arial;
+    font-family:monospace, arial, verdana;
 }
 
 #bodyPrint{
@@ -58,8 +58,6 @@
     padding-left:5%;
     padding-right:5%;
     font-size: 2rem;
-   
-    
 }
 
 footer{

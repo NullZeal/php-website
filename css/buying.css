@@ -8,12 +8,8 @@
 #Julien Pontbriand (2135020)    Oct. 22, 2022    Added ID css or many tags, including the requird, red, buyingform, label and body tags. Added css for the confirmation class. 
 #
 #Julien Pontbriand (2135020)    Oct. 23, 2022    Refactored some tags, added css for the submit button, input and textarea tags. Added some css for all tags with the star sign).
-
-
-
-
-
-
+#
+#Julien Pontbriand (2135020)    Oct. 30, 2022    Final indentation
 */
 
 #required{
@@ -47,6 +43,7 @@ input, textarea{
 body{
     background-color: rgba(33,122,122,0.2);
 }
+
 .confirmation{
     color: green;
     background-color: rgba(222,222,40,0.8);
@@ -64,5 +61,4 @@ body{
     font-size: 2rem;
     border-radius: 20px;
     color: rgba(222,222,222,0.9);
-    
 }

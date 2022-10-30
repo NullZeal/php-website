@@ -6,14 +6,14 @@
 #Julien Pontbriand (2135020)    Oct. 7, 2022     File creation.
 #
 #Julien Pontbriand (2135020)    Oct. 23, 2022    Added css for all tags with the star symbol, for html, body, noOrdersFound, table, td tags
-
+#
+#Julien Pontbriand (2135020)    Oct. 30, 2022    Final indentation touch up
 
 */
 
 html body{
     font-size: 1.5rem;
 }
-
 
 #noOrdersFound{
     width: 100vw;
@@ -32,7 +32,6 @@ td{
     text-align: center;
     padding: 0px;
     background-color: rgba(222,222,222,1);
-    
 } 
  
 body{
