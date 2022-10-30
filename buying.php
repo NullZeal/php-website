@@ -469,6 +469,8 @@ generateBuyingPage(
     $errorsOccured
 );
 
+
+
 generatePageFooter();
 
 closeBodyTag();

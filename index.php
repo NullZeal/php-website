@@ -70,8 +70,7 @@ function generateImageSection($productsArray)
     $randomNumber = random_int(0, 4);
     $productDescription = "";
     $imageClass = "products";
-    #   Trigger_error("custom error", E_USER_ERROR); #generate error
-    Throw new Exception("custom exception"); #generate exception
+
 
     switch ($randomNumber) {
         case 0:
@@ -122,4 +121,3 @@ generateIndexPage($productsArray);
 generatePageFooter();
 closeBodyTag();
 closeHtmlTag();
-

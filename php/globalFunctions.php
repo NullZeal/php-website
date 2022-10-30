@@ -12,7 +12,7 @@
 #Julien Pontbriand (2135020)    Oct. 29, 2022    Removed logo variable. Refactored error functions. Added constant for download button
 
 #CONSTANTS - PLEASE PUT TO FALSE IF NOT DEBUGGING!
-define("DEBUGGING", false);
+define("DEBUGGING", true);
 
 //Creating a constant for folders
 define("FOLDER_CSS", "css/");
@@ -161,49 +161,43 @@ function addErrorHandling(){
     set_exception_handler("manageException");
 }
 
-function manageError($errorObject)
-{
-    if (DEBUGGING) {
-        #detailled ERROR
-        echo "An error occured on the line "
-        . $errorObject->getLine()
-        . " of the file "
-        . $errorObject->getMessage()
-        . "("
-        . $errorObject->getCode()
-        . ")";
-    } else {
+function manageError($errorNumber, $errorString, $errorFile, $errorLineNumber){
+    
+     if (DEBUGGING) {
+    
+         echo "An error occured on the line $errorLineNumber in the file $errorFile: " 
+     . "$errorString ($errorNumber) at time: " . date("Y/m/d/ h:i:sa");}
+    
+    else {
         echo "An error has occured! The error has been reported and the IT team will look into it shortly. Thank you for your patience! :)";
     }
     
-    $orderArray = Array(
-        $errorObject->getMessage(),
-        $errorObject->getCode(),
-        date("Y/m/d/ h:i:sa"),
-        $_SERVER['SCRIPT_NAME'],
-        $errorObject->getLine(),
-    );
+    $errorString = "An error occured on the line $errorLineNumber in the file "
+        . "$errorFile: $errorString ($errorNumber) at time: " . date("Y/m/d/ h:i:sa");
     
-    $orderArrayJson = json_encode($orderArray);
+    $orderStringJson = json_encode($errorString);
         
-    file_put_contents(FILE_TXT_ERRORS_ERRORS_LOG, $orderArrayJson . PHP_EOL, FILE_APPEND);
+    file_put_contents(FILE_TXT_ERRORS_ERRORS_LOG, $orderStringJson . PHP_EOL, FILE_APPEND);
 
     die();
 }
 
 function manageException($errorObject)
 {
-    if(DEBUGGING){
-        #detailled EXCEPTION
-     echo "An exception occured on the line "
-    . $errorObject->getLine()
-    . " of the file "
-    . $errorObject->getMessage() 
-    . "(" 
-    . $errorObject->getCode()
-    . ")";
+    if (DEBUGGING) {
+        #detailled ERROR
+        echo "An exception has occured on the line "
+        . $errorObject->getLine()
+        . " of the file "
+        . $_SERVER['SCRIPT_NAME']
+        . " : "
+        . $errorObject->getMessage()
+        . " (Error #"
+        . $errorObject->getCode()
+        . ")"
+        . " at time "
+        . date("Y/m/d/ h:i:sa");
     }
-    
     else {
         echo "An exception has occured! The exception has been reported and the IT team will look into it shortly. Thank you for your patience! :)";
     }
@@ -214,7 +208,7 @@ function manageException($errorObject)
         date("Y/m/d/ h:i:sa"),
         $_SERVER['SCRIPT_NAME'],
         $errorObject->getLine(),
-    );
+        );
     
     $orderArrayJson = json_encode($orderArray);
         
@@ -222,20 +216,3 @@ function manageException($errorObject)
 
     die();
 }
-
-function pushErrorWithTimeToArray(&$array, $errorType)
-{
-
-    $stringToPush = $fieldFromClass
-        . "-ERROR. / TYPED VALUE = "
-        . $errorValueToSend
-        . " / ERROR TYPE = "
-        . $errorType
-        . " / DATE = "
-        . $currentDaysDate
-        . " "
-        . $currentHMSDate
-        . PHP_EOL; #I learned that this is the same thing as /r/n
-    array_push($array, $stringToPush);
-}
-
