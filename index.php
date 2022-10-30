@@ -70,23 +70,25 @@ function generateImageSection($productsArray)
     $randomNumber = random_int(0, 4);
     $productDescription = "";
     $imageClass = "products";
+    #   Trigger_error("custom error", E_USER_ERROR); #generate error
+    Throw new Exception("custom exception"); #generate exception
 
     switch ($randomNumber) {
         case 0:
-            $productDescription = "integrated, VPN-level ad protection";
+            $productDescription = "integrated, VPN-level ad protection (5$/M)";
             break;
         case 1:
-            $productDescription = "full disk encryption VPN servers";
+            $productDescription = "full disk encryption VPN servers (5$/M)";
             break;
         case 2:
-            $productDescription = "encrypted traffic with AES-256";
+            $productDescription = "encrypted traffic with AES-256 (10$/M)";
             $imageClass = "superProduct";
             break;
         case 3:
-            $productDescription = "trusted protocols such as OpenVPN, IKEv2, and WireGuard";
+            $productDescription = "trusted protocols such as OpenVPN, IKEv2, and WireGuard (5$/M)";
             break;
         case 4:
-            $productDescription = "servers located outside of the 5 eyes juridiction";
+            $productDescription = "servers located outside of the 5 eyes juridiction (5$/M)";
             break;
         default :
             echo "";

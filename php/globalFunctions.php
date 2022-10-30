@@ -35,6 +35,10 @@ define("FILE_TXT_ORDERS", FOLDER_TXT. "orders.txt");
 define("FILE_TXT_CHEATSHEET", FOLDER_TXT. "cheatsheet.txt");
 define("FILE_TXT_ERRORS_BUYINGPAGE_WRONGINPUT_LOG", 
     FOLDER_TXT_ERRORS . "buyingpage_wronginput_log.txt");
+define("FILE_TXT_ERRORS_ERRORS_LOG", 
+    FOLDER_TXT_ERRORS . "error_logs.txt");
+define("FILE_TXT_ERRORS_EXCEPTIONS_LOG", 
+    FOLDER_TXT_ERRORS . "exceptions_logs.txt");
 
 
 define("FILE_PICTURES_LOGO", FOLDER_PICTURES . "logo.png");
@@ -171,10 +175,18 @@ function manageError($errorObject)
     } else {
         echo "An error has occured! The error has been reported and the IT team will look into it shortly. Thank you for your patience! :)";
     }
-
-    #save detailed error in the file
-    #file_put_contents() 
-    #ADD DATE TO THE LOGS
+    
+    $orderArray = Array(
+        $errorObject->getMessage(),
+        $errorObject->getCode(),
+        date("Y/m/d/ h:i:sa"),
+        $_SERVER['SCRIPT_NAME'],
+        $errorObject->getLine(),
+    );
+    
+    $orderArrayJson = json_encode($orderArray);
+        
+    file_put_contents(FILE_TXT_ERRORS_ERRORS_LOG, $orderArrayJson . PHP_EOL, FILE_APPEND);
 
     die();
 }
@@ -184,7 +196,7 @@ function manageException($errorObject)
     if(DEBUGGING){
         #detailled EXCEPTION
      echo "An exception occured on the line "
-    . $errorObject->getLine() 
+    . $errorObject->getLine()
     . " of the file "
     . $errorObject->getMessage() 
     . "(" 
@@ -196,9 +208,34 @@ function manageException($errorObject)
         echo "An exception has occured! The exception has been reported and the IT team will look into it shortly. Thank you for your patience! :)";
     }
     
-    #save detailed error in the file
-    #file_put_contents() 
-    #ADD DATE TO THE LOGS
+    $orderArray = Array(
+        $errorObject->getMessage(),
+        $errorObject->getCode(),
+        date("Y/m/d/ h:i:sa"),
+        $_SERVER['SCRIPT_NAME'],
+        $errorObject->getLine(),
+    );
     
+    $orderArrayJson = json_encode($orderArray);
+        
+    file_put_contents(FILE_TXT_ERRORS_EXCEPTIONS_LOG, $orderArrayJson . PHP_EOL, FILE_APPEND);
+
     die();
 }
+
+function pushErrorWithTimeToArray(&$array, $errorType)
+{
+
+    $stringToPush = $fieldFromClass
+        . "-ERROR. / TYPED VALUE = "
+        . $errorValueToSend
+        . " / ERROR TYPE = "
+        . $errorType
+        . " / DATE = "
+        . $currentDaysDate
+        . " "
+        . $currentHMSDate
+        . PHP_EOL; #I learned that this is the same thing as /r/n
+    array_push($array, $stringToPush);
+}
+

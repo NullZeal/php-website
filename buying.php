@@ -95,19 +95,13 @@ function isAnInt($number)
 
 function pushErrorWithTimeToArray(&$array, $errorValueToSend, $fieldFromClass, $errorType)
 {
-
-    $currentDaysDate = date("Y/m/d");
-    $currentHMSDate = date("h:i:sa");
-
     $stringToPush = $fieldFromClass
         . "-ERROR. / TYPED VALUE = "
         . $errorValueToSend
         . " / ERROR TYPE = "
         . $errorType
         . " / DATE = "
-        . $currentDaysDate
-        . " "
-        . $currentHMSDate
+        . date("Y/m/d h:i:sa")
         . PHP_EOL; #I learned that this is the same thing as /r/n
     array_push($array, $stringToPush);
 }
