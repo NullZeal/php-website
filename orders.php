@@ -48,21 +48,14 @@ function generateOrderRows()
                                 echo "tdRedColor";
                             }
                             elseif($value < 999.991){
-                                echo "tdYellowColor";
+                                echo "tdOrangeColor";
                             }
                             elseif($value >= 1000){
-                                echo "tdYellowColor";
+                                echo "tdGreenColor";
                             }
                         }
-                            
-                        }
-                                                
-                            echo "tdRedColor";
-                        }
+                        }?>"><?php 
                         
-                        
-                        ?>">
-                        <?php 
                         if($order == 5 || $order == 7 || $order == 8 || $order == 9){
                             echo $value . "$";
                         }

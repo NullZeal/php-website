@@ -31,6 +31,7 @@ td{
     font-size: 15px;
     text-align: center;
     padding: 0px;
+    background-color: rgba(222,222,222,1);
     
 } 
  
@@ -56,6 +57,14 @@ body{
     border-radius: 10px;
 }
 
-#thColoredSubtotal{
-    
+#tdRedColor{
+    color: red;
+}
+
+#tdOrangeColor{
+    color: rgba(236, 120, 21, 1);
+}
+
+#tdGreenColor{
+    color: green;
 }
