@@ -12,12 +12,19 @@
 #
 #Julien Pontbriand (2135020)    Oct. 30, 2022    Added more comments to the code. Final indentation control.
 #
+#Julien Pontbriand (2135020)    Nov. 29, 2022    Amounts will now always display 2 digits.
+#
+#Julien Pontbriand (2135020)    Nov. 29, 2022    Added the forcehttps function.
+#                                                Money values will now always register with 2 decimals.
 #-------------------------------------------------------------------
 
 #Importing global functions from the relative path given in $globalFunctions
 
 $globalFunctions = 'php/globalFunctions.php';
 require_once $globalFunctions;
+
+#Making page https only
+forceHttps();
 
 //Adding error handling
 addErrorHandling();
@@ -316,11 +323,11 @@ if (isset($_POST["buyingPage"])) {
             $lastName,
             $city,
             $comments,
-            $price,
+            number_format($price, 2),
             $quantity,
-            $subtotal,
-            $taxAmount,
-            $total);
+            number_format($subtotal, 2),
+            number_format($taxAmount, 2),
+            number_format($total, 2));
         
         $orderArrayJson = json_encode($orderArray);
         

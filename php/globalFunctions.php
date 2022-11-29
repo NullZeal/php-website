@@ -12,6 +12,8 @@
 #Julien Pontbriand (2135020)    Oct. 29, 2022    Removed logo variable. Refactored error functions. Added constant for download button. Minor code refactoring.
 #
 #Julien Pontbriand (2135020)    Oct. 29, 2022    Added more code comments to the file. Indendation has been reviewed. Fixed the logo generation function to be non case-sensititve
+#
+#Julien Pontbriand (2135020)    Nov. 29, 2022    Added the forcehttps function. 
 #-------------------------------------------------------------------
 
 #CONSTANTS - PLEASE PUT TO FALSE IF NOT DEBUGGING!
@@ -231,4 +233,14 @@ function manageException($errorObject)
     file_put_contents(FILE_TXT_ERRORS_EXCEPTIONS_LOG, $orderArrayJson . PHP_EOL, FILE_APPEND);
 
     die();
+}
+
+function forceHttps()
+{
+    if( ! isset($_SERVER["HTTPS"]) || $_SERVER["HTTPS"] != "on")
+    {
+        header('Location: https://' . $_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"]);
+        exit();
+    }
+    
 }

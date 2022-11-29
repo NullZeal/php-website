@@ -9,12 +9,17 @@
 #
 #Julien Pontbriand (2135020)    Oct. 29, 2022    Added error handling. Minor refactoring.
 #
-##Julien Pontbriand (2135020)    Oct. 30, 2022    Final refactoring and indent control. Added more comments to the file.
+#Julien Pontbriand (2135020)    Oct. 30, 2022    Final refactoring before midterm release : indent control. Added more comments to the file.
+#
+#Julien Pontbriand (2135020)    Nov. 29, 2022    Added the forcehttps function.
 #-------------------------------------------------------------------
 
 #Importing global functions from the relative path given in $globalFunctions
 $globalFunctions = 'php/globalFunctions.php';
 require_once $globalFunctions;
+
+#Making page https only
+forceHttps();
 
 //Adding error handling
 addErrorHandling();

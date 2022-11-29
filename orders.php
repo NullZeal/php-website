@@ -11,13 +11,18 @@
 #
 #Julien Pontbriand (2135020)    Oct. 29, 2022    Added error handling. Minor code refactoring
 #
-#Julien Pontbriand (2135020)    Oct. 30, 2022    Added more comments to the code. Indendation refactoring (especially for the table). The page source looks way cleaner now. Fixed the color of the columns always being added
+#Julien Pontbriand (2135020)    Oct. 30, 2022    Added more comments to the code. Indendation refactoring (especially for the table). 
+#                                                The page source looks way cleaner now. Fixed the color of the columns always being added
 #
+#Julien Pontbriand (2135020)    Nov. 29, 2022    Added the forcehttps function.
 #-------------------------------------------------------------------
 
 //Importing global functions from the relative path given in $globalFunctions
 $globalFunctions = 'php/globalFunctions.php';
 require_once $globalFunctions;
+
+#Making page https only
+forceHttps();
 
 //Adding error handling
 addErrorHandling();

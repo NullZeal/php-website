@@ -10,6 +10,8 @@
 #Julien Pontbriand (2135020)    Oct. 23, 2022    Refactored some tags.
 #
 #Julien Pontbriand (2135020)    Oct. 30, 2022    Final indentation, added verdana to the font family
+#
+#Julien Pontbriand (2135020)    Nov. 29, 2022    Removed text decorations from the nav menu
 */
 
 *{
@@ -47,6 +49,7 @@
     display: flex;
     background-color: rgba(166,166,166,1);
     border-bottom: 5px solid;
+    
 }
 
 .navigation a{
@@ -58,6 +61,7 @@
     padding-left:5%;
     padding-right:5%;
     font-size: 2rem;
+    text-decoration: none;
 }
 
 footer{
