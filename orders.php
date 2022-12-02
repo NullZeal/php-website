@@ -21,6 +21,9 @@
 $globalFunctions = 'php/globalFunctions.php';
 require_once $globalFunctions;
 
+#opening a session to share variables on all pages
+openSession();
+
 #Making page https only
 forceHttps();
 

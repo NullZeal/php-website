@@ -53,6 +53,9 @@ define("FILE_PICTURES_PROTOCOL", FOLDER_PICTURES . "protocol.jpg");
 define("FILE_PICTURES_ADBLOCK", FOLDER_PICTURES . "adblock.jpg");
 define("FILE_PICTURES_DISK", FOLDER_PICTURES . "disk.jpg");
 
+const myConnection = 'php/globalFunctions.php';
+
+require_once myConnection;
 
 #generates the doctype tag
 function openDoctypeTag(){
@@ -242,5 +245,60 @@ function forceHttps()
         header('Location: https://' . $_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"]);
         exit();
     }
+}
+
+function generateRedStar() # This generates a red star character
+{
+    echo "<span id='red'>*</span>";
+}
+
+function generateLoginForm()
+{
+    if( ! isset($_POST["login"]))
     
+    {
+        
+    ?>
+        <div class="loginform">
+            <form method="post">
+                <label for="username">Username: </label>
+                <input id="username" type="text" name="username" placeholder="Username"></input>
+                <label for="password">Username: </label>
+                <input id="password" type="text" name="password" placeholder="Password"></input>
+                <button type="submit" name="login">Login</button>
+            </form>
+        </div>
+
+    <?php        
+        
+    }
+    else
+    {
+        $username = htmlspecialchars($_POST["username"]);
+        $password = htmlspecialchars($_POST["password"]);
+        
+        $hashedPasswordFromForm = password_hash($password, PASSWORD_DEFAULT);
+        
+        $hashedPasswordFromDb = "";
+        
+        $SQLquery = "CALL procedure_get_password_from_username(:username)";
+   
+        $row = $connection->prepare($SQLquery);
+    
+        $row->bindParam(":username", $username, PDO::PARAM_STR);
+        
+        if($row->execute())
+        {
+            $hashedPasswordFromDb = $row->fetch();
+        }
+        
+        if(password_verify($hashedPasswordFromForm, $hashedPasswordFromDb))
+        {
+            echo "Password Validation OK";
+        }
+    }
+}
+
+function openSession(){
+    session_start();
 }

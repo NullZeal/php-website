@@ -23,6 +23,9 @@
 $globalFunctions = 'php/globalFunctions.php';
 require_once $globalFunctions;
 
+#opening a session to share variables on all pages
+openSession();
+
 #Making page https only
 forceHttps();
 
@@ -343,10 +346,7 @@ if (isset($_POST["buyingPage"])) {
     }
 }
 
-function generateRedStar() # This generates a red star character
-{
-    echo "<span id='red'>*</span>";
-}
+
 
 function generateBuyingPage( 
 
