@@ -17,6 +17,7 @@
 #-------------------------------------------------------------------
 
 #CONSTANTS - PLEASE PUT TO FALSE IF NOT DEBUGGING!
+
 define("DEBUGGING", false);
 
 //Creating a constant for folders
