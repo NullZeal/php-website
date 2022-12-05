@@ -98,7 +98,6 @@ function generateImageSection($productsArray)
     }
 
     ?>
-
                 <section>
                     <p class="title">We offer <?php echo $productDescription ?></p>
 

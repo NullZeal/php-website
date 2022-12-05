@@ -80,6 +80,11 @@ class customer
         }
     }
     
+    function getId()
+    {
+        return $this->id;
+    }
+    
     function setFirstname($input)
     {
         if (empty($input)) {
@@ -91,6 +96,11 @@ class customer
             $this->firstname = $input;
             return null;
         }
+    }
+
+    function getFirstname()
+    {
+        return $this->firstname;
     }
 
     function setLastname($input)
@@ -106,6 +116,11 @@ class customer
         }
     }
 
+    function getLastname()
+    {
+        return $this->lastname;
+    }    
+
     function setAddress($input)
     {
         if (empty($input)) {
@@ -118,6 +133,11 @@ class customer
             return false;
         }
     }
+    
+    function getAddress()
+    {
+        return $this->address;
+    } 
 
     function setCity($input)
     {
@@ -131,6 +151,11 @@ class customer
             return false;
         }
     }
+    
+    function getCity()
+    {
+        return $this->city;
+    } 
 
     function setProvince($input)
     {
@@ -144,6 +169,11 @@ class customer
             return false;
         }
     }
+    
+    function getProvince()
+    {
+        return $this->province;
+    } 
 
     function setPostalcode($input)
     {
@@ -157,7 +187,12 @@ class customer
             return false;
         }
     }
-    
+
+    function getPostalcode()
+    {
+        return $this->postalcode;
+    }     
+
     function setUsername($input)
     {
         if (empty($input)) {
@@ -170,6 +205,11 @@ class customer
             return false;
         }
     }
+
+    function getUsername()
+    {
+        return $this->username;
+    } 
     
     function setUser_password($input)
     {
@@ -184,13 +224,23 @@ class customer
         }
     }
     
+    function getUser_password()
+    {
+        return $this->user_password;
+    } 
+    
     function setPicture($input)
     {
         if (empty($input)) {
-        return "The picture code cannot be empty";
+        return "Please upload your profile picture";
         }
         else{
             $this->picture = $input;
         }
     }
+    
+    function getPicture()
+    {
+        return $this->picture;
+    } 
 }

@@ -18,6 +18,9 @@
 
 #CONSTANTS - PLEASE PUT TO FALSE IF NOT DEBUGGING!
 
+const myConnection = 'php/connection.php';
+require_once myConnection;
+
 define("DEBUGGING", false);
 
 //Creating a constant for folders
@@ -54,9 +57,7 @@ define("FILE_PICTURES_PROTOCOL", FOLDER_PICTURES . "protocol.jpg");
 define("FILE_PICTURES_ADBLOCK", FOLDER_PICTURES . "adblock.jpg");
 define("FILE_PICTURES_DISK", FOLDER_PICTURES . "disk.jpg");
 
-const myConnection = 'php/globalFunctions.php';
 
-require_once myConnection;
 
 #generates the doctype tag
 function openDoctypeTag(){
