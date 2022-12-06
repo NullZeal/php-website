@@ -75,7 +75,7 @@ function generateOrderRows() #This function generates the table rows (tr)
             }?></tr><?php
         }
 }
-
+ 
 function generateOrdersPage() 
 {
     #this function generates most of the page specific html content, 
@@ -130,7 +130,7 @@ function generateOrdersPage()
                 
             </table>
             
-            <a id="downloadButtonContainer" href="Txt-/cheatsheet.html" download="CheatSheet.html">
+            <a id="downloadButtonContainer" href="Txt/cheatsheet.html" download="CheatSheet.html">
                 <button id="btnDownload">Download the CheatSheet!</button>
             </a>
 

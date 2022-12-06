@@ -19,7 +19,7 @@
 #-------------------------------------------------------------------
 
 #Importing global functions from the relative path given in $globalFunctions
-
+ 
 const INIT  = 'php/init.php';
 require_once INIT;
 

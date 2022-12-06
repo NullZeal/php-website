@@ -16,11 +16,11 @@
 
 #Importing global functions from the relative path given in $globalFunctions
 const INIT  = 'php/init.php';
-require_once INIT;
+require_once INIT; 
 
 #opening a session to share variables on all pages
 openSession();
-
+        
 #Making page https only
 forceHttps();
 

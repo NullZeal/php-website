@@ -3,7 +3,7 @@
 #https://stackoverflow.com/questions/7942154/mysql-error-2006-mysql-server-has-gone-away#9479681
 
 
-
+ 
 
 const INIT  = 'php/init.php';
 require_once INIT;
