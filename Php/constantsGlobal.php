@@ -1,7 +1,7 @@
 <?php
 
-const CONNECTION = 'Php/connection.php';
-const CUSTOMER = 'php/class/customer.php';
+const CONNECTION = 'Php/dbConnection.php';
+const CUSTOMER = 'Php/Classes/customer.php';
 const FUNCTIONS_GLOBAL = 'Php/functionsGlobal.php';
 const FUNCTIONS_HTML = 'Php/functionsHtml.php';
 const FUNCTIONS_PAGE_SETUP = 'Php/functionsPageSetup.php';

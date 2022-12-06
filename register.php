@@ -108,8 +108,6 @@ if (isset($_POST["register"])) {
     }
 }
 
-
-
 // ###Now generating the actual page###
 // The next 4 functions generate the html for everything that's before the body
 openDoctypeTag();
@@ -127,9 +125,6 @@ generateRegisterForm($errorMessageTable, isset($successMessage) ? $successMessag
 generatePageFooter();
 closeBodyTag();
 closeHtmlTag();
-
-
-
 
 function checkForErrorsInArray($errorMessageTable)
 {
@@ -149,66 +144,66 @@ function generateRegisterForm($errorMessageTable, $successMessage)
         <span id="required">* = required</span>
         <form id="registerForm" method="post" enctype="multipart/form-data">
 
-            <label for="firstname"><?php echo generateRedStar() ?>First name: </label>
+            <label for="firstname">First name: </label>
 
             <input id="firstname" type="text" name="firstname" placeholder="Firstname" 
-                   value="<?php echo isset($_POST["lastname"]) ? filter_input(INPUT_POST, 'firstname') : "" ?>"></input>
+                   value="<?php echo isset($_POST["lastname"]) ? filter_input(INPUT_POST, 'firstname') : "" ?>"></input><?php echo generateRedStar() ?>
             <span class="formErrorSpan"><?php echo $errorMessageTable["firstname"]; ?></span>
 
             <br>
 
-            <label for="lastname"><?php echo generateRedStar() ?>Last name: </label>
+            <label for="lastname">Last name: </label>
 
             <input id="lastname" type="text" name="lastname" placeholder="Lastname" 
-                   value="<?php echo isset($_POST["lastname"]) ? filter_input(INPUT_POST, 'lastname') : "" ?>"></input>
+                   value="<?php echo isset($_POST["lastname"]) ? filter_input(INPUT_POST, 'lastname') : "" ?>"></input><?php echo generateRedStar() ?>
             <span class="formErrorSpan"><?php echo $errorMessageTable["lastname"]; ?></span>
 
             <br>
 
-            <label for="address"><?php echo generateRedStar() ?>Address: </label>
+            <label for="address">Address: </label>
             <input id="address" type="text" name="address" placeholder="Address"
-                   value="<?php echo isset($_POST["address"]) ? filter_input(INPUT_POST, 'address') : "" ?>"></input>
+                   value="<?php echo isset($_POST["address"]) ? filter_input(INPUT_POST, 'address') : "" ?>"></input><?php echo generateRedStar() ?>
             <span class="formErrorSpan"><?php echo $errorMessageTable["address"]; ?></span>
 
             <br>
 
-            <label for="city"><?php echo generateRedStar() ?>City: </label>
+            <label for="city">City: </label>
             <input id="city" type="text" name="city" placeholder="City"
-                   value="<?php echo isset($_POST["city"]) ? filter_input(INPUT_POST, 'city') : "" ?>"></input>
+                   value="<?php echo isset($_POST["city"]) ? filter_input(INPUT_POST, 'city') : "" ?>"></input><?php echo generateRedStar() ?>
             <span class="formErrorSpan"><?php echo $errorMessageTable["city"]; ?></span>
 
             <br>
 
-            <label for="province"><?php echo generateRedStar() ?>Province: </label>
+            <label for="province">Province: </label>
             <input id="province" type="text" name="province" placeholder="Province"
-                   value="<?php echo isset($_POST["province"]) ? filter_input(INPUT_POST, 'province') : "" ?>"></input>
+                   value="<?php echo isset($_POST["province"]) ? filter_input(INPUT_POST, 'province') : "" ?>"></input><?php echo generateRedStar() ?>
             <span class="formErrorSpan"><?php echo $errorMessageTable["province"]; ?></span>
 
             <br>
 
-            <label for="postalcode"><?php echo generateRedStar() ?>Postal code: </label>
+            <label for="postalcode">Postal code: </label>
             <input id="postalcode" type="text" name="postalcode" placeholder="Postalcode"
-                   value="<?php echo isset($_POST["postalcode"]) ? filter_input(INPUT_POST, 'postalcode') : "" ?>"></input>
+                   value="<?php echo isset($_POST["postalcode"]) ? filter_input(INPUT_POST, 'postalcode') : "" ?>"></input><?php echo generateRedStar() ?>
             <span class="formErrorSpan"><?php echo $errorMessageTable["postalcode"]; ?></span>
 
             <br>
 
-            <label for="username"><?php echo generateRedStar() ?>Username: </label>
+            <label for="username">Username: </label>
             <input id="username" type="text" name="username" placeholder="Username"
-                   value="<?php echo isset($_POST["username"]) ? filter_input(INPUT_POST, 'username') : "" ?>"></input>
+                   value="<?php echo isset($_POST["username"]) ? filter_input(INPUT_POST, 'username') : "" ?>"></input><?php echo generateRedStar() ?>
             <span class="formErrorSpan"><?php echo $errorMessageTable["username"]; ?></span>
 
             <br>
 
-            <label for="user_password"><?php echo generateRedStar() ?>Password: </label>
+            <label for="user_password">Password: </label>
             <input id="user_password" type="password" name="user_password" placeholder="Password"
-                   value="<?php echo isset($_POST["user_password"]) ? filter_input(INPUT_POST, 'user_password') : "" ?>"></input>
+                   value="<?php echo isset($_POST["user_password"]) ? filter_input(INPUT_POST, 'user_password') : "" ?>"></input><?php echo generateRedStar() ?>
             <span class="formErrorSpan"><?php echo $errorMessageTable["user_password"]; ?></span>
 
             <br>
 
-            <label for="picture"><?php echo generateRedStar() ?>Picture: </label>
-            <input id="picture" type="file" name="picture" placeholder="picture" accept="image/png, image/jpeg"></input>
+            <label for="picture">Picture: </label>
+            <input id="picture" type="file" name="picture" placeholder="picture" accept="image/png, image/jpeg"></input><?php echo generateRedStar() ?>
             <span class="formErrorSpan"><?php echo $errorMessageTable["picture"]; ?></span>
 
             <br>

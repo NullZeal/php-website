@@ -116,7 +116,7 @@ function generateOrdersPage()
                 
             </table>
             
-            <a id="downloadButtonContainer" href="Txt/cheatsheet.html" download="CheatSheet.html">
+            <a id="downloadButtonContainer" href="Txt/cheat-sheet.html" download="CheatSheet.html">
                 <button id="btnDownload">Download the CheatSheet!</button>
             </a>
 
