@@ -2,10 +2,14 @@
 #For bigger images : please set the [mysqld] max_allowed_packet setting to a higher limit in /etc/my.cnf
 #https://stackoverflow.com/questions/7942154/mysql-error-2006-mysql-server-has-gone-away#9479681
 
-$globalFunctions = 'php/globalFunctions.php';
-$customer = 'php/class/customer.php';
-require_once $globalFunctions;
-require_once $customer;
+
+
+
+const INIT  = 'php/init.php';
+require_once INIT;
+require_once CUSTOMER;
+
+
 
 #opening a session to share variables on all pages
 openSession();
@@ -140,7 +144,7 @@ function generateRegisterForm($errorMessageTable)
 {
 
     ?>
-    <div class="loginform">
+    <div class="registerPage">
         <form method="post" enctype="multipart/form-data">
 
             <label for="firstname">First name: </label>

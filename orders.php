@@ -18,8 +18,8 @@
 #-------------------------------------------------------------------
 
 //Importing global functions from the relative path given in $globalFunctions
-$globalFunctions = 'php/globalFunctions.php';
-require_once $globalFunctions;
+const INIT  = 'php/init.php';
+require_once INIT;
 
 #opening a session to share variables on all pages
 openSession();
@@ -130,7 +130,7 @@ function generateOrdersPage()
                 
             </table>
             
-            <a id="downloadButtonContainer" href="txt/cheatsheet.html" download="CheatSheet.html">
+            <a id="downloadButtonContainer" href="Txt/cheatsheet.html" download="CheatSheet.html">
                 <button id="btnDownload">Download the CheatSheet!</button>
             </a>
 

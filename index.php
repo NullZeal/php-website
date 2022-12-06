@@ -15,8 +15,8 @@
 #-------------------------------------------------------------------
 
 #Importing global functions from the relative path given in $globalFunctions
-$globalFunctions = 'php/globalFunctions.php';
-require_once $globalFunctions;
+const INIT  = 'php/init.php';
+require_once INIT;
 
 #opening a session to share variables on all pages
 openSession();
@@ -39,11 +39,11 @@ $pageTitle = "Home Page";
 
 //This array will be used to select 1 out of 5 images
 $productsArray = array(
-    FILE_PICTURES_ADBLOCK,
-    FILE_PICTURES_DISK,
-    FILE_PICTURES_ENCRYPTION,
-    FILE_PICTURES_PROTOCOL,
-    FILE_PICTURES_SERVER);
+    FILE_MEDIA_IMAGE_ADBLOCK,
+    FILE_MEDIA_IMAGE_DISK,
+    FILE_MEDIA_IMAGE_ENCRYPTION,
+    FILE_MEDIA_IMAGE_PROTOCOL,
+    FILE_MEDIA_IMAGE_SERVER);
 
 //This function generates the html content for the Home Page
 //By the way, ShinyBridge is a gag, because my name is Pontbriand :)
