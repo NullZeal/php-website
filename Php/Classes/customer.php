@@ -50,9 +50,10 @@ class customer
         $user_password = "",
         $picture = "",
         $datetime_created = "",
-        $datetime_modifided = ""
+        $datetime_updated = ""
     )
     {
+        $this->setId($id);
         $this->setFirstname($firstname);
         $this->setLastname($lastname);
         $this->setAddress($address);
@@ -62,6 +63,8 @@ class customer
         $this->setUsername($username);
         $this->setUser_password($user_password);
         $this->setPicture($picture);
+        $this->setDatetime_created($datetime_created);
+        $this->setDatetime_updated($datetime_updated);
     }
     
     function setId($input)
@@ -243,4 +246,60 @@ class customer
     {
         return $this->picture;
     } 
+    
+        function setDatetime_created($input)
+    {
+        if (empty($input)) {
+            return "The datetime cannot be empty";
+        } else {
+            $this->datetime_created = $input;
+            return false;
+        }
+    }
+    
+    function getDatetime_created()
+    {
+        return $this->datetime_created;
+    } 
+    
+        function setDatetime_updated($input)
+    {
+        if (empty($input)) {
+            return "The datetime cannot be empty";
+        } else {
+            $this->datetime_updated = $input;
+            return false;
+        }
+    }
+    
+    function getDatetime_updated()
+    {
+        return $this->datetime_updated;
+    } 
+    
+    function load($username, $connection)
+    {
+        $SQLquery = Database2135020_Procedures_Customers::SELECT_ONE . "(:username)";
+        $rows = $connection->prepare($SQLquery);
+        $rows->bindParam(":username", $username, PDO::PARAM_STR);
+
+        if ($rows->execute()) {
+            while ($row = $rows->fetch()) {
+                if ($row["username"] == $username) {
+                    $this->setId($row["id"]);
+                    $this->setFirstname($row["firstname"]);
+                    $this->setLastname($row["lastname"]);
+                    $this->setAddress($row["address"]);
+                    $this->setCity($row["city"]);
+                    $this->setProvince($row["province"]);
+                    $this->setPostalcode($row["postalcode"]);
+                    $this->setUsername($row["username"]);
+                    $this->setUser_password($row["user_password"]);
+                    $this->setPicture($row["picture"]);
+                    $this->setDatetime_created($row["datetime_created"]);
+                    $this->setDatetime_updated($row["datetime_updated"]);
+                }
+            }
+        }
+    }
 }

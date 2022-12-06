@@ -462,6 +462,7 @@ generatePageHead($pageTitle, FILE_CSS_BUYING);
 openBodyTag();
 
 generateNavigationMenu();
+generateLoginLogout($connection);
 
 generateBuyingPage(
     $productCode,

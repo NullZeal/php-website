@@ -105,6 +105,7 @@ openBodyTag();
 
 //The next 2 functions generate the core of the body
 generateNavigationMenu();
+generateLoginLogout($connection);
 generateIndexPage($productsArray);
 
 //The next 3 functions generate the footer and the end of the html content

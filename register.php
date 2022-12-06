@@ -5,6 +5,7 @@
 const INIT  = 'php/init.php';
 require_once INIT;
 require_once CUSTOMER;
+require_once CONNECTION;
 
 #See function details for more info
 executePageInitializationFunctions();
@@ -37,14 +38,14 @@ if (isset($_POST["register"])) {
     $postalcode = htmlspecialchars($_POST["postalcode"]);
     $username = htmlspecialchars($_POST["username"]);
     $user_password = htmlspecialchars($_POST["user_password"]);
-    
     $picture = "";
-
+    
     if ($_FILES["picture"]["error"] == UPLOAD_ERR_OK && is_uploaded_file($_FILES["picture"]["tmp_name"])) {
         $picture = file_get_contents($_FILES["picture"]["tmp_name"]);
     } 
-
+    
     $newCustomer = new customer();
+
     $canInsertNewCustomer = true;
 
     $errorMessageTable["firstname"] = $newCustomer->setFirstname($firstname) == true ? $newCustomer->setFirstname($firstname) : "";
@@ -56,7 +57,7 @@ if (isset($_POST["register"])) {
     $errorMessageTable["username"] = $newCustomer->setUsername($username) == true ? $newCustomer->setUsername($username) : "";
     $errorMessageTable["user_password"] = $newCustomer->setUser_password($user_password) == true ? $newCustomer->setUser_password($user_password) : "";
     $errorMessageTable["picture"] = $newCustomer->setPicture($picture) == true ? $newCustomer->setPicture($picture) : "";
-
+    
     if (checkForErrorsInArray($errorMessageTable)) {
         $canInsertNewCustomer = false;
     }
@@ -74,7 +75,7 @@ if (isset($_POST["register"])) {
         }
     }
     $rows->closeCursor();
-
+    
     if ($canInsertNewCustomer) {
         $SQLquery = "CALL procedure_customers_insert_one("
             . ":firstname,"

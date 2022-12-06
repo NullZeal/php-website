@@ -3,7 +3,7 @@
 function executePageInitializationFunctions()
 {
     #opening a session to share variables on all pages
-    openSession();
+    session_start();
 
     #Making page https only
     forceHttps();
@@ -15,12 +15,6 @@ function executePageInitializationFunctions()
     addCachingPreventionHeaders();
     addContentTypeHeader();
 }
-
-function openSession()
-{
-    session_start();
-}
-
 
 function forceHttps()
 {

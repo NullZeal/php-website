@@ -44,34 +44,6 @@ function generatePageFooter()
     <?php
 }
 
-
-function generateLoginForm($userError, $passwordError, $registerUrl)
-{
-
-    ?>
-
-    <div class="loginform">
-        <form method="post">
-
-            <label for="username">Username: </label>
-            <input id="username" type="text" name="username" placeholder="Username"></input>
-            <span class="formLoginSpan"><?php echo $userError; ?></span>
-
-            <label for="password">Password: </label>
-            <input id="password" type="text" name="password" placeholder="Password"></input>
-            <span class="formLoginSpan"><?php echo $passwordError; ?></span>
-
-            <button type="submit" name="login">Login</button>
-
-        </form>
-
-        <div>
-            <a href="<?php $registerUrl ?>">Create a new account</a>
-        </div>
-    </div>
-    <?php
-}
-
 function openDoctypeTag()
 {
 
@@ -141,4 +113,46 @@ function generateLogo()
 function generateRedStar()
 {
     echo "<span class='red'>*</span>";
+}
+
+function generateLoginForm($errorMessage, $registerUrl)
+{
+
+    ?>
+
+    <div>
+        <form id="loginForm" method="post">
+            
+            <button id="loginButton" type="submit" name="login">Login</button>
+            <label for="username">Username: </label>
+            <input id="username" type="text" 
+                   name="username" placeholder="Username"></input>
+
+            <label for="password">Password: </label>
+            <input id="password" type="text" 
+                   name="password" placeholder="Password"></input>
+            <span class="formLoginSpan"><?php echo $errorMessage; ?></span>
+            
+
+        </form>
+    </div>
+    <?php
+}
+
+function generateLogoutForm($registerUrl)
+{
+
+    ?>
+
+    <div>
+        <form id="logoutForm" method="post">
+            
+            <img id="customerImage" src="<?php  ?>">
+            <label for="customerImage"></label>
+
+            <button type="submit" name="logout">Logout</button>
+
+        </form>
+    </div>
+    <?php
 }

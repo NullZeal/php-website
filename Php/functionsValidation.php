@@ -16,25 +16,9 @@
 #Julien Pontbriand (2135020)    Nov. 29, 2022    Added the forcehttps function. 
 #-------------------------------------------------------------------
 
-function createCookie()
-{
-    $_SESSION["loggedUser"] = $_POST["user"];
-    header('location:index.php');
-    exit();
-}
+require_once CUSTOMER;
 
-function readCookie()
-{
-    global $loggedUser;
-
-    if (isset($_SESSION["loggedUser"])) {
-        $loggedUser = $_SESSION["loggedUser"];
-
-        setcookie("loggedUser", $_COOKIE[loggedUser], time() + 60 * 10);
-    }
-}
-
-function validateUserCredentials($username, $password)
+function validateUserCredentials($username, $password, $connection)
 {
     $SQLquery = Database2135020_Procedures_Customers::GET_USERNAME_PASSWORD . "(:username)";
     $rows = $connection->prepare($SQLquery);
@@ -49,37 +33,3 @@ function validateUserCredentials($username, $password)
     }
     return false;
 }
-
-function generateLogout($someCustomer)
-{
-    
-}
-
-function generateLogin()
-{
-    if (isset($_SESSION["connectedUser"])) {
-        generateLogout($_SESSION["connectedUser"]);
-    } elseif (isset($_POST["login"])) {
-        if (isset($_POST["username"]) && isset($_POST["password"])) {
-            $username = htmlspecialchars($_POST["username"]);
-            $password = htmlspecialchars($_POST["password"]);
-
-            if (validateUserCredentials($username, $password)) {
-
-                $connectedUser = new customer();
-
-                generateLogout($_SESSION["connectedUser"]);
-            }
-        }
-    } else {
-
-
-        if (!isset($_POST["username"])) {
-            
-        }
-        if (isset($_POST["password"])) {
-            
-        }
-    }
-}
-
