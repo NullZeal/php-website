@@ -1,9 +1,10 @@
 <?php
 
-
 const CONNECTION = 'Php/connection.php';
 const CUSTOMER = 'php/class/customer.php';
-const FUNCTIONS_GLOBAL = 'Php/globalFunctions.php';
+const FUNCTIONS_GLOBAL = 'Php/functionsGlobal.php';
+const FUNCTIONS_HTML = 'Php/functionsHtml.php';
+const FUNCTIONS_PAGE_SETUP = 'Php/functionsPageSetup.php';
 const DEBUGGING = false;
 
 abstract class Database2135020_Procedures_Customers
@@ -49,10 +50,12 @@ const FILE_CSS_INDEX = FOLDER_CSS . 'index.css';
 const FILE_CSS_BUYING = FOLDER_CSS . 'buying.css';
 const FILE_CSS_ORDERS = FOLDER_CSS . 'orders.css';
 const FILE_CSS_GLOBAL = FOLDER_CSS . 'global.css';
+const FILE_CSS_REGISTER = FOLDER_CSS . 'register.css';
 
 const FILE_PAGE_INDEX = 'index.php';
 const FILE_PAGE_BUYING = 'buying.php';
 const FILE_PAGE_ORDERS = "orders.php"; 
+const FILE_PAGE_REGISTER = "register.php"; 
 
 const FILE_TXT_ORDERS = FOLDER_TXT . "orders.txt";
 const FILE_TXT_CHEATSHEET = FOLDER_TXT . "cheatsheet.txt";

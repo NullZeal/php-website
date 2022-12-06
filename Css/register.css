@@ -1,0 +1,69 @@
+/*
+
+#Revision History
+#
+#DEVELOPER                      DATE             Comments
+#Julien Pontbriand (2135020)    Oct. 7, 2022     File creation.
+#
+#Julien Pontbriand (2135020)    Oct. 23, 2022    Added css for all tags with the star symbol, for html, body, noOrdersFound, table, td tags
+#
+#Julien Pontbriand (2135020)    Oct. 30, 2022    Final indentation touch up
+
+*/ 
+
+html body{
+    font-size: 1.2rem;
+}
+ 
+body{
+    background-color: rgba(133,86,176, 0.2);
+}
+
+#registerForm{
+    margin-top:5vh;
+    margin-left:20vw;
+    margin-right:20vw;
+    background-color: rgba(30,30,100, 0.2);
+    border-radius: 10px;
+}
+
+label{
+    display:inline-block;
+    margin: 20px 0 0 50px;
+    vertical-align: top;
+    font-size:1.5rem;
+}
+
+input, textarea{
+    margin-top:20px;
+}
+
+#submitButton{
+    margin-left: calc(50vw - 150px - 20vw);
+    margin-bottom: 50px;
+    margin-top:20px;
+    height: 150px;
+    width: 300px;
+    background-color: rgba(133,66,166, 0.5);
+    font-size: 2rem;
+    border-radius: 20px;
+    color: rgba(222,222,222,0.9);
+}
+
+#successMessage{
+    text-align: center;
+    margin-left: 10vw;
+    margin-right: 10vw;
+    margin-bottom: 5vh;
+    color: rgba(133,86,176, 1);
+}
+
+.red{
+    color:red;
+}
+
+#required{
+    display:block;
+    color:red;
+    margin-left:20vw;
+}

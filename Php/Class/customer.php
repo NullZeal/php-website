@@ -7,7 +7,7 @@
 #
 #-------------------------------------------------------------------
 
-class customer
+class customer 
 {
     //class constants
     const ID_MIN_LENGTH = 36;

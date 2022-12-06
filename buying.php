@@ -23,22 +23,8 @@
 const INIT  = 'php/init.php';
 require_once INIT;
 
-#opening a session to share variables on all pages
-openSession();
-
-#Making page https only
-forceHttps();
-
-//Adding error handling
-addErrorHandling();
-#To enter DEBUG mode, set DEBUGGING to true in the globalFunctions.php file
-#Test it with :
-#   Trigger_error("custom error", E_USER_ERROR); #generate error
-#   Throw new Exception("custom exception"); #generate exception
-
-//Adding a page headers
-addCachingPreventionHeaders();
-addContentTypeHeader();
+#See function details for more info
+executePageInitializationFunctions();
 
 //Creating a title variable for this page
 $pageTitle = "Buying Page";
@@ -381,7 +367,7 @@ function generateBuyingPage(
 
             <form action="buying.php" method="POST" id="buyingForm">
                 <p>
-                    <label>Product code:<?php generateRedStar(); ?></label>
+                    <label><?php generateRedStar(); ?>Product code:</label>
                     <input type="text" 
                            name="productCode"
                            value="<?php echo $productCode ?>"
@@ -392,7 +378,7 @@ function generateBuyingPage(
                 </p>
 
                 <p>
-                    <label>Customer first name:<?php generateRedStar(); ?></label>
+                    <label><?php generateRedStar(); ?>Customer first name:</label>
                     <input
                         type="text"
                         name="firstName"
@@ -404,7 +390,7 @@ function generateBuyingPage(
                 </p>
 
                 <p>
-                    <label>Customer last name:<?php generateRedStar(); ?></label>
+                    <label><?php generateRedStar(); ?>Customer last name:</label>
                     <input 
                         type="text" 
                         name="lastName" 
@@ -416,7 +402,7 @@ function generateBuyingPage(
                 </p>
 
                 <p>
-                    <label>Customer city:<?php generateRedStar(); ?></label>
+                    <label><?php generateRedStar(); ?>Customer city:</label>
                     <input 
                         type="text"
                         name="city" 
@@ -439,7 +425,7 @@ function generateBuyingPage(
                 </p>
 
                 <p>
-                    <label>Price:<?php generateRedStar(); ?></label>
+                    <label><?php generateRedStar(); ?>Price:</label>
                     <input 
                         type="text" 
                         name="price" 
@@ -451,7 +437,7 @@ function generateBuyingPage(
                 </p>
 
                 <p>
-                    <label>Quantity:<?php generateRedStar(); ?></label>
+                    <label><?php generateRedStar(); ?>Quantity:</label>
                     <input 
                         type="text"
                         name="quantity"

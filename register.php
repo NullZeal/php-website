@@ -2,27 +2,12 @@
 #For bigger images : please set the [mysqld] max_allowed_packet setting to a higher limit in /etc/my.cnf
 #https://stackoverflow.com/questions/7942154/mysql-error-2006-mysql-server-has-gone-away#9479681
 
-
- 
-
 const INIT  = 'php/init.php';
 require_once INIT;
 require_once CUSTOMER;
 
-
-
-#opening a session to share variables on all pages
-openSession();
-
-#Making page https only
-forceHttps();
-
-//Adding error handling
-addErrorHandling();
-
-//Adding page headers
-addCachingPreventionHeaders();
-addContentTypeHeader();
+#See function details for more info
+executePageInitializationFunctions();
 
 //Creating a title variable for this page
 $pageTitle = "Register";
@@ -39,8 +24,11 @@ $errorMessageTable = array(
     "picture" => "",
 );
 
-if (isset($_POST["register"])) {
 
+if (isset($_POST["register"])) {
+    
+    $successMessage = "";
+    
     $firstname = htmlspecialchars($_POST["firstname"]);
     $lastname = htmlspecialchars($_POST["lastname"]);
     $address = htmlspecialchars($_POST["address"]);
@@ -49,7 +37,7 @@ if (isset($_POST["register"])) {
     $postalcode = htmlspecialchars($_POST["postalcode"]);
     $username = htmlspecialchars($_POST["username"]);
     $user_password = htmlspecialchars($_POST["user_password"]);
-
+    
     $picture = "";
 
     if ($_FILES["picture"]["error"] == UPLOAD_ERR_OK && is_uploaded_file($_FILES["picture"]["tmp_name"])) {
@@ -73,7 +61,7 @@ if (isset($_POST["register"])) {
         $canInsertNewCustomer = false;
     }
 
-    $SQLquery = "CALL procedure_get_password_from_username(:username)";
+    $SQLquery = Database2135020_Procedures_Customers::GET_USERNAME_PASSWORD . "(:username)";
     $rows = $connection->prepare($SQLquery);
     $rows->bindParam(":username", $username, PDO::PARAM_STR);
 
@@ -85,7 +73,6 @@ if (isset($_POST["register"])) {
             }
         }
     }
-
     $rows->closeCursor();
 
     if ($canInsertNewCustomer) {
@@ -115,17 +102,34 @@ if (isset($_POST["register"])) {
         $rows->bindParam(":picture", $picture);
 
         if ($rows->execute()) {
-            echo $rows->rowCount() . " customer was added successfully!";
+            $successMessage = $rows->rowCount() . " customer was added successfully!";
             $_POST = array();
         }
     }
 }
 
-generateRegisterForm($errorMessageTable);
 
-################################################################################
-#                              Functions
-################################################################################
+
+// ###Now generating the actual page###
+// The next 4 functions generate the html for everything that's before the body
+openDoctypeTag();
+openHtmlTag();
+generatePageHead($pageTitle, FILE_CSS_REGISTER);
+openBodyTag();
+
+
+//The next 2 functions generate the core of the body
+generateNavigationMenu();
+generateLogo();
+generateRegisterForm($errorMessageTable, isset($successMessage) ? $successMessage : "");
+
+//The next 3 functions generate the footer and the end of the html content
+generatePageFooter();
+closeBodyTag();
+closeHtmlTag();
+
+
+
 
 function checkForErrorsInArray($errorMessageTable)
 {
@@ -137,17 +141,15 @@ function checkForErrorsInArray($errorMessageTable)
     return false;
 }
 
-
-
-
-function generateRegisterForm($errorMessageTable)
+function generateRegisterForm($errorMessageTable, $successMessage)
 {
 
     ?>
     <div class="registerPage">
-        <form method="post" enctype="multipart/form-data">
+        <span id="required">* = required</span>
+        <form id="registerForm" method="post" enctype="multipart/form-data">
 
-            <label for="firstname">First name: </label>
+            <label for="firstname"><?php echo generateRedStar() ?>First name: </label>
 
             <input id="firstname" type="text" name="firstname" placeholder="Firstname" 
                    value="<?php echo isset($_POST["lastname"]) ? filter_input(INPUT_POST, 'firstname') : "" ?>"></input>
@@ -155,7 +157,7 @@ function generateRegisterForm($errorMessageTable)
 
             <br>
 
-            <label for="lastname">Last name: </label>
+            <label for="lastname"><?php echo generateRedStar() ?>Last name: </label>
 
             <input id="lastname" type="text" name="lastname" placeholder="Lastname" 
                    value="<?php echo isset($_POST["lastname"]) ? filter_input(INPUT_POST, 'lastname') : "" ?>"></input>
@@ -163,55 +165,56 @@ function generateRegisterForm($errorMessageTable)
 
             <br>
 
-            <label for="address">Address: </label>
+            <label for="address"><?php echo generateRedStar() ?>Address: </label>
             <input id="address" type="text" name="address" placeholder="Address"
                    value="<?php echo isset($_POST["address"]) ? filter_input(INPUT_POST, 'address') : "" ?>"></input>
             <span class="formErrorSpan"><?php echo $errorMessageTable["address"]; ?></span>
 
             <br>
 
-            <label for="city">City: </label>
+            <label for="city"><?php echo generateRedStar() ?>City: </label>
             <input id="city" type="text" name="city" placeholder="City"
                    value="<?php echo isset($_POST["city"]) ? filter_input(INPUT_POST, 'city') : "" ?>"></input>
             <span class="formErrorSpan"><?php echo $errorMessageTable["city"]; ?></span>
 
             <br>
 
-            <label for="province">Province: </label>
+            <label for="province"><?php echo generateRedStar() ?>Province: </label>
             <input id="province" type="text" name="province" placeholder="Province"
                    value="<?php echo isset($_POST["province"]) ? filter_input(INPUT_POST, 'province') : "" ?>"></input>
             <span class="formErrorSpan"><?php echo $errorMessageTable["province"]; ?></span>
 
             <br>
 
-            <label for="postalcode">Postal code: </label>
+            <label for="postalcode"><?php echo generateRedStar() ?>Postal code: </label>
             <input id="postalcode" type="text" name="postalcode" placeholder="Postalcode"
                    value="<?php echo isset($_POST["postalcode"]) ? filter_input(INPUT_POST, 'postalcode') : "" ?>"></input>
             <span class="formErrorSpan"><?php echo $errorMessageTable["postalcode"]; ?></span>
 
             <br>
 
-            <label for="username">Username: </label>
+            <label for="username"><?php echo generateRedStar() ?>Username: </label>
             <input id="username" type="text" name="username" placeholder="Username"
                    value="<?php echo isset($_POST["username"]) ? filter_input(INPUT_POST, 'username') : "" ?>"></input>
             <span class="formErrorSpan"><?php echo $errorMessageTable["username"]; ?></span>
 
             <br>
 
-            <label for="user_password">Password: </label>
+            <label for="user_password"><?php echo generateRedStar() ?>Password: </label>
             <input id="user_password" type="password" name="user_password" placeholder="Password"
                    value="<?php echo isset($_POST["user_password"]) ? filter_input(INPUT_POST, 'user_password') : "" ?>"></input>
             <span class="formErrorSpan"><?php echo $errorMessageTable["user_password"]; ?></span>
 
             <br>
 
-            <label for="picture">Picture: </label>
+            <label for="picture"><?php echo generateRedStar() ?>Picture: </label>
             <input id="picture" type="file" name="picture" placeholder="picture" accept="image/png, image/jpeg"></input>
             <span class="formErrorSpan"><?php echo $errorMessageTable["picture"]; ?></span>
 
             <br>
 
             <button id="submitButton" type="submit" name="register">Register</button>
+            <p id="successMessage"><?php echo $successMessage ?></p>
         </form>
     </div>
     <?php

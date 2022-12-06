@@ -21,22 +21,8 @@
 const INIT  = 'php/init.php';
 require_once INIT;
 
-#opening a session to share variables on all pages
-openSession();
-
-#Making page https only
-forceHttps();
-
-//Adding error handling
-addErrorHandling();
-#To enter DEBUG mode, set DEBUGGING to true in the globalFunctions.php file
-#Test it with :
-#   Trigger_error("custom error", E_USER_ERROR); #generate error
-#   Throw new Exception("custom exception"); #generate exception
-
-//Adding a page headers
-addCachingPreventionHeaders();
-addContentTypeHeader();
+#See function details for more info
+executePageInitializationFunctions();
 
 //Creating a title variable for this page
 $pageTitle = "Orders Page";
