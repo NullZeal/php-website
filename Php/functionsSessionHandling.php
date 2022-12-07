@@ -6,8 +6,10 @@ function generateLoginLogout($connection)
 
         if (!isset($_POST["logout"])) {
 
-            generateLogout($_SESSION["connectedUser"]);
-            
+            generateLogout(
+                $_SESSION["connectedUser"]->getFirstname(),
+                $_SESSION["connectedUser"]->getLastname(),
+                $_SESSION["connectedUser"]->getPicture());
         } else {
 
             $_SESSION = [];
@@ -18,46 +20,44 @@ function generateLoginLogout($connection)
         }
         return null;
     }
-    
 
-if (!isset($_POST["login"])) {
-    $errorMessage = "";
-    generateLoginForm($errorMessage, FILE_PAGE_REGISTER);
-    return null;
-}
 
-if ($_POST["username"] == "" || $_POST["password"] == "") {
+    if (!isset($_POST["login"])) {
+        $errorMessage = "";
+        generateLoginForm($errorMessage, FILE_PAGE_REGISTER);
+        return null;
+    }
 
-    $errorMessage = "Invalid credentials";
-    generateLoginForm($errorMessage, FILE_PAGE_REGISTER);
-    return null;
-}
+    if ($_POST["username"] == "" || $_POST["password"] == "") {
+
+        $errorMessage = "Invalid credentials";
+        generateLoginForm($errorMessage, FILE_PAGE_REGISTER);
+        return null;
+    }
 
 #At this point there is content in both username and password posts
 #ready to be validated
 
-$username = htmlspecialchars($_POST["username"]);
-$password = htmlspecialchars($_POST["password"]);
+    $username = htmlspecialchars($_POST["username"]);
+    $password = htmlspecialchars($_POST["password"]);
 
-if (validateUserCredentials($username, $password, $connection)) {
+    if (validateUserCredentials($username, $password, $connection)) {
 
-    $validatedUser = new customer();
-    $validatedUser->load($username, $connection);
-    $_SESSION["connectedUser"] = $validatedUser;
-    
-    #setcookie("connectedUser", $_COOKIE[loggedUser], time() + 60 * 10);
+        $validatedUser = new customer();
+        $validatedUser->load($username, $connection);
+        $_SESSION["connectedUser"] = $validatedUser;
 
-    echo $validatedUser->getId();
-
-    generateLogout($validatedUser);
-} else {
-    $errorMessage = "Invalid credentials";
-    generateLoginForm($errorMessage, FILE_PAGE_REGISTER);
+        generateLogout(
+            $_SESSION["connectedUser"]->getFirstname(),
+            $_SESSION["connectedUser"]->getLastname(),
+            $_SESSION["connectedUser"]->getPicture());
+    } else {
+        $errorMessage = "Invalid credentials";
+        generateLoginForm($errorMessage);
+    }
 }
-}
 
-function generateLogout()
+function generateLogout($firstname, $lastname, $picture)
 {
-    generateLogoutForm(FILE_PAGE_REGISTER);
+    generateLogoutForm($firstname, $lastname, $picture);
 }
-// base64_encode($screenshot)

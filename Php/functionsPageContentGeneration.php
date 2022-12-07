@@ -129,7 +129,7 @@ function generateLoginForm($errorMessage, $registerUrl)
                    name="username" placeholder="Username"></input>
 
             <label for="password">Password: </label>
-            <input id="password" type="text" 
+            <input id="password" type="password" 
                    name="password" placeholder="Password"></input>
             <span class="formLoginSpan"><?php echo $errorMessage; ?></span>
             
@@ -139,20 +139,25 @@ function generateLoginForm($errorMessage, $registerUrl)
     <?php
 }
 
-function generateLogoutForm($registerUrl)
+function generateLogoutForm($firstname, $lastname, $picture)
 {
 
     ?>
+    
+    
 
     <div>
         <form id="logoutForm" method="post">
             
-            <img id="customerImage" src="<?php  ?>">
+            <img class="profilePicture" id="customerImage" src="data:image;base64,<?php echo base64_encode($picture) ?>">
+            <h4 class="welcome">Welcome <?php echo $firstname . " " .  $lastname . "!"?></h4>
             <label for="customerImage"></label>
 
-            <button type="submit" name="logout">Logout</button>
+            <button id="btnLogout" type="submit" name="logout">Logout</button>
 
         </form>
     </div>
     <?php
 }
+
+// base64_encode($screenshot)

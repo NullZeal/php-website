@@ -96,3 +96,32 @@ body{
     background-color: rgba(44,44,44,0.3);
     border-radius: 10px;
 }
+
+.profilePicture{
+    width: 100px;
+    height:100px;
+    margin-left: calc(70% - 100px);
+    
+    display:inline-block;
+}
+
+#logoutForm{
+    padding-top: 3vh;
+    paddding-bottomL: 3vh;
+    background-color: rgba(14,14,14,0.5);
+}
+
+.welcome{
+    display:inline-block;
+    color: white;
+    font-size: 2rem;
+}
+
+#btnLogout{
+    display:inline-block;
+    position:relative;
+    top:0;
+    width:6vw;
+    height:6vh;
+    
+}

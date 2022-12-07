@@ -77,8 +77,8 @@ if (isset($_POST["register"])) {
     $rows->closeCursor();
     
     if ($canInsertNewCustomer) {
-        $SQLquery = "CALL procedure_customers_insert_one("
-            . ":firstname,"
+        $SQLquery = Database2135020_Procedures_Customers::INSERT_ONE 
+            . "(:firstname,"
             . ":lastname,"
             . ":address,"
             . ":city,"
