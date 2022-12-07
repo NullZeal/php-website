@@ -4,8 +4,8 @@
 
 const INIT  = 'php/init.php';
 require_once INIT;
-require_once CUSTOMER;
-require_once CONNECTION;
+require_once FILE_CUSTOMER;
+require_once FILE_CONNECTION;
 
 #See function details for more info
 executePageInitializationFunctions();
@@ -44,7 +44,7 @@ if (isset($_POST["register"])) {
         $picture = file_get_contents($_FILES["picture"]["tmp_name"]);
     } 
     
-    $newCustomer = new customer();
+    $newCustomer = new Customer();
 
     $canInsertNewCustomer = true;
 

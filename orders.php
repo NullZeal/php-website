@@ -121,9 +121,7 @@ function generateOrdersPage(&$errorMessage)
                 
             </table>
             
-            <a id="downloadButtonContainer" href="Txt/cheat-sheet.html" download="CheatSheet.html">
-                <button id="btnDownload">Download the CheatSheet!</button>
-            </a>
+            
 
         </div>
 

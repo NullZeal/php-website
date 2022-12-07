@@ -123,7 +123,7 @@ function generateLoginForm($errorMessage, $registerUrl)
     <div>
         <form id="loginForm" method="post">
             
-            <button id="loginButton" type="submit" name="login">Login</button>
+            
             <label for="username">Username: </label>
             <input id="username" type="text" 
                    name="username" placeholder="Username"></input>
@@ -131,6 +131,7 @@ function generateLoginForm($errorMessage, $registerUrl)
             <label for="password">Password: </label>
             <input id="password" type="password" 
                    name="password" placeholder="Password"></input>
+            <button id="loginButton" type="submit" name="login">Login</button>
             <span class="formLoginSpan"><?php echo $errorMessage; ?> - <a href="<?php echo FILE_PAGE_REGISTER ?>">Register</a></span>
             <br>
             

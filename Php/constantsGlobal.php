@@ -4,19 +4,27 @@
 #         DIRECTORIES           #
 #################################
 
-const CONNECTION = 'Php/dbConnection.php';
-const CUSTOMER = 'Php/Classes/customer.php';
-const FUNCTIONS_VALIDATION = 'Php/functionsValidation.php';
-const FUNCTIONS_PAGE_CONFIG = 'Php/functionsPageConfig.php';
-const FUNCTIONS_PAGE_CONTENT_GENERATION = 'Php/functionsPageContentGeneration.php';
-const FUNCTIONS_SESSION_HANDLING = 'Php/functionsSessionHandling.php';
-
 //Creating a constant for folders
 const FOLDER_CSS = 'Css/';
 const FOLDER_MEDIA = 'Media/';
 const FOLDER_IMAGE = 'Image/'; 
 const FOLDER_TXT = 'Txt/';
 const FOLDER_TXT_ERRORS = FOLDER_TXT . 'Errors/';
+CONST FOLDER_PHP = "Php/";
+CONST FOLDER_CLASSES = FOLDER_PHP . 'Classes/';
+
+const FILE_CONNECTION = FOLDER_PHP . 'dbConnection.php';
+
+const FUNCTIONS_VALIDATION = FOLDER_PHP . 'functionsValidation.php';
+const FUNCTIONS_PAGE_CONFIG = FOLDER_PHP . 'functionsPageConfig.php';
+const FUNCTIONS_PAGE_CONTENT_GENERATION = FOLDER_PHP . 'functionsPageContentGeneration.php';
+const FUNCTIONS_SESSION_HANDLING = FOLDER_PHP . 'functionsSessionHandling.php';
+
+const FILE_CUSTOMER = FOLDER_CLASSES . 'customer.php';
+const FILE_PRODUCT = FOLDER_CLASSES . 'product.php';
+const FILE_PRODUCTS = FOLDER_CLASSES . 'products.php';
+const FILE_COLLECTION = FOLDER_CLASSES . 'collection.php';
+
 
 //Creating a constant for files
 const FILE_CSS_INDEX = FOLDER_CSS . 'index.css';
@@ -56,19 +64,9 @@ abstract class Database2135020_Procedures_Customers
     public const DELETE_ONE = 'CALL procedure_customers_delete_one';
     public const INSERT_ONE = 'CALL procedure_customers_insert_one';
     public const SELECT_ALL = 'CALL procedure_customers_select_all';
-    public const SELECT_ONE = 'CALL procedure_customers_select_one';
+    public const SELECT_ONE_FROM_ID = 'CALL procedure_customers_select_from_id';
+    public const SELECT_ONE_FROM_USERNAME = 'CALL procedure_customers_select_from_username';
     public const UPDATE_ONE = 'CALL procedure_customers_update_one';
-}
-    
-abstract class Database2135020_Procedures_Orders
-{
-    public const DELETE_ONE = 'CALL procedure_orders_delete_one';
-    public const INSERT_ONE = 'CALL procedure_orders_insert_one';
-    public const SELECT_ALL = 'CALL procedure_orders_select_all';
-    public const SELECT_ONE = 'CALL procedure_orders_select_one';
-    public const UPDATE_ONE = 'CALL procedure_orders_update_one';
-    public const SELECT_CUSTOMER_ORDERS = 'CALL procedure_select_customer_orders';
-    
 }
 
 abstract class Database2135020_Procedures_Products
@@ -80,5 +78,18 @@ abstract class Database2135020_Procedures_Products
     public const UPDATE_ONE = 'CALL procedure_products_update_one';
     
 }
+
+abstract class Database2135020_Procedures_Orders
+{
+    public const DELETE_ONE = 'CALL procedure_orders_delete_one';
+    public const INSERT_ONE = 'CALL procedure_orders_insert_one';
+    public const SELECT_ALL = 'CALL procedure_orders_select_all';
+    public const SELECT_ONE = 'CALL procedure_orders_select_one';
+    public const UPDATE_ONE = 'CALL procedure_orders_update_one';
+    public const SELECT_CUSTOMER_ORDERS = 'CALL procedure_select_customer_orders';
+    
+}
+
+
 
 const LOGGIN_ERROR_MESSAGE = "Please login before accessing this page";

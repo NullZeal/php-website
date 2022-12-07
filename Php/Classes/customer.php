@@ -7,7 +7,7 @@
 #
 #-------------------------------------------------------------------
 
-class customer 
+class Customer 
 {
     //class constants
     const ID_MIN_LENGTH = 36;
@@ -66,6 +66,11 @@ class customer
         $this->setDatetime_created($datetime_created);
         $this->setDatetime_updated($datetime_updated);
     }
+
+    function getId()
+    {
+        return $this->id;
+    }
     
     function setId($input)
     {
@@ -83,9 +88,9 @@ class customer
         }
     }
     
-    function getId()
+    function getFirstname()
     {
-        return $this->id;
+        return $this->firstname;
     }
     
     function setFirstname($input)
@@ -101,10 +106,10 @@ class customer
         }
     }
 
-    function getFirstname()
+    function getLastname()
     {
-        return $this->firstname;
-    }
+        return $this->lastname;
+    } 
 
     function setLastname($input)
     {
@@ -119,10 +124,10 @@ class customer
         }
     }
 
-    function getLastname()
+    function getAddress()
     {
-        return $this->lastname;
-    }    
+        return $this->address;
+    }   
 
     function setAddress($input)
     {
@@ -137,11 +142,11 @@ class customer
         }
     }
     
-    function getAddress()
+    function getCity()
     {
-        return $this->address;
+        return $this->city;
     } 
-
+    
     function setCity($input)
     {
         if (empty($input)) {
@@ -155,11 +160,11 @@ class customer
         }
     }
     
-    function getCity()
+    function getProvince()
     {
-        return $this->city;
+        return $this->province;
     } 
-
+    
     function setProvince($input)
     {
         if (empty($input)) {
@@ -172,11 +177,11 @@ class customer
             return false;
         }
     }
-    
-    function getProvince()
+
+    function getPostalcode()
     {
-        return $this->province;
-    } 
+        return $this->postalcode;
+    }  
 
     function setPostalcode($input)
     {
@@ -190,11 +195,11 @@ class customer
             return false;
         }
     }
-
-    function getPostalcode()
+    
+    function getUsername()
     {
-        return $this->postalcode;
-    }     
+        return $this->username;
+    } 
 
     function setUsername($input)
     {
@@ -209,9 +214,9 @@ class customer
         }
     }
 
-    function getUsername()
+    function getUser_password()
     {
-        return $this->username;
+        return $this->user_password;
     } 
     
     function setUser_password($input)
@@ -227,9 +232,9 @@ class customer
         }
     }
     
-    function getUser_password()
+    function getPicture()
     {
-        return $this->user_password;
+        return $this->picture;
     } 
     
     function setPicture($input)
@@ -241,10 +246,10 @@ class customer
             $this->picture = $input;
         }
     }
-    
-    function getPicture()
+
+    function getDatetime_created()
     {
-        return $this->picture;
+        return $this->datetime_created;
     } 
     
         function setDatetime_created($input)
@@ -257,9 +262,9 @@ class customer
         }
     }
     
-    function getDatetime_created()
+    function getDatetime_updated()
     {
-        return $this->datetime_created;
+        return $this->datetime_updated;
     } 
     
         function setDatetime_updated($input)
@@ -271,21 +276,16 @@ class customer
             return false;
         }
     }
-    
-    function getDatetime_updated()
+
+    function load($id, $connection)
     {
-        return $this->datetime_updated;
-    } 
-    
-    function load($username, $connection)
-    {
-        $SQLquery = Database2135020_Procedures_Customers::SELECT_ONE . "(:username)";
+        $SQLquery = Database2135020_Procedures_Customers::SELECT_ONE_FROM_ID . "(:id)";
         $rows = $connection->prepare($SQLquery);
-        $rows->bindParam(":username", $username, PDO::PARAM_STR);
+        $rows->bindParam(":id", $id, PDO::PARAM_STR);
 
         if ($rows->execute()) {
             while ($row = $rows->fetch()) {
-                if ($row["username"] == $username) {
+                if ($row["id"] == $id) {
                     $this->setId($row["id"]);
                     $this->setFirstname($row["firstname"]);
                     $this->setLastname($row["lastname"]);

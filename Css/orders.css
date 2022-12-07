@@ -41,16 +41,7 @@ body{
     margin-bottom: 50vh;
 }
 
-#btnDownload{
-    width: 30vw;
-    position: absolute;
-    margin-left: calc(50% - 15vw);
-    margin-top: 5vh;
-    font-weight: bolder;
-    font-size:2rem;
-    background-color: rgba(44,44,44,0.3);
-    border-radius: 10px;
-}
+
 
 #tdRedColor{
     color: red;

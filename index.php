@@ -52,7 +52,15 @@ function generateIndexPage($productsArray)
                     products offered by companies that do not respect your 
                     rights.
                 </p>
+
                 <?php generateImageSection($productsArray); ?></div>
+                
+                <a id="downloadButtonContainer" 
+                   href="Txt/cheat-sheet.html" 
+                   download="CheatSheet.html">
+                    
+                    <button id="btnDownload">Download the CheatSheet!</button>
+                </a>
     <?php
 }
 

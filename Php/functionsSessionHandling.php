@@ -6,10 +6,13 @@ function generateLoginLogout($connection)
 
         if (!isset($_POST["logout"])) {
 
+            $currentCustomer = new Customer();
+            $currentCustomer->load($_SESSION["connectedUser"], $connection);
+            
             generateLogout(
-                $_SESSION["connectedUser"]->getFirstname(),
-                $_SESSION["connectedUser"]->getLastname(),
-                $_SESSION["connectedUser"]->getPicture());
+                $currentCustomer->getFirstname(),
+                $currentCustomer->getLastname(),
+                $currentCustomer->getPicture());
         } else {
 
             $_SESSION = [];
@@ -40,17 +43,22 @@ function generateLoginLogout($connection)
 
     $username = htmlspecialchars($_POST["username"]);
     $password = htmlspecialchars($_POST["password"]);
+    
+    $customerValidationToken = validateUserCredentials($username, $password, $connection);
 
-    if (validateUserCredentials($username, $password, $connection)) {
+    if ($customerValidationToken) {
 
-        $validatedUser = new customer();
-        $validatedUser->load($username, $connection);
-        $_SESSION["connectedUser"] = $validatedUser;
+        $validatedUser = new Customer();
+        
+        $validatedUser->load($customerValidationToken, $connection);
+        
+        $_SESSION["connectedUser"] = $validatedUser->getId();
 
         generateLogout(
-            $_SESSION["connectedUser"]->getFirstname(),
-            $_SESSION["connectedUser"]->getLastname(),
-            $_SESSION["connectedUser"]->getPicture());
+            $validatedUser->getFirstname(),
+            $validatedUser->getLastname(),
+            $validatedUser->getPicture());
+        
     } else {
         $errorMessage = "Invalid credentials";
         generateLoginForm($errorMessage, FILE_PAGE_REGISTER);
