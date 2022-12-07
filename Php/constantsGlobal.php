@@ -80,3 +80,5 @@ abstract class Database2135020_Procedures_Products
     public const UPDATE_ONE = 'CALL procedure_products_update_one';
     
 }
+
+const LOGGIN_ERROR_MESSAGE = "Please login before accessing this page";

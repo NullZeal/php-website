@@ -27,7 +27,7 @@ function generateNavigationMenu()
         <a href="<?php echo FILE_PAGE_INDEX ?>">Home</a>
         <a href="<?php echo FILE_PAGE_BUYING ?>">Buying</a>
         <a href="<?php echo FILE_PAGE_ORDERS ?>">Orders</a>
-        <a href="<?php echo FILE_PAGE_REGISTER ?>">Register</a>
+        
     </div>
 
     <?php
@@ -131,7 +131,9 @@ function generateLoginForm($errorMessage, $registerUrl)
             <label for="password">Password: </label>
             <input id="password" type="password" 
                    name="password" placeholder="Password"></input>
-            <span class="formLoginSpan"><?php echo $errorMessage; ?></span>
+            <span class="formLoginSpan"><?php echo $errorMessage; ?> - <a href="<?php echo FILE_PAGE_REGISTER ?>">Register</a></span>
+            <br>
+            
             
 
         </form>
@@ -160,4 +162,8 @@ function generateLogoutForm($firstname, $lastname, $picture)
     <?php
 }
 
-// base64_encode($screenshot)
+function generateErrorMessage($errorMessage){
+    ?>
+        <div id="pageLoginErrorMessage"><?php echo $errorMessage ?> </div>
+    <?php
+}

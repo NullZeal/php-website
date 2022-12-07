@@ -53,7 +53,7 @@ function generateLoginLogout($connection)
             $_SESSION["connectedUser"]->getPicture());
     } else {
         $errorMessage = "Invalid credentials";
-        generateLoginForm($errorMessage);
+        generateLoginForm($errorMessage, FILE_PAGE_REGISTER);
     }
 }
 

@@ -85,7 +85,7 @@ body{
 }
 
 #loginForm{
-    margin-left: calc(50% - 300px);
+    margin-left: calc(45% - 300px);
     margin-top:4vh;
 }
 
@@ -124,4 +124,13 @@ body{
     width:6vw;
     height:6vh;
     
+}
+
+.formLoginSpan a{
+    text-decoration:none
+}
+
+#pageLoginErrorMessage{
+    margin-top: 5vh;
+    margin-left: calc(50% - 100px);
 }

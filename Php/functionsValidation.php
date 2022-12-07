@@ -33,3 +33,8 @@ function validateUserCredentials($username, $password, $connection)
     }
     return false;
 }
+
+function isUserConnected()
+{
+    return isset($_SESSION["connectedUser"]) ? true : false;
+}

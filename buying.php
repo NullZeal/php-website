@@ -337,7 +337,6 @@ if (isset($_POST["buyingPage"])) {
 function generateBuyingPage( 
 
     #this function generates most of the html specific content for this page
-    
     $productCode,
     $firstName,
     $lastName,
@@ -353,8 +352,16 @@ function generateBuyingPage(
     $valiationPrice,
     $validationQuantity,
     $orderConfirmation,
-    $errorsOccured)
+    $errorsOccured,
+    &$errorMessage)
 {
+    if (!isUserConnected()) {
+        $errorMessage = LOGGIN_ERROR_MESSAGE;
+        return null;
+    }
+    else {
+        $errorMessage = "";
+    }
 
     $errorsOccured = false;
 
@@ -455,6 +462,9 @@ function generateBuyingPage(
         </div>
     <?php
 }
+
+$errorMessage = "";
+
 #Generating the page by calling all the necessary functions
 openDoctypeTag();
 openHtmlTag();
@@ -480,9 +490,10 @@ generateBuyingPage(
     $validationPrice,
     $validationQuantity,
     $orderConfirmation,
-    $errorsOccured
+    $errorsOccured,
+    $errorMessage
 );
-
+generateErrorMessage($errorMessage);
 generatePageFooter();
 
 closeBodyTag();
