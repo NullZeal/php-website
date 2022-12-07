@@ -20,23 +20,28 @@
 #Importing global functions from the relative path given in $globalFunctions
 
 const INIT = 'php/init.php';
-require_once INIT;
 
+require_once INIT;
 require_once FILE_PRODUCTS;
 
-#See function details for more info
 executePageInitializationFunctions();
 
-//Creating a title variable for this page
 $pageTitle = "Buying Page";
+$errorMessage = "";
+
+generatePageTop($pageTitle, FILE_CSS_BUYING);
+generateLoginLogout($connection);
+generateBuyingPage($errorMessage);
+generateErrorMessage($errorMessage);
+generatePageBottom();
+
+########################################################################
+# PAGE-SPECIFIC FUNCTIONS BELOW
+########################################################################
 
 function insertOrderToCustomer()
 {
     if (isset($_POST["buyingPage"])) {
-
-        #Here I will test all the validation requirements.
-        #All form inputs are included in separate if-elseif chains
-        #The htmlspecialchars protects against injection
 
         $productId = ($_POST["firstName"]);
         $comments = htmlspecialchars($_POST["buyingComments"]);
@@ -51,77 +56,49 @@ function generateBuyingPage(&$errorMessage)
     if (!isUserConnected()) {
         $errorMessage = LOGGIN_ERROR_MESSAGE;
         return null;
-    } else {
-        $errorMessage = "";
-    }
-
-    ?>
-
-    <div class="formSection">
-        <?php generateLogo() ?>
-        <span id="required">* = required</span>
-
-        <form action="buying.php" method="POST" id="buyingForm">
-
-            <label for="products"><?php generateRedStar(); ?>Product:</label>
-            <select name="product" id="product">
-
-                <?php
-                $products = new Products();
-
-                foreach ($products->items as $product) {
-
+    } else {$errorMessage = "";}
+    
+    ?>  
+        <div class="formSection">
+            <?php generateLogo() ?>
+            <span id="required">* = required</span>
+            <form action="buying.php" method="POST" id="buyingForm">
+                <label for="products"><?php generateRedStar(); ?>Product:</label>
+                <select name="product" id="product">
+                    <?php 
+                        $products = new Products(); 
+                        foreach ($products->items as $product){?>
+                            <option value="<?php echo $product->getId() ?>">
+                                <?php echo $product->getPcode() 
+                                    . "-" 
+                                    . $product->getPdescription()
+                                    . " ("
+                                    . $product->getPrice()
+                                    . "$)"
+                                ?>
+                            </option><?php }
                     ?>
-                    <option value="<?php echo $product->getId() ?>">
-                        <?php
-                        echo $product->getPcode()
-                        . "-"
-                        . $product->getPdescription()
-                        . " ("
-                        . $product->getPrice()
-                        . ")"
-
-                        ?>
-                    </option>
-        <?php
-    }
-
-    ?>
-            </select>
-            <br>
-            <label><?php generateRedStar(); ?>Comments:</label>
-            <input
-                type="text"
-                name="comments"
-                placeholder="Type your comments here!"
-                size="30"
-                maxlength="200">
-             <br>
-            <label><?php generateRedStar(); ?>Quantity:</label>
-            <input 
-                type="text" 
-                name="quantity" 
-                placeholder="Input quantity here!"
-                size="30"
-                maxlength="20">
-        </form>
-    </div>
+                </select>
+                <br>
+                <label><?php generateRedStar(); ?>Comments:</label>
+                <input
+                    type="text"
+                    name="comments"
+                    placeholder="Type your comments here!"
+                    size="30"
+                    maxlength="200">
+                <br>
+                <label><?php generateRedStar(); ?>Quantity:</label>
+                <input 
+                    type="text" 
+                    name="quantity" 
+                    placeholder="Input quantity here!"
+                    size="30"
+                    maxlength="20">
+                <br>
+                <button id="buyButton" type="submit" name="buy">Buy</button>
+            </form>
+        </div>
     <?php
 }
-$errorMessage = "";
 
-#Generating the page by calling all the necessary functions
-openDoctypeTag();
-openHtmlTag();
-generatePageHead($pageTitle, FILE_CSS_BUYING);
-openBodyTag();
-
-generateNavigationMenu();
-generateLoginLogout($connection);
-
-generateBuyingPage($errorMessage);
-generateErrorMessage($errorMessage);
-generatePageFooter();
-
-closeBodyTag();
-closeHtmlTag();

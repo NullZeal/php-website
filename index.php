@@ -15,16 +15,12 @@
 #-------------------------------------------------------------------
 
 #Importing global functions from the relative path given in $globalFunctions
-const INIT  = 'php/init.php';
-require_once INIT; 
+const INIT = 'php/init.php';
+require_once INIT;
 
 #See function details for more info
 executePageInitializationFunctions();
 
-//Creating a title variable for this page
-$pageTitle = "Home Page";
-
-//This array will be used to select 1 out of 5 images
 $productsArray = array(
     FILE_MEDIA_IMAGE_ADBLOCK,
     FILE_MEDIA_IMAGE_DISK,
@@ -32,35 +28,45 @@ $productsArray = array(
     FILE_MEDIA_IMAGE_PROTOCOL,
     FILE_MEDIA_IMAGE_SERVER);
 
+$pageTitle = "Home Page";
+
+generatePageTop($pageTitle, FILE_CSS_INDEX);
+generateLoginLogout($connection);
+generateIndexPage($productsArray);
+generatePageBottom();
+
+########################################################################
+# PAGE-SPECIFIC FUNCTIONS BELOW
+########################################################################
+
 //This function generates the html content for the Home Page
 //By the way, ShinyBridge is a gag, because my name is Pontbriand :)
 function generateIndexPage($productsArray)
 {
 
     ?>
+    <div class="companyDescription">
+        <?php generateLogo() ?>
+        <h1>ShinyBridge VPN</h1>
+        <h2>
+            Privacy at it's best.<br><br>Because everybody has something
+            to hide. And that's perfectly fine.<br>
+        </h2>
+        <p>
+            ShinyBridge VPN believes in a free and secure Internet. We 
+            offer the world open source technologies to compete with 
+            products offered by companies that do not respect your 
+            rights.
+        </p>
 
-            <div class="companyDescription">
-            <?php generateLogo() ?>
-            <h1>ShinyBridge VPN</h1>
-                <h2>
-                    Privacy at it's best.<br><br>Because everybody has something
-                    to hide. And that's perfectly fine.<br>
-                </h2>
-                <p>
-                    ShinyBridge VPN believes in a free and secure Internet. We 
-                    offer the world open source technologies to compete with 
-                    products offered by companies that do not respect your 
-                    rights.
-                </p>
+        <?php generateImageSection($productsArray); ?></div>
 
-                <?php generateImageSection($productsArray); ?></div>
-                
-                <a id="downloadButtonContainer" 
-                   href="Txt/cheat-sheet.html" 
-                   download="CheatSheet.html">
-                    
-                    <button id="btnDownload">Download the CheatSheet!</button>
-                </a>
+    <a id="downloadButtonContainer" 
+       href="Txt/cheat-sheet.html" 
+       download="CheatSheet.html">
+
+        <button id="btnDownload">Download the CheatSheet!</button>
+    </a>
     <?php
 }
 
@@ -93,30 +99,14 @@ function generateImageSection($productsArray)
     }
 
     ?>
-                <section>
-                    <p class="title">We offer <?php echo $productDescription ?></p>
+    <section>
+        <p class="title">We offer <?php echo $productDescription ?></p>
 
-                    <a href="https://www.mozilla.org/en-US/products/vpn/">
-                        <img class="<?php echo $imageClass ?>"
-                            loading="lazy" 
-                            src="<?php echo $productsArray[$randomNumber] ?>" 
-                            alt="An image representing <?php echo $productDescription ?>"/>
-                    </a>
-                </section><?php
+        <a href="https://www.mozilla.org/en-US/products/vpn/">
+            <img class="<?php echo $imageClass ?>"
+                 loading="lazy" 
+                 src="<?php echo $productsArray[$randomNumber] ?>" 
+                 alt="An image representing <?php echo $productDescription ?>"/>
+        </a>
+    </section><?php
 }
-// ###Now generating the actual page###
-// The next 4 functions generate the html for everything that's before the body
-openDoctypeTag();
-openHtmlTag();
-generatePageHead($pageTitle, FILE_CSS_INDEX);
-openBodyTag();
-
-//The next 2 functions generate the core of the body
-generateNavigationMenu();
-generateLoginLogout($connection);
-generateIndexPage($productsArray);
-
-//The next 3 functions generate the footer and the end of the html content
-generatePageFooter();
-closeBodyTag();
-closeHtmlTag();

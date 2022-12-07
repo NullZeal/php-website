@@ -109,23 +109,12 @@ if (isset($_POST["register"])) {
     }
 }
 
-// ###Now generating the actual page###
-// The next 4 functions generate the html for everything that's before the body
-openDoctypeTag();
-openHtmlTag();
-generatePageHead($pageTitle, FILE_CSS_REGISTER);
-openBodyTag();
+generatePageTop($pageTitle, FILE_CSS_REGISTER);
 
-
-//The next 2 functions generate the core of the body
-generateNavigationMenu();
 generateLogo();
 generateRegisterForm($errorMessageTable, isset($successMessage) ? $successMessage : "");
 
-//The next 3 functions generate the footer and the end of the html content
-generatePageFooter();
-closeBodyTag();
-closeHtmlTag();
+generatePageBottom();
 
 function checkForErrorsInArray($errorMessageTable)
 {

@@ -11,9 +11,6 @@
 #
 #Julien Pontbriand (2135020)    Oct. 30, 2022    Final indentation
 */
-#delemte{
-    
-}
 #required{
     display:block;
     color:red;
@@ -29,12 +26,17 @@
     margin-right:20vw;
     background-color: rgba(30,30,100, 0.2);
     border-radius: 10px;
+    padding: 100px;
 }
 
 label{
     display:inline-block;
     margin: 20px 0 0 50px;
     vertical-align: top;
+}
+
+#product{
+    margin: 20px 0 0 7px;
 }
 
 input, textarea{
@@ -62,4 +64,13 @@ body{
     font-size: 2rem;
     border-radius: 20px;
     color: rgba(222,222,222,0.9);
+}
+
+#buyButton{
+    width: 10vw;
+    position: absolute;
+    margin-left: calc(30% - 5vw);
+    margin-top: 5vh;
+    font-weight: bolder;
+    font-size: 2rem;
 }

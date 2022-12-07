@@ -142,8 +142,6 @@ generateNavigationMenu();
 generateLoginLogout($connection);
 generateOrdersPage($errorMessage);
 generateErrorMessage($errorMessage);
-generatePageFooter();
 
-closeBodyTag();
-closeHtmlTag();
+generatePageBottom();
 
