@@ -302,4 +302,32 @@ class Customer
             }
         }
     }
+    
+    function save($id, $connection)
+    {
+        $SQLquery = Database2135020_Procedures_Customers::INSERT_ONE
+            . "(:firstname,"
+            . ":lastname,"
+            . ":address,"
+            . ":city,"
+            . ":province,"
+            . ":postalcode,"
+            . ":username,"
+            . ":user_password,"
+            . ":picture )";
+
+        $rows = $connection->prepare($SQLquery);
+
+        $rows->bindParam(":firstname", $this->firstname, PDO::PARAM_STR);
+        $rows->bindParam(":lastname", $this->lastname, PDO::PARAM_STR);
+        $rows->bindParam(":address", $this->address, PDO::PARAM_STR);
+        $rows->bindParam(":city", $this->city, PDO::PARAM_STR);
+        $rows->bindParam(":province", $this->province, PDO::PARAM_STR);
+        $rows->bindParam(":postalcode", $this->postalcode, PDO::PARAM_STR);
+        $rows->bindParam(":username", $this->username, PDO::PARAM_STR);
+        $rows->bindParam(":user_password", $this->user_password, PDO::PARAM_STR);
+        $rows->bindParam(":picture", $this->picture);
+
+        $rows->execute();
+    }
 }

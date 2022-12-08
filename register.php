@@ -25,96 +25,19 @@ $errorMessageTable = array(
     "picture" => "",
 );
 
-
-if (isset($_POST["register"])) {
-    
-    $successMessage = "";
-    
-    $firstname = htmlspecialchars($_POST["firstname"]);
-    $lastname = htmlspecialchars($_POST["lastname"]);
-    $address = htmlspecialchars($_POST["address"]);
-    $city = htmlspecialchars($_POST["city"]);
-    $province = htmlspecialchars($_POST["province"]);
-    $postalcode = htmlspecialchars($_POST["postalcode"]);
-    $username = htmlspecialchars($_POST["username"]);
-    $user_password = htmlspecialchars($_POST["user_password"]);
-    $picture = "";
-    
-    if ($_FILES["picture"]["error"] == UPLOAD_ERR_OK && is_uploaded_file($_FILES["picture"]["tmp_name"])) {
-        $picture = file_get_contents($_FILES["picture"]["tmp_name"]);
-    } 
-    
-    $newCustomer = new Customer();
-
-    $canInsertNewCustomer = true;
-
-    $errorMessageTable["firstname"] = $newCustomer->setFirstname($firstname) == true ? $newCustomer->setFirstname($firstname) : "";
-    $errorMessageTable["lastname"] = $newCustomer->setLastname($lastname) == true ? $newCustomer->setLastname($lastname) : "";
-    $errorMessageTable["address"] = $newCustomer->setAddress($address) == true ? $newCustomer->setAddress($address) : "";
-    $errorMessageTable["city"] = $newCustomer->setCity($city) == true ? $newCustomer->setCity($city) : "";
-    $errorMessageTable["province"] = $newCustomer->setProvince($province) == true ? $newCustomer->setProvince($province) : "";
-    $errorMessageTable["postalcode"] = $newCustomer->setPostalcode($postalcode) == true ? $newCustomer->setPostalcode($postalcode) : "";
-    $errorMessageTable["username"] = $newCustomer->setUsername($username) == true ? $newCustomer->setUsername($username) : "";
-    $errorMessageTable["user_password"] = $newCustomer->setUser_password($user_password) == true ? $newCustomer->setUser_password($user_password) : "";
-    $errorMessageTable["picture"] = $newCustomer->setPicture($picture) == true ? $newCustomer->setPicture($picture) : "";
-    
-    if (checkForErrorsInArray($errorMessageTable)) {
-        $canInsertNewCustomer = false;
-    }
-
-    $SQLquery = Database2135020_Procedures_Customers::GET_USERNAME_PASSWORD . "(:username)";
-    $rows = $connection->prepare($SQLquery);
-    $rows->bindParam(":username", $username, PDO::PARAM_STR);
-
-    if ($rows->execute()) {
-        while ($row = $rows->fetch()) {
-            if ($row["username"] == $username && !empty($row["username"])) {
-                $errorMessageTable["username"] = "Username already exists";
-                $canInsertNewCustomer = false;
-            }
-        }
-    }
-    $rows->closeCursor();
-    
-    if ($canInsertNewCustomer) {
-        $SQLquery = Database2135020_Procedures_Customers::INSERT_ONE 
-            . "(:firstname,"
-            . ":lastname,"
-            . ":address,"
-            . ":city,"
-            . ":province,"
-            . ":postalcode,"
-            . ":username,"
-            . ":user_password,"
-            . ":picture )";
-
-        $hashedPassword = password_hash($user_password, PASSWORD_DEFAULT);
-
-        $rows = $connection->prepare($SQLquery);
-
-        $rows->bindParam(":firstname", $firstname, PDO::PARAM_STR);
-        $rows->bindParam(":lastname", $lastname, PDO::PARAM_STR);
-        $rows->bindParam(":address", $address, PDO::PARAM_STR);
-        $rows->bindParam(":city", $city, PDO::PARAM_STR);
-        $rows->bindParam(":province", $province, PDO::PARAM_STR);
-        $rows->bindParam(":postalcode", $postalcode, PDO::PARAM_STR);
-        $rows->bindParam(":username", $username, PDO::PARAM_STR);
-        $rows->bindParam(":user_password", $hashedPassword, PDO::PARAM_STR);
-        $rows->bindParam(":picture", $picture);
-
-        if ($rows->execute()) {
-            $successMessage = $rows->rowCount() . " customer was added successfully!";
-            $_POST = array();
-        }
-    }
-}
+$successMessage = "";
 
 generatePageTop($pageTitle, FILE_CSS_REGISTER);
-
 generateLogo();
+
+registerCustomer($errorMessageTable, $successMessage, $connection);
 generateRegisterForm($errorMessageTable, isset($successMessage) ? $successMessage : "");
 
 generatePageBottom();
+
+########################################################################
+# PAGE-SPECIFIC FUNCTIONS BELOW
+########################################################################
 
 function checkForErrorsInArray($errorMessageTable)
 {
@@ -128,72 +51,29 @@ function checkForErrorsInArray($errorMessageTable)
 
 function generateRegisterForm($errorMessageTable, $successMessage)
 {
-
     ?>
-    <div class="registerPage">
+        <div class="registerPage">
         <span id="required">* = required</span>
         <form id="registerForm" method="post" enctype="multipart/form-data">
-
-            <label for="firstname">First name: </label>
-
-            <input id="firstname" type="text" name="firstname" placeholder="Firstname" 
-                   value="<?php echo isset($_POST["lastname"]) ? filter_input(INPUT_POST, 'firstname') : "" ?>"></input><?php echo generateRedStar() ?>
-            <span class="formErrorSpan"><?php echo $errorMessageTable["firstname"]; ?></span>
-
-            <br>
-
-            <label for="lastname">Last name: </label>
-
-            <input id="lastname" type="text" name="lastname" placeholder="Lastname" 
-                   value="<?php echo isset($_POST["lastname"]) ? filter_input(INPUT_POST, 'lastname') : "" ?>"></input><?php echo generateRedStar() ?>
-            <span class="formErrorSpan"><?php echo $errorMessageTable["lastname"]; ?></span>
-
-            <br>
-
-            <label for="address">Address: </label>
-            <input id="address" type="text" name="address" placeholder="Address"
-                   value="<?php echo isset($_POST["address"]) ? filter_input(INPUT_POST, 'address') : "" ?>"></input><?php echo generateRedStar() ?>
-            <span class="formErrorSpan"><?php echo $errorMessageTable["address"]; ?></span>
-
-            <br>
-
-            <label for="city">City: </label>
-            <input id="city" type="text" name="city" placeholder="City"
-                   value="<?php echo isset($_POST["city"]) ? filter_input(INPUT_POST, 'city') : "" ?>"></input><?php echo generateRedStar() ?>
-            <span class="formErrorSpan"><?php echo $errorMessageTable["city"]; ?></span>
-
-            <br>
-
-            <label for="province">Province: </label>
-            <input id="province" type="text" name="province" placeholder="Province"
-                   value="<?php echo isset($_POST["province"]) ? filter_input(INPUT_POST, 'province') : "" ?>"></input><?php echo generateRedStar() ?>
-            <span class="formErrorSpan"><?php echo $errorMessageTable["province"]; ?></span>
-
-            <br>
-
-            <label for="postalcode">Postal code: </label>
-            <input id="postalcode" type="text" name="postalcode" placeholder="Postalcode"
-                   value="<?php echo isset($_POST["postalcode"]) ? filter_input(INPUT_POST, 'postalcode') : "" ?>"></input><?php echo generateRedStar() ?>
-            <span class="formErrorSpan"><?php echo $errorMessageTable["postalcode"]; ?></span>
-
-            <br>
-
-            <label for="username">Username: </label>
-            <input id="username" type="text" name="username" placeholder="Username"
-                   value="<?php echo isset($_POST["username"]) ? filter_input(INPUT_POST, 'username') : "" ?>"></input><?php echo generateRedStar() ?>
-            <span class="formErrorSpan"><?php echo $errorMessageTable["username"]; ?></span>
-
-            <br>
-
-            <label for="user_password">Password: </label>
-            <input id="user_password" type="password" name="user_password" placeholder="Password"
-                   value="<?php echo isset($_POST["user_password"]) ? filter_input(INPUT_POST, 'user_password') : "" ?>"></input><?php echo generateRedStar() ?>
-            <span class="formErrorSpan"><?php echo $errorMessageTable["user_password"]; ?></span>
-
-            <br>
-
+            <?php  
+            
+                $text = "text";
+                $password = "password";
+                
+                generateRegisterField("firstname", "First Name:", "My first name", $errorMessageTable, $text);
+                generateRegisterField("lastname", "Last Name:", "My last name", $errorMessageTable, $text);
+                generateRegisterField("address", "Address:", "My address", $errorMessageTable, $text);
+                generateRegisterField("city", "City:", "My city", $errorMessageTable, $text);
+                generateRegisterField("province", "Province:", "My province", $errorMessageTable, $text);
+                generateRegisterField("postalcode", "Postal code:", "My postal code", $errorMessageTable, $text);
+                generateRegisterField("username", "Username:", "My username", $errorMessageTable, $text);
+                generateRegisterField("user_password", "Password:", "My password", $errorMessageTable, $password);
+            ?>
+            
             <label for="picture">Picture: </label>
-            <input id="picture" type="file" name="picture" placeholder="picture" accept="image/png, image/jpeg"></input><?php echo generateRedStar() ?>
+            <input id="picture" type="file" name="picture" placeholder="picture" accept="image/png, image/jpeg">
+                <?php echo generateRedStar() ?>
+            
             <span class="formErrorSpan"><?php echo $errorMessageTable["picture"]; ?></span>
 
             <br>
@@ -203,4 +83,95 @@ function generateRegisterForm($errorMessageTable, $successMessage)
         </form>
     </div>
     <?php
+}
+
+function generateRegisterField($fieldName, $label, $placeholder, $errorMessageTable, $type){
+    ?>
+        <label for="<?php echo $fieldName?>"><?php echo $label?> </label>
+        <input id="<?php echo $fieldName?>" 
+               type="<?php echo $type ?>" name="<?php echo $fieldName?>" 
+               placeholder="<?php echo $placeholder?>" 
+               value="<?php echo isset($_POST[$fieldName]) 
+                    ? filter_input(INPUT_POST, $fieldName) : "" ?>">
+        <?php echo generateRedStar() ?>
+        <span class="formErrorSpan"><?php echo $errorMessageTable[$fieldName]; ?></span>
+        <br>
+    <?php
+}
+
+function registerCustomer(&$errorMessageTable, &$successMessage, $connection){
+    
+    if (! isset($_POST["register"])){
+        return null;
+    } 
+        
+    $firstname = htmlspecialchars($_POST["firstname"]);
+    $lastname = htmlspecialchars($_POST["lastname"]);
+    $address = htmlspecialchars($_POST["address"]);
+    $city = htmlspecialchars($_POST["city"]);
+    $province = htmlspecialchars($_POST["province"]);
+    $postalcode = htmlspecialchars($_POST["postalcode"]);
+    $username = htmlspecialchars($_POST["username"]);
+    $user_password = htmlspecialchars($_POST["user_password"]);
+    $picture = "";
+
+    if ($_FILES["picture"]["error"] == UPLOAD_ERR_OK && is_uploaded_file($_FILES["picture"]["tmp_name"])) 
+    {
+        $picture = file_get_contents($_FILES["picture"]["tmp_name"]);
+    } 
+    
+    $newCustomer = new Customer();
+
+    $errorMessageTable["firstname"] = $newCustomer->setFirstname($firstname) == true 
+        ? $newCustomer->setFirstname($firstname) : "";
+    $errorMessageTable["lastname"] = $newCustomer->setLastname($lastname) == true 
+        ? $newCustomer->setLastname($lastname) : "";
+    $errorMessageTable["address"] = $newCustomer->setAddress($address) == true 
+        ? $newCustomer->setAddress($address) : "";
+    $errorMessageTable["city"] = $newCustomer->setCity($city) == true 
+        ? $newCustomer->setCity($city) : "";
+    $errorMessageTable["province"] = $newCustomer->setProvince($province) == true 
+        ? $newCustomer->setProvince($province) : "";
+    $errorMessageTable["postalcode"] = $newCustomer->setPostalcode($postalcode) == true 
+        ? $newCustomer->setPostalcode($postalcode) : "";
+    $errorMessageTable["username"] = $newCustomer->setUsername($username) == true 
+        ? $newCustomer->setUsername($username) : "";
+    $errorMessageTable["user_password"] = $newCustomer->setUser_password($user_password) == true
+        ? $newCustomer->setUser_password($user_password) : "";
+    $errorMessageTable["picture"] = $newCustomer->setPicture($picture) == true 
+        ? $newCustomer->setPicture($picture) : "";
+    
+    $usernameIsDuplicate = false;
+
+    $SQLquery = Database2135020_Procedures_Customers::SELECT_ONE_FROM_USERNAME . "(:username)";
+    $rows = $connection->prepare($SQLquery);
+    $rows->bindParam(":username", $username, PDO::PARAM_STR);
+
+    if ($rows->execute()) {
+        while ($row = $rows->fetch()) {
+            if ($row["username"] == $username && !empty($row["username"])) 
+            {
+                $newCustomer->setId($row["id"]);
+                $errorMessageTable["username"] = "Username already exists";
+                $usernameIsDuplicate = true;
+            }
+        }
+    }
+    
+    $rows->closeCursor();
+        
+    if (checkForErrorsInArray($errorMessageTable) || $usernameIsDuplicate) {
+        return null;
+    }
+    
+    $hashedPassword = password_hash($user_password, PASSWORD_DEFAULT);
+    
+    $newCustomer->setUser_password($hashedPassword);
+    
+    $newCustomer->save($newCustomer->getId(), $connection);
+    
+    $successMessage = "Registration completed successfully!";
+    
+    header("Location: " . FILE_PAGE_INDEX);
+    
 }

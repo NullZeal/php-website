@@ -40,7 +40,6 @@ input, textarea{
 
 #submitButton{
     margin-left: calc(50vw - 150px - 20vw);
-    margin-bottom: 50px;
     margin-top:20px;
     height: 150px;
     width: 300px;
