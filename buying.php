@@ -34,6 +34,7 @@ $errorMessageArray = array(
     "comments" => "",
     "quantity" => ""
 );
+
 insertOrderToCustomer($errorMessageArray, $connection);
 generatePageTop($pageTitle, FILE_CSS_BUYING);
 generateLoginLogout($connection);
@@ -47,7 +48,8 @@ generatePageBottom();
 
 function insertOrderToCustomer(&$errorMessageArray, $connection)
 {
-    if (isset($_POST["buy"]) && isset($_SESSION["connectedUser"])) {
+    if (isset($_POST["buy"]) && isset($_SESSION["connectedUser"])) 
+    {
         $comments = htmlspecialchars($_POST["comments"]);
         $quantity = htmlspecialchars($_POST["quantity"]);
         $price = getProductPrice($_POST["product"], $connection) 
@@ -76,7 +78,9 @@ function getProductPrice($productId, $connection)
         . "(:id)";
     $rows = $connection->prepare($SQLquery);
     $rows->bindParam(":id", $_POST["buy"], PDO::PARAM_STR);
-    if ($rows->execute()) {
+    
+    if ($rows->execute()) 
+    {
         while ($row = $rows->fetch()) {
             if ($row["id"] == $productId) {
                 return $row["price"];
@@ -88,34 +92,35 @@ function getProductPrice($productId, $connection)
 
 function generateBuyingPage(&$errorMessageArray)
 {
-    if (!isUserConnected()) {
+    if (!isUserConnected()) 
+    {
         $errorMessageArray["login"] = LOGGIN_ERROR_MESSAGE;
         return null;
-    } else {$errorMessageArray["login"] = "";}
-    
-    ?>  
-        <div class="formSection">
-            <?php generateLogo() ?>
+    } 
+    else 
+    {
+        $errorMessageArray["login"] = "";
+    }?>  
+        <div class="formSection"><?php generateLogo() ?>
             <span id="required">* = required</span>
             <form action="buying.php" method="POST" id="buyingForm">
-                
                 <label for="products"><?php generateRedStar(); ?>Product:</label>
-                
                 <select name="product" id="product">
                 <?php 
                     $products = new Products();
                     $arrayOfProducts = $products->items;
                     foreach ($arrayOfProducts as $product){
                         ?>
-                        <option value="<?php echo $product->getId() ?>">
-                            <?php echo $product->getPcode() 
-                                . "-" 
-                                . $product->getPdescription()
-                                . " ("
-                                . $product->getPrice()
-                                . "$)"
-                            ?>
-                        </option><?php }
+                            <option value="<?php echo $product->getId() ?>">
+                                <?php echo $product->getPcode() 
+                                    . "-" 
+                                    . $product->getPdescription()
+                                    . " ("
+                                    . $product->getPrice()
+                                    . "$)"
+                                ?>
+                            </option>
+                        <?php }
                 ?>
                 </select>
                 <br>
@@ -127,7 +132,8 @@ function generateBuyingPage(&$errorMessageArray)
                     rows="4" 
                     cols="70"
                     maxlength="200"></textarea>
-                <label for="comments"><?php echo $errorMessageArray["comments"]; ?></label>
+                <label for="comments"><?php 
+                    echo $errorMessageArray["comments"]; ?></label>
                 <br>
                 <label><?php generateRedStar(); ?>Quantity:</label>
                 <input 
@@ -137,11 +143,11 @@ function generateBuyingPage(&$errorMessageArray)
                     placeholder="Input quantity here!"
                     size="30"
                     maxlength="20">
-                <label for="quantity"><?php echo $errorMessageArray["quantity"]; ?></label>
+                <label for="quantity"><?php 
+                    echo $errorMessageArray["quantity"]; ?></label>
                 <br>
                 <button id="buyButton" type="submit" name="buy">Buy</button>
             </form>
         </div>
     <?php
 }
-

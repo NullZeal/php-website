@@ -45,8 +45,7 @@ function generateIndexPage($productsArray)
 {
 
     ?>
-    <div class="companyDescription">
-        <?php generateLogo() ?>
+    <div class="companyDescription"><?php generateLogo() ?>
         <h1>ShinyBridge VPN</h1>
         <h2>
             Privacy at it's best.<br><br>Because everybody has something

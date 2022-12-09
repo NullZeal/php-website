@@ -23,12 +23,13 @@ require_once INIT;
 executePageInitializationFunctions();
 
 $pageTitle = "Orders Page";
+$errorMessage = "";
 
 generatePageTop($pageTitle, FILE_CSS_ORDERS);
 
 generateLoginLogout($connection);
 generateOrdersPage($errorMessage);
-generateErrorMessage($errorMessage);
+generateErrorMessageDiv($errorMessage);
 
 generatePageBottom();
 

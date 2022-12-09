@@ -40,6 +40,13 @@ function generateHead($title, $cssFile)
     <?php
 }
 
+function openBodyTag()
+{
+    ?>
+        <body id="<?php echo isset($_GET["action"]) && strtolower($_GET["action"] == "print") ? "bodyPrint" : "";?>">
+    <?php
+}
+
 function generateNavigationMenu()
 {
     ?>
@@ -47,35 +54,18 @@ function generateNavigationMenu()
             <a href="<?php echo FILE_PAGE_INDEX ?>">Home</a>
             <a href="<?php echo FILE_PAGE_BUYING ?>">Buying</a>
             <a href="<?php echo FILE_PAGE_ORDERS ?>">Orders</a>
+            <a href="<?php echo FILE_PAGE_ACCOUNT ?>">Account</a>
         </div>
-
     <?php
 }
 function generatePageFooter()
 {
-    ?>
-        <footer>Copyright Julien Pontbriand (202135020) <?php echo date("Y") ?></footer>
-    <?php
+    ?><footer>Copyright Julien Pontbriand (202135020) <?php echo date("Y") ?></footer><?php
 }
 
 function closeHtmlTag()
 {
     ?></html><?php
-}
-
-function openBodyTag()
-{
-    ?>
-        <body id="<?php 
-                        if (isset($_GET["action"]) 
-                            && strtolower($_GET["action"] == "print")) 
-                            {
-                                echo "bodyPrint";
-                            } else 
-                            {
-                                echo "";
-                            }?>">
-    <?php
 }
 
 function closeBodyTag()
@@ -85,46 +75,40 @@ function closeBodyTag()
 
 function generateLogo()
 {
-    ?><img id="<?php
-        if (isset($_GET["action"]) && strtolower($_GET["action"]) == "print") {
-            echo "logoPrint";
-        } else {
-            echo "logo";
-        }
-
-        ?>" src="<?php echo FILE_MEDIA_IMAGE_LOGO; ?>"
-            alt="logo of Julien Pontbriand inc." 
-        />
+    ?>  
+        <img id="<?php echo isset($_GET["action"]) && strtolower($_GET["action"]) == "print" ? "logoPrint" : "logo";?>"
+             src="<?php echo FILE_MEDIA_IMAGE_LOGO; ?>"
+             alt="logo of Julien Pontbriand inc." />
     <?php
 }
 
 function generateRedStar()
 {
-        echo "<span class='red'>*</span>";
+    echo "<span class='red'>*</span>";
 }
 
 function generateLoginForm($errorMessage, $registerUrl)
 {
     ?>
+        <div>
+            <form id="loginForm" method="post">
 
-    <div>
-        <form id="loginForm" method="post">
-
-            <label for="username">Username: </label>
-            <input id="username" type="text" 
+                <label for="username">Username: </label>
+                <input id="username" type="text" 
                    name="username" placeholder="Username">
 
-            <label for="password">Password: </label>
-            <input id="password" type="password" 
+                <label for="password">Password: </label>
+                <input id="password" type="password" 
                    name="password" placeholder="Password">
             
-            <button id="loginButton" type="submit" name="login">Login</button>
+                <button id="loginButton" type="submit" name="login">Login</button>
             
-            <span class="formLoginSpan"><?php echo $errorMessage; ?> - <a href="<?php echo FILE_PAGE_REGISTER ?>">Register</a></span>
-            
-            <br>
-        </form>
-    </div>
+                <span class="formLoginSpan"><?php 
+                    echo $errorMessage; ?> - <a href="<?php 
+                    echo FILE_PAGE_REGISTER ?>">Register</a></span>
+                <br>
+            </form>
+        </div>
     <?php
 }
 
@@ -137,13 +121,10 @@ function generateLogoutForm($firstname, $lastname, $picture)
                 class="profilePicture" 
                 id="customerImage" 
                 src="data:image;base64,<?php echo base64_encode($picture) ?>">
-            
             <h4 
                 class="welcome">Welcome <?php echo $firstname . " " . $lastname . "!" ?>
             </h4>
-            
             <label for="customerImage"></label>
-
             <button id="btnLogout" type="submit" name="logout">Logout</button>
         </form>
     </div>
@@ -153,6 +134,6 @@ function generateLogoutForm($firstname, $lastname, $picture)
 function generateErrorMessageDiv($errorMessage)
 {
     ?>
-    <div id="pageLoginErrorMessage"><?php echo $errorMessage ?> </div>
+        <div id="pageLoginErrorMessage"><?php echo $errorMessage ?> </div>
     <?php
 }

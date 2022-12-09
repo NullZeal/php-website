@@ -23,6 +23,7 @@ const FILE_PAGE_INDEX = 'index.php';
 const FILE_PAGE_BUYING = 'buying.php';
 const FILE_PAGE_ORDERS = "orders.php"; 
 const FILE_PAGE_REGISTER = "register.php"; 
+const FILE_PAGE_ACCOUNT = "account.php";
 
 #PHP
 const FILE_CONNECTION = FOLDER_PHP . 'dbConnection.php';
