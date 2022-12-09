@@ -57,6 +57,10 @@ function generateIndexPage($productsArray)
             products offered by companies that do not respect your 
             rights.
         </p>
+        
+         <iframe id="videoEncryption" 
+                 src="https://player.vimeo.com/video/368740653" 
+                 title="Encryption"></iframe> 
 
         <?php generateImageSection($productsArray); ?></div>
 

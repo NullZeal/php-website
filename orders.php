@@ -18,6 +18,7 @@
 #-------------------------------------------------------------------
 
 const INIT  = 'php/init.php';
+
 require_once INIT;
 
 executePageInitializationFunctions();
@@ -48,8 +49,8 @@ function generateOrdersPage(&$errorMessage)
         $errorMessage = LOGGIN_ERROR_MESSAGE;
         return null;
     }
-     if (file_exists(FILE_TXT_ORDERS)){
-         ?>
+    if (file_exists(FILE_TXT_ORDERS)){
+        ?>
         <div class="ordersTable">
             <?php generateLogo() ?>
             <table>

@@ -16,6 +16,7 @@ class order
     const COMMENTS_CHAR_MAX = 200;
     const PRODUCT_PRICE_MIN = 0;
     const PRODUCT_PRICE_MAX = 10000;
+    const TAX_RATE_PERCENTAGE = 13.7;
     
     //variables
     
@@ -24,9 +25,12 @@ class order
     private $id_product = "";
     private $quantity = "";
     private $product_price = "";
+    private $subtotal = "";
+    private $taxAmount = "";
+    private $total = "";
     private $comments = "";
     private $datetime_created = "";
-    private $datetime_upadated = "";
+    private $datetime_updated = "";
     
     public function __construct
     (
@@ -35,6 +39,9 @@ class order
         $id_product = "",
         $quantity = "",
         $product_price = "",
+        $subtotal = "",
+        $taxAmount = "",
+        $total = "",
         $comments = "",
         $datetime_created = "",
         $datetime_upadated = ""
@@ -43,9 +50,15 @@ class order
         $this->setId($id);
         $this->setId_customer($id_customer);
         $this->setId_product($id_product);
-        $this->setComments($comments);
         $this->setQuantity($quantity);
         $this->setProductPrice($product_price);
+        
+        $this->setSubtotal();
+        
+        $this->setTaxAmount();
+        $this->setTotal();
+        $this->setComments($comments);
+        
     }
     
     function getId()
@@ -99,21 +112,6 @@ class order
         }
     }
     
-    function getComments()
-    {
-        return $this->comments;
-    } 
-    
-    function setComments($input)
-    {
-        if (mb_strlen($input) > self::COMMENTS_CHAR_MAX) {
-            return "Max comments size = " . self::COMMENTS_CHAR_MAX . " characters";
-        } else {
-            $this->comments = $input;
-            return false;
-        }
-    }
-    
     function getProductPrice()
     {
         return $this->product_price;
@@ -130,7 +128,61 @@ class order
         } elseif ((float) $input > self::PRODUCT_PRICE_MAX) {
             return "The quantity cannot be a over " . self::PRODUCT_PRICE_MAX;
         } else{
-            $this->quantity = $input;
+            $this->product_price = $input;
+            return false;
+        }
+    }
+    
+    function getSubtotal()
+    {
+        return $this->subtotal;
+    } 
+    
+    function setSubtotal()
+    {
+        $this->subtotal = 
+            $this->quantity != "" && $this->product_price != "" 
+                ? $this->calculateSubtotal($this->quantity, $this->product_price)
+                : "";
+    }
+    
+    function getTaxAmount()
+    {
+        return $this->taxAmount;
+    } 
+    
+    function setTaxAmount()
+    {
+        $this->taxAmount =
+            $this->subtotal != "" 
+                ? $this->calculateTaxAmount($this->subtotal, self::TAX_RATE_PERCENTAGE)
+                : "";
+    }
+    
+    function getTotal()
+    {
+        return $this->total;
+    } 
+    
+    function setTotal()
+    {
+        $this->total = 
+            $this->getSubtotal() != "" && $this->getTaxAmount() != ""
+                ? $this->calculateTotal($this->subtotal, $this->taxAmount)
+                : "";
+    }
+    
+    function getComments()
+    {
+        return $this->comments;
+    } 
+    
+    function setComments($input)
+    {
+        if (mb_strlen($input) > self::COMMENTS_CHAR_MAX) {
+            return "Max comments size = " . self::COMMENTS_CHAR_MAX . " characters";
+        } else {
+            $this->comments = $input;
             return false;
         }
     }
@@ -191,6 +243,9 @@ class order
             . ":id_product,"
             . ":quantity,"
             . ":product_price,"
+            . ":subtotal,"
+            . ":tax_amount,"
+            . ":total,"
             . ":comments)";
 
         $rows = $connection->prepare($SQLquery);
@@ -198,9 +253,27 @@ class order
         $rows->bindParam(":id_customer", $this->id_customer, PDO::PARAM_STR);
         $rows->bindParam(":id_product", $this->id_product, PDO::PARAM_STR);
         $rows->bindParam(":quantity", $this->quantity, PDO::PARAM_STR);
-        $rows->bindParam(":product_price", $this->product_price);
+        $rows->bindParam(":product_price", $this->product_price, PDO::PARAM_STR);
+        $rows->bindParam(":subtotal", $this->subtotal, PDO::PARAM_STR);
+        $rows->bindParam(":tax_amount", $this->taxAmount, PDO::PARAM_STR);
+        $rows->bindParam(":total", $this->total, PDO::PARAM_STR);
         $rows->bindParam(":comments", $this->comments, PDO::PARAM_STR);
 
         $rows->execute();
+    }
+    
+    function calculateSubtotal($quantity, $productPrice)
+    {
+        return ((float) $quantity) * ((float) $productPrice);
+    }
+
+    function calculateTaxAmount($subtotal, $taxRateInPercentage)
+    {
+        return round($subtotal * ($taxRateInPercentage / 100), 2);
+    }
+
+    function calculateTotal($subtotal, $taxAmount)
+    {
+        return round(($subtotal + $taxAmount), 2);
     }
 }

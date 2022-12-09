@@ -1,10 +1,20 @@
 <?php
 
+#################################
+#           DEBUGGING              
+#################################
+
 const DEBUGGING = false;
-const LOGGIN_ERROR_MESSAGE = "Please login before accessing this page";
 
 #################################
-#              URI              #
+#           LOGGING          
+#################################
+
+const LOGGIN_ERROR_MESSAGE = "Please login before accessing this page";
+
+
+#################################
+#           URI              
 #################################
 
 ##FOLDERS
@@ -64,7 +74,7 @@ const FILE_MEDIA_IMAGE_ADBLOCK = FOLDER_MEDIA . FOLDER_IMAGE . "adblock.jpg";
 const FILE_MEDIA_IMAGE_DISK = FOLDER_MEDIA . FOLDER_IMAGE . "disk.jpg";
 
 #################################
-#         PROCEDURES            #
+#           PROCEDURES
 #################################
 
 abstract class Database2135020_Procedures_Customers

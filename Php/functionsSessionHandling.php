@@ -24,7 +24,6 @@ function generateLoginLogout($connection)
         return null;
     }
 
-
     if (!isset($_POST["login"])) {
         $errorMessage = "";
         generateLoginForm($errorMessage, FILE_PAGE_REGISTER);

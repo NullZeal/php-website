@@ -4,11 +4,14 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/D:/Lasalle/Session%203/Web%20Class/202135020/Php/constantsGlobal.php</file>
-            <file>file:/D:/Lasalle/Session%203/Web%20Class/202135020/Php/dbConnection.php</file>
-            <file>file:/D:/Lasalle/Session%203/Web%20Class/202135020/Css/register.css</file>
-            <file>file:/D:/Lasalle/Session%203/Web%20Class/202135020/register.php</file>
-            <file>file:/D:/Lasalle/Session%203/Web%20Class/202135020/Php/functionsPageSetup.php</file>
-            <file>file:/D:/Lasalle/Session%203/Web%20Class/202135020/Php/functionsHtml.php</file>
+            <file>file:/D:/Lasalle/Session%203/Web%20Class/202135020/Php/functionsSessionHandling.php</file>
+            <file>file:/D:/Lasalle/Session%203/Web%20Class/202135020/Php/init.php</file>
+            <file>file:/D:/Lasalle/Session%203/Web%20Class/202135020/orders.php</file>
+            <file>file:/D:/Lasalle/Session%203/Web%20Class/202135020/Css/index.css</file>
+            <file>file:/D:/Lasalle/Session%203/Web%20Class/202135020/buying.php</file>
+            <file>file:/D:/Lasalle/Session%203/Web%20Class/202135020/index.php</file>
+            <file>file:/D:/Lasalle/Session%203/Web%20Class/202135020/account.php</file>
+            <file>file:/D:/Lasalle/Session%203/Web%20Class/202135020/Php/functionsPageContentGeneration.php</file>
         </group>
     </open-files>
 </project-private>

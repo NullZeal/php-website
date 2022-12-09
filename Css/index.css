@@ -87,3 +87,9 @@ body{
     background-color: rgba(44,44,44,0.3);
     border-radius: 10px;
 }
+
+#videoEncryption{
+    width : 532px;
+    height: 300px;
+    margin-left:calc(50% - 266px);
+}

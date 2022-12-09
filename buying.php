@@ -54,19 +54,24 @@ function insertOrderToCustomer(&$errorMessageArray, $connection)
         $quantity = htmlspecialchars($_POST["quantity"]);
         $price = getProductPrice($_POST["product"], $connection) 
             ? getProductPrice($_POST["product"], $connection) : -1;
-        
         $order = new order();
-        
-        $errorMessageArray["comments"] = $order->setComments($_POST["comments"]);
-        $errorMessageArray["quantity"] = $order->setQuantity($_POST["quantity"]);
-        
-        if($errorMessageArray["comments"] == ""
-            && $errorMessageArray["quantity"] == "")
+        $errorMessageArray["comments"] = $order->setComments($comments);
+        $errorMessageArray["quantity"] = $order->setQuantity($quantity);
+        if
+        (
+            $errorMessageArray["comments"] == ""
+            && $errorMessageArray["quantity"] == ""
+            && $price != -1
+        )
         {
             $order->setId_customer($_SESSION["connectedUser"]);
             $order->setId_product($_POST["product"]);
             $order->setProductPrice($price);
+            $order->setSubtotal();
+            $order->setTaxAmount();
+            $order->setTotal();
             $order->save($connection);
+            
             header("Location: " . FILE_PAGE_ORDERS);
         }
     }
@@ -77,7 +82,7 @@ function getProductPrice($productId, $connection)
     $SQLquery = Database2135020_Procedures_Products::SELECT_ONE
         . "(:id)";
     $rows = $connection->prepare($SQLquery);
-    $rows->bindParam(":id", $_POST["buy"], PDO::PARAM_STR);
+    $rows->bindParam(":id", $productId, PDO::PARAM_STR);
     
     if ($rows->execute()) 
     {
@@ -151,3 +156,4 @@ function generateBuyingPage(&$errorMessageArray)
         </div>
     <?php
 }
+
