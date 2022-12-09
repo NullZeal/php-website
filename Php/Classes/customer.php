@@ -303,7 +303,7 @@ class Customer
         }
     }
     
-    function save($id, $connection)
+    function save($connection)
     {
         $SQLquery = Database2135020_Procedures_Customers::INSERT_ONE
             . "(:firstname,"

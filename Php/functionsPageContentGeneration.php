@@ -150,7 +150,7 @@ function generateLogoutForm($firstname, $lastname, $picture)
     <?php
 }
 
-function generateErrorMessage($errorMessage)
+function generateErrorMessageDiv($errorMessage)
 {
     ?>
     <div id="pageLoginErrorMessage"><?php echo $errorMessage ?> </div>

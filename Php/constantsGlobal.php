@@ -36,6 +36,7 @@ const FILE_CUSTOMER = FOLDER_CLASSES . 'customer.php';
 const FILE_PRODUCT = FOLDER_CLASSES . 'product.php';
 const FILE_PRODUCTS = FOLDER_CLASSES . 'products.php';
 const FILE_COLLECTION = FOLDER_CLASSES . 'collection.php';
+const FILE_ORDER = FOLDER_CLASSES . 'order.php';
 
 #CSS
 const FILE_CSS_INDEX = FOLDER_CSS . 'index.css';

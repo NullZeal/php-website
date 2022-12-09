@@ -106,4 +106,6 @@ class Product
     {
         $this->datetime_updated = $input;
     }
+    
+
 }

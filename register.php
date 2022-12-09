@@ -168,7 +168,7 @@ function registerCustomer(&$errorMessageTable, &$successMessage, $connection){
     
     $newCustomer->setUser_password($hashedPassword);
     
-    $newCustomer->save($newCustomer->getId(), $connection);
+    $newCustomer->save($connection);
     
     $successMessage = "Registration completed successfully!";
     

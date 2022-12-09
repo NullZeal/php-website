@@ -10,77 +10,42 @@
 class order 
 {
     //class constants
-    const ID_MIN_LENGTH = 36;
-    const ID_MAX_LENGTH = 36;
-    const FIRSTNAME_MAX_LENGTH = 20;
-    const LASTNAME_MAX_LENGTH = 20;
-    const ADDRESS_MAX_LENGTH = 25;
-    const CITY_MAX_LENGTH = 25;
-    const PROVINCE_MAX_LENGTH = 25;
-    const POSTALCODE_MAX_LENGTH = 7;
-    const USERNAME_MAX_LENGTH = 15;
-    const USER_PASSWORD_MAX_LENGTH = 255;
-    const PICTURE_MAX_SIZE = 20000;
+
+    const QUANTITY_MAX = 99;
+    const QUANTITY_MIN = 1;
+    const COMMENTS_CHAR_MAX = 200;
+    const PRODUCT_PRICE_MIN = 0;
+    const PRODUCT_PRICE_MAX = 10000;
     
     //variables
     
     private $id = "";
-    private $firstname = "";
-    private $lastname = "";
-    private $address = "";
-    private $city = "";
-    private $province = "";
-    private $postalcode = "";
-    private $username = "";
-    private $user_password = "";
-    private $picture = "";
+    private $id_customer = "";
+    private $id_product = "";
+    private $quantity = "";
+    private $product_price = "";
+    private $comments = "";
     private $datetime_created = "";
-    private $datetime_updated = "";
+    private $datetime_upadated = "";
     
     public function __construct
     (
         $id = "",
-        $firstname = "",
-        $lastname = "",
-        $address = "",
-        $city = "",
-        $province = "",
-        $postalcode = "",
-        $username = "",
-        $user_password = "",
-        $picture = "",
+        $id_customer = "",
+        $id_product = "",
+        $quantity = "",
+        $product_price = "",
+        $comments = "",
         $datetime_created = "",
-        $datetime_updated = ""
+        $datetime_upadated = ""
     )
     {
         $this->setId($id);
-        $this->setFirstname($firstname);
-        $this->setLastname($lastname);
-        $this->setAddress($address);
-        $this->setCity($city);
-        $this->setProvince($province);
-        $this->setPostalcode($postalcode);
-        $this->setUsername($username);
-        $this->setUser_password($user_password);
-        $this->setPicture($picture);
-        $this->setDatetime_created($datetime_created);
-        $this->setDatetime_updated($datetime_updated);
-    }
-    
-    function setId($input)
-    {
-        if (empty($input)) {
-            return "The id cannot be empty";
-        } elseif (mb_strlen($input) > $this::ID_MAX_LENGTH) {
-            return "The id cannot have over "
-                . $this::ID_MAX_LENGTH . " characters";
-        } elseif (mb_strlen($input) < $this::ID_MAX_LENGTH) {
-            return "The id cannot have under "
-                . $this::ID_MAX_LENGTH . " characters";
-        } else {
-            $this->id = $input;
-            return null;
-        }
+        $this->setId_customer($id_customer);
+        $this->setId_product($id_product);
+        $this->setComments($comments);
+        $this->setQuantity($quantity);
+        $this->setProductPrice($product_price);
     }
     
     function getId()
@@ -88,166 +53,94 @@ class order
         return $this->id;
     }
     
-    function setFirstname($input)
+    function setId($input)
     {
-        if (empty($input)) {
-            return "The firstname cannot be empty";
-        } elseif (mb_strlen($input) > $this::FIRSTNAME_MAX_LENGTH) {
-            return "The firstname cannot have over "
-                . $this::FIRSTNAME_MAX_LENGTH . " characters";
-        } else {
-            $this->firstname = $input;
-            return null;
-        }
+        $this->id = $input;
+    }
+    
+    function getId_customer()
+    {
+        return $this->id_customer;
+    }
+    
+    function setId_customer($input)
+    {
+        $this->id_customer = $input;
     }
 
-    function getFirstname()
+    function getId_product()
     {
-        return $this->firstname;
+        return $this->id_product;
     }
-
-    function setLastname($input)
+    
+    function setId_product($input)
     {
-        if (empty($input)) {
-            return "The lastname cannot be empty";
-        } elseif (mb_strlen($input) > $this::LASTNAME_MAX_LENGTH) {
-            return "The lastname cannot have over "
-                . $this::LASTNAME_MAX_LENGTH . " characters";
-        } else {
-            $this->lastname = $input;
-            return null;
-        }
+        $this->id_product = $input;
     }
-
-    function getLastname()
+    
+    function getQuantity()
     {
-        return $this->lastname;
-    }    
+        return $this->quantity;
+    } 
 
-    function setAddress($input)
+    function setQuantity($input)
     {
-        if (empty($input)) {
-            return "The address cannot be empty";
-        } elseif (mb_strlen($input) > $this::ADDRESS_MAX_LENGTH) {
-            return "The address cannot have over "
-                . $this::ADDRESS_MAX_LENGTH . " characters";
-        } else {
-            $this->lastname = $input;
+        if (!is_numeric($input)) {
+            return "The quantity must be a numeric value";
+        } elseif (!isAnInt($input)) {
+            return "Quantity not integer-like over 0";
+        } elseif ((int) $input < self::QUANTITY_MIN) {
+            return "The quantity cannot be a under 1";
+        } elseif ((int) $input > self::QUANTITY_MAX) {
+            return "The quantity cannot be a over 99";
+        } else{
+            $this->quantity = $input;
             return false;
         }
     }
     
-    function getAddress()
+    function getComments()
     {
-        return $this->address;
+        return $this->comments;
     } 
-
-    function setCity($input)
+    
+    function setComments($input)
     {
-        if (empty($input)) {
-            return "The city cannot be empty";
-        } elseif (mb_strlen($input) > $this::CITY_MAX_LENGTH) {
-            return "The city cannot have over "
-                . $this::CITY_MAX_LENGTH . " characters";
+        if (mb_strlen($input) > self::COMMENTS_CHAR_MAX) {
+            return "Max comments size = " . self::COMMENTS_CHAR_MAX . " characters";
         } else {
-            $this->city = $input;
+            $this->comments = $input;
             return false;
         }
     }
     
-    function getCity()
+    function getProductPrice()
     {
-        return $this->city;
+        return $this->product_price;
     } 
-
-    function setProvince($input)
-    {
-        if (empty($input)) {
-            return "The province cannot be empty";
-        } elseif (mb_strlen($input) > $this::PROVINCE_MAX_LENGTH) {
-            return "The province cannot have over "
-                . $this::PROVINCE_MAX_LENGTH . " characters";
-        } else {
-            $this->province = $input;
-            return false;
-        }
-    }
     
-    function getProvince()
+    function setProductPrice($input)
     {
-        return $this->province;
-    } 
-
-    function setPostalcode($input)
-    {
-        if (empty($input)) {
-            return "The postal code cannot be empty";
-        } elseif (mb_strlen($input) > $this::POSTALCODE_MAX_LENGTH) {
-            return "The postal code cannot have over "
-                . $this::POSTALCODE_MAX_LENGTH. " characters";
-        } else {
-            $this->postalcode = $input;
+        if (!is_numeric($input)) {
+            return "The productPrice must be a numeric value";
+        } elseif (!isCurrency($input)) {
+            return "The productPrice must be currency-like";
+        } elseif ((float) $input < self::PRODUCT_PRICE_MIN) {
+            return "The quantity cannot be a under " . self::PRODUCT_PRICE_MIN;
+        } elseif ((float) $input > self::PRODUCT_PRICE_MAX) {
+            return "The quantity cannot be a over " . self::PRODUCT_PRICE_MAX;
+        } else{
+            $this->quantity = $input;
             return false;
         }
     }
 
-    function getPostalcode()
+    function getDatetime_created()
     {
-        return $this->postalcode;
-    }     
-
-    function setUsername($input)
-    {
-        if (empty($input)) {
-            return "The username code cannot be empty";
-        } elseif (mb_strlen($input) > $this::USERNAME_MAX_LENGTH) {
-            return "The username code cannot have over "
-                . $this::USERNAME_MAX_LENGTH. " characters";
-        } else {
-            $this->username = $input;
-            return false;
-        }
-    }
-
-    function getUsername()
-    {
-        return $this->username;
+        return $this->datetime_created;
     } 
     
-    function setUser_password($input)
-    {
-        if (empty($input)) {
-            return "The password code cannot be empty";
-        } elseif (mb_strlen($input) > $this::USER_PASSWORD_MAX_LENGTH) {
-            return "The password code cannot have over "
-                . $this::USER_PASSWORD_MAX_LENGTH. " characters";
-        } else {
-            $this->user_password = $input;
-            return false;
-        }
-    }
-    
-    function getUser_password()
-    {
-        return $this->user_password;
-    } 
-    
-    function setPicture($input)
-    {
-        if (empty($input)) {
-        return "Please upload your profile picture";
-        }
-        else{
-            $this->picture = $input;
-        }
-    }
-    
-    function getPicture()
-    {
-        return $this->picture;
-    } 
-    
-        function setDatetime_created($input)
+    function setDatetime_created($input)
     {
         if (empty($input)) {
             return "The datetime cannot be empty";
@@ -257,12 +150,12 @@ class order
         }
     }
     
-    function getDatetime_created()
+    function getDatetime_updated()
     {
-        return $this->datetime_created;
+        return $this->datetime_updated;
     } 
     
-        function setDatetime_updated($input)
+    function setDatetime_updated($input)
     {
         if (empty($input)) {
             return "The datetime cannot be empty";
@@ -272,34 +165,42 @@ class order
         }
     }
     
-    function getDatetime_updated()
+    function load($id, $connection)
     {
-        return $this->datetime_updated;
-    } 
-    
-    function load($username, $connection)
-    {
-        $SQLquery = Database2135020_Procedures_Customers::SELEC . "(:username)";
+        $SQLquery = Database2135020_Procedures_Orders::INSERT_ONE . "(:id)";
         $rows = $connection->prepare($SQLquery);
-        $rows->bindParam(":username", $username, PDO::PARAM_STR);
+        $rows->bindParam(":id", $id, PDO::PARAM_STR);
 
         if ($rows->execute()) {
             while ($row = $rows->fetch()) {
-                if ($row["username"] == $username) {
+                if ($row["id"] == $id) {
                     $this->setId($row["id"]);
-                    $this->setFirstname($row["firstname"]);
-                    $this->setLastname($row["lastname"]);
-                    $this->setAddress($row["address"]);
-                    $this->setCity($row["city"]);
-                    $this->setProvince($row["province"]);
-                    $this->setPostalcode($row["postalcode"]);
-                    $this->setUsername($row["username"]);
-                    $this->setUser_password($row["user_password"]);
-                    $this->setPicture($row["picture"]);
-                    $this->setDatetime_created($row["datetime_created"]);
-                    $this->setDatetime_updated($row["datetime_updated"]);
+                    $this->setId_customer($row["id_customer"]);
+                    $this->setId_product($row["id_product"]);
+                    $this->setQuantity($row["quantity"]);
+                    $this->setComments($row["comments"]);
                 }
             }
         }
+    }
+    
+    function save($connection)
+    {
+        $SQLquery = Database2135020_Procedures_Orders::INSERT_ONE
+            . "(:id_customer,"
+            . ":id_product,"
+            . ":quantity,"
+            . ":product_price,"
+            . ":comments)";
+
+        $rows = $connection->prepare($SQLquery);
+
+        $rows->bindParam(":id_customer", $this->id_customer, PDO::PARAM_STR);
+        $rows->bindParam(":id_product", $this->id_product, PDO::PARAM_STR);
+        $rows->bindParam(":quantity", $this->quantity, PDO::PARAM_STR);
+        $rows->bindParam(":product_price", $this->product_price);
+        $rows->bindParam(":comments", $this->comments, PDO::PARAM_STR);
+
+        $rows->execute();
     }
 }

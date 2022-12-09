@@ -64,43 +64,4 @@ function isAnInt($number)
     # in range 0-9 (int only string)
     return preg_match("/^[0-9]+$/", $number);
 }
-
-
-//    quantity check, to delete
-//
-//    if (!is_numeric($quantity)) {
-//        $validationQuantity = "The quantity must be a numeric value";
-//        $errorsOccured = true;
-//        pushErrorWithTimeToArray(
-//            $errorsArray,
-//            $quantity,
-//            Fields::Quantity,
-//            $validationPrice);
-//    } elseif (!filter_var((float) $quantity, FILTER_VALIDATE_INT)) {
-//        $validationQuantity = "The quantity must be an integer value (round number) over 0";
-//        $errorsOccured = true;
-//        pushErrorWithTimeToArray(
-//            $errorsArray,
-//            $quantity,
-//            Fields::Quantity,
-//            $validationQuantity);
-//    } elseif ((int) $quantity < MIN_VALUE_QUANTITY) {
-//        $validationQuantity = "The quantity cannot be a under 1";
-//        $errorsOccured = true;
-//        pushErrorWithTimeToArray(
-//            $errorsArray,
-//            $quantity,
-//            Fields::Quantity,
-//            $validationQuantity);
-//    } elseif ((int) $quantity > MAX_VALUE_QUANTITY) {
-//        $validationQuantity = "The quantity cannot be a over 99";
-//        $errorsOccured = true;
-//        pushErrorWithTimeToArray(
-//            $errorsArray,
-//            $quantity,
-//            Fields::Quantity,
-//            $validationQuantity);
-//    }
-//    
-//    
   
