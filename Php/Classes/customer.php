@@ -7,11 +7,13 @@
 #
 #-------------------------------------------------------------------
 
-class Customer 
+require_once CONSTANTS_GLOBAL;
+require_once FILE_CLASSES_DATABASE_CONNECTED_OBJECT;
+
+class Customer extends DatabaseConnectedObject
 {
+    
     //class constants
-    const ID_MIN_LENGTH = 36;
-    const ID_MAX_LENGTH = 36;
     const FIRSTNAME_MAX_LENGTH = 20;
     const LASTNAME_MAX_LENGTH = 20;
     const ADDRESS_MAX_LENGTH = 25;
@@ -24,7 +26,6 @@ class Customer
     
     //variables
     
-    private $id = "";
     private $firstname = "";
     private $lastname = "";
     private $address = "";
@@ -40,6 +41,7 @@ class Customer
     public function __construct
     (
         $id = "",
+        $connection = "",
         $firstname = "",
         $lastname = "",
         $address = "",
@@ -53,7 +55,7 @@ class Customer
         $datetime_updated = ""
     )
     {
-        $this->setId($id);
+        parent::__construct($id, $connection);
         $this->setFirstname($firstname);
         $this->setLastname($lastname);
         $this->setAddress($address);
@@ -67,27 +69,6 @@ class Customer
         $this->setDatetime_updated($datetime_updated);
     }
 
-    function getId()
-    {
-        return $this->id;
-    }
-    
-    function setId($input)
-    {
-        if (empty($input)) {
-            return "The id cannot be empty";
-        } elseif (mb_strlen($input) > $this::ID_MAX_LENGTH) {
-            return "The id cannot have over "
-                . $this::ID_MAX_LENGTH . " characters";
-        } elseif (mb_strlen($input) < $this::ID_MAX_LENGTH) {
-            return "The id cannot have under "
-                . $this::ID_MAX_LENGTH . " characters";
-        } else {
-            $this->id = $input;
-            return null;
-        }
-    }
-    
     function getFirstname()
     {
         return $this->firstname;
@@ -277,10 +258,10 @@ class Customer
         }
     }
 
-    function load($id, $connection)
+    function load($id)
     {
         $SQLquery = Database2135020_Procedures_Customers::SELECT_ONE_FROM_ID . "(:id)";
-        $rows = $connection->prepare($SQLquery);
+        $rows = $this->getConnection()->prepare($SQLquery);
         $rows->bindParam(":id", $id, PDO::PARAM_STR);
 
         if ($rows->execute()) {
@@ -303,7 +284,7 @@ class Customer
         }
     }
     
-    function save($connection)
+    function save()
     {
         $SQLquery = Database2135020_Procedures_Customers::INSERT_ONE
             . "(:firstname,"
@@ -316,7 +297,7 @@ class Customer
             . ":user_password,"
             . ":picture )";
 
-        $rows = $connection->prepare($SQLquery);
+        $rows = $this->getConnection()->prepare($SQLquery);
 
         $rows->bindParam(":firstname", $this->firstname, PDO::PARAM_STR);
         $rows->bindParam(":lastname", $this->lastname, PDO::PARAM_STR);
@@ -329,5 +310,22 @@ class Customer
         $rows->bindParam(":picture", $this->picture);
 
         $rows->execute();
+    }
+    
+    function validateCredentials()
+    {
+        $SQLquery = Database2135020_Procedures_Customers::SELECT_ONE_FROM_USERNAME . "(:username)";
+        $rows = $this->getConnection()->prepare($SQLquery);
+        $rows->bindParam(":username", $this->username, PDO::PARAM_STR);
+
+        if ($rows->execute()) {
+            while ($row = $rows->fetch()) {
+                if ($row["username"] == $this->username && password_verify($this->user_password, $row["user_password"])) {
+                    $this->setId($row["id"]);
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 }

@@ -16,25 +16,7 @@
 #Julien Pontbriand (2135020)    Nov. 29, 2022    Added the forcehttps function. 
 #-------------------------------------------------------------------
 
-require_once FILE_CUSTOMER;
-
-function validateUserCredentials($username, $password, $connection)
-{
-    $SQLquery = Database2135020_Procedures_Customers::SELECT_ONE_FROM_USERNAME . "(:username)";
-    $rows = $connection->prepare($SQLquery);
-    $rows->bindParam(":username", $username, PDO::PARAM_STR);
-
-    if ($rows->execute()) {
-        while ($row = $rows->fetch()) 
-        {
-            if ($row["username"] == $username && password_verify($password, $row["user_password"]))
-            {
-                return $row["id"];
-            }
-        }
-    }
-    return false;
-}
+require_once FILE_CLASSES_CUSTOMER;
 
 function isUserConnected()
 {

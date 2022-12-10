@@ -29,6 +29,7 @@ $errorMessage = "";
 generatePageTop($pageTitle, FILE_CSS_ORDERS);
 
 generateLoginLogout($connection);
+generateSearchForm();
 generateOrdersPage($errorMessage);
 generateErrorMessageDiv($errorMessage);
 
@@ -38,42 +39,55 @@ generatePageBottom();
 # PAGE-SPECIFIC FUNCTIONS BELOW
 ########################################################################
 
-function generateOrderRows() #This function generates the table rows (tr)
+function generateSearchForm()
 {
-    
-}
- 
-function generateOrdersPage(&$errorMessage) 
-{
-    if (!isUserConnected()) {
+    if (!isUserConnected()) 
+    {
         $errorMessage = LOGGIN_ERROR_MESSAGE;
         return null;
     }
-    if (file_exists(FILE_TXT_ORDERS)){
-        ?>
-        <div class="ordersTable">
-            <?php generateLogo() ?>
-            <table>
-                    <tr>
-                        <th>Product<br>ID</th>
-                        <th>First<br>Name</th>
-                        <th>Last<br>Name</th>
-                        <th>City</th>
-                        <th>Comments</th>
-                        <th>Price</th>
-                        <th>Quantity</th>
-                        <th>Subtotal</th>
-                        <th>Taxes</th>
-                        <th>Grand<br>Total</th>
-                    </tr>
-                    <?php generateOrderRows(); ?>
-            </table>
-        </div>
-        <?php
-    }
-    else
+    else 
     {
-        ?> <p id="noOrdersFound">No orders found!</p>
+        ?>
+            <div>
+                <form action="orders.php" method="POST" id="searchForm">
+                    <input type="date" name="date" />
+                    <button name="searchForm">Search</button>
+                    </form>
+            </div>
         <?php
     }
+}
+
+function generateOrdersPage(&$errorMessage) 
+{
+    if(isset($_POST["searchForm"]))
+    {
+        ?>
+            <div class="ordersTable">
+                <?php generateLogo() ?>
+                <table>
+                        <tr>
+                            <th>Delete</th>
+                            <th>Date</th>
+                            <th>Product<br>ID</th>
+                            <th>First<br>Name</th>
+                            <th>Last<br>Name</th>
+                            <th>City</th>
+                            <th>Comments</th>
+                            <th>Qty</th>
+                            <th>Subtotal</th>
+                            <th>Taxes</th>
+                            <th>Total</th>
+                        </tr>
+                        <?php generateOrderRows(); ?>
+                </table>
+            </div>
+        <?php
+    }
+}
+        
+function generateOrderRows() #This function generates the table rows (tr)
+{
+    
 }

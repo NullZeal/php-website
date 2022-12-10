@@ -14,11 +14,11 @@ class Products extends Collection
 {
     public function __construct(){
         
-        global $connection;
+        global $currentDatabaseConnection;
         
         $SQLquery = Database2135020_Procedures_Products::SELECT_ALL . "();";
         
-        $rows = $connection->prepare($SQLquery);
+        $rows = $currentDatabaseConnection->prepare($SQLquery);
         
         if($rows->execute())
         {

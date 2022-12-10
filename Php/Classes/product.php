@@ -1,4 +1,4 @@
-<?php
+t<?php
 #-------------------------------------------------------------------
 #Revision History
 #
@@ -106,6 +106,4 @@ class Product
     {
         $this->datetime_updated = $input;
     }
-    
-
 }

@@ -43,11 +43,12 @@ const FUNCTIONS_PAGE_CONTENT_GENERATION = FOLDER_PHP . 'functionsPageContentGene
 const FUNCTIONS_SESSION_HANDLING = FOLDER_PHP . 'functionsSessionHandling.php';
 
 #CLASSES
-const FILE_CUSTOMER = FOLDER_CLASSES . 'customer.php';
-const FILE_PRODUCT = FOLDER_CLASSES . 'product.php';
-const FILE_PRODUCTS = FOLDER_CLASSES . 'products.php';
-const FILE_COLLECTION = FOLDER_CLASSES . 'collection.php';
-const FILE_ORDER = FOLDER_CLASSES . 'order.php';
+const FILE_CLASSES_CUSTOMER = FOLDER_CLASSES . 'customer.php';
+const FILE_CLASSES_PRODUCT = FOLDER_CLASSES . 'product.php';
+const FILE_CLASSES_PRODUCTS = FOLDER_CLASSES . 'products.php';
+const FILE_CLASSES_COLLECTION = FOLDER_CLASSES . 'collection.php';
+const FILE_CLASSES_ORDER = FOLDER_CLASSES . 'order.php';
+const FILE_CLASSES_DATABASE_CONNECTED_OBJECT = FOLDER_CLASSES . 'databaseConnectedObject.php';
 
 #CSS
 const FILE_CSS_INDEX = FOLDER_CSS . 'index.css';

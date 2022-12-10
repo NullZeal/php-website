@@ -31,7 +31,7 @@ $productsArray = array(
 $pageTitle = "Home Page";
 
 generatePageTop($pageTitle, FILE_CSS_INDEX);
-generateLoginLogout($connection);
+generateLoginLogout();
 generateIndexPage($productsArray);
 generatePageBottom();
 
@@ -100,7 +100,6 @@ function generateImageSection($productsArray)
         default :
             echo "";
     }
-
     ?>
     <section>
         <p class="title">We offer <?php echo $productDescription ?></p>
