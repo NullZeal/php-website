@@ -16,13 +16,6 @@
 #Julien Pontbriand (2135020)    Nov. 29, 2022    Added the forcehttps function. 
 #-------------------------------------------------------------------
 
-require_once FILE_CLASSES_CUSTOMER;
-
-function isUserConnected()
-{
-    return isset($_SESSION["connectedUser"]) ? true : false;
-}
-
 function isCurrency($number)
 {
     // function taken from 
@@ -46,4 +39,3 @@ function isAnInt($number)
     # in range 0-9 (int only string)
     return preg_match("/^[0-9]+$/", $number);
 }
-  

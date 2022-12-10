@@ -57,7 +57,7 @@ function generateLoginLogout()
     }
     
     #At this point we know that a user tried to log in and has filled the form
-    #We will try to validate his credentials
+    
 
     $username = htmlspecialchars($_POST["username"]);
     $password = htmlspecialchars($_POST["password"]);
@@ -67,10 +67,12 @@ function generateLoginLogout()
     $newCustomer->setUsername($username);
     $newCustomer->setUser_password($password);
     
+    #We will try to validate his credentials (and get his id at the same time)
     if ($newCustomer->validateCredentials())
     {
         $newCustomer->load($newCustomer->getId());
         
+        //On success, we add a session cookie that contains only the id of the customer
         $_SESSION["connectedUser"] = $newCustomer->getId();
         
         generateLogoutForm(
@@ -78,8 +80,15 @@ function generateLoginLogout()
             $newCustomer->getLastname(),
             $newCustomer->getPicture());
         
-    } else 
+    } 
+    //On failed validation, we reload the login with an error message
+    else 
     {
         generateLoginForm($errorMessage, FILE_PAGE_REGISTER);
     }
 }   
+
+function isUserConnected()
+{
+    return isset($_SESSION["connectedUser"]) ? true : false;
+}

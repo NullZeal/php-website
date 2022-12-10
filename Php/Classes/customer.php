@@ -7,7 +7,6 @@
 #
 #-------------------------------------------------------------------
 
-require_once CONSTANTS_GLOBAL;
 require_once FILE_CLASSES_DATABASE_CONNECTED_OBJECT;
 
 class Customer extends DatabaseConnectedObject
@@ -184,12 +183,17 @@ class Customer extends DatabaseConnectedObject
 
     function setUsername($input)
     {
-        if (empty($input)) {
+        if (empty($input)) 
+        {
             return "The username code cannot be empty";
-        } elseif (mb_strlen($input) > $this::USERNAME_MAX_LENGTH) {
+        } 
+        elseif (mb_strlen($input) > $this::USERNAME_MAX_LENGTH) 
+        {
             return "The username code cannot have over "
                 . $this::USERNAME_MAX_LENGTH. " characters";
-        } else {
+        }
+        else
+        {
             $this->username = $input;
             return false;
         }
@@ -320,12 +324,28 @@ class Customer extends DatabaseConnectedObject
 
         if ($rows->execute()) {
             while ($row = $rows->fetch()) {
-                if ($row["username"] == $this->username && password_verify($this->user_password, $row["user_password"])) {
+                if ($row["username"] == $this->username && password_verify($this->user_password, $row["user_password"]))                {
                     $this->setId($row["id"]);
                     return true;
                 }
             }
         }
         return false;
+    }
+    
+    function isUsernameDuplicate()
+    {
+        $SQLquery = Database2135020_Procedures_Customers::SELECT_ONE_FROM_USERNAME . "(:username)";
+        $rows = $this->getConnection()->prepare($SQLquery);
+        $rows->bindParam(":username", $this->username, PDO::PARAM_STR);
+
+        if ($rows->execute()) {
+            while ($row = $rows->fetch()) {
+                if ($row["username"] == $this->username && !empty($row["username"])) {
+                    return true;
+                }
+            }
+            return false;
+        }
     }
 }

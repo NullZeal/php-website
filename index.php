@@ -43,7 +43,6 @@ generatePageBottom();
 //By the way, ShinyBridge is a gag, because my name is Pontbriand :)
 function generateIndexPage($productsArray)
 {
-
     ?>
     <div class="companyDescription"><?php generateLogo() ?>
         <h1>ShinyBridge VPN</h1>

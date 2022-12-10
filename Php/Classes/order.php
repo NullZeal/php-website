@@ -6,6 +6,7 @@
 #Julien Pontbriand (2135020)    Nov. 29, 2022     File creation.
 #
 #-------------------------------------------------------------------
+require_once FUNCTIONS_VALIDATION;
 
 class order 
 {

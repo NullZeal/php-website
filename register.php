@@ -4,8 +4,8 @@
 
 const INIT  = 'php/init.php';
 require_once INIT;
-require_once FILE_CUSTOMER;
-require_once FILE_CONNECTION;
+
+require_once FILE_CLASSES_CUSTOMER;
 
 #See function details for more info
 executePageInitializationFunctions();
@@ -30,7 +30,7 @@ $successMessage = "";
 generatePageTop($pageTitle, FILE_CSS_REGISTER);
 generateLogo();
 
-registerCustomer($errorMessageTable, $successMessage, $connection);
+registerCustomer($errorMessageTable, $successMessage);
 generateRegisterForm($errorMessageTable, isset($successMessage) ? $successMessage : "");
 
 generatePageBottom();
@@ -39,15 +39,7 @@ generatePageBottom();
 # PAGE-SPECIFIC FUNCTIONS BELOW
 ########################################################################
 
-function checkForErrorsInArray($errorMessageTable)
-{
-    foreach ($errorMessageTable as $value) {
-        if (!empty($value)) {
-            return true;
-        }
-    }
-    return false;
-}
+
 
 function generateRegisterForm($errorMessageTable, $successMessage)
 {
@@ -55,6 +47,7 @@ function generateRegisterForm($errorMessageTable, $successMessage)
         <div class="registerPage">
         <span id="required">* = required</span>
         <form id="registerForm" method="post" enctype="multipart/form-data">
+            <p id="successMessage"><?php echo $successMessage ?></p>
             <?php  
             
                 $text = "text";
@@ -79,7 +72,7 @@ function generateRegisterForm($errorMessageTable, $successMessage)
             <br>
 
             <button id="submitButton" type="submit" name="register">Register</button>
-            <p id="successMessage"><?php echo $successMessage ?></p>
+            
         </form>
     </div>
     <?php
@@ -99,9 +92,10 @@ function generateRegisterField($fieldName, $label, $placeholder, $errorMessageTa
     <?php
 }
 
-function registerCustomer(&$errorMessageTable, &$successMessage, $connection){
+function registerCustomer(&$errorMessageTable, &$successMessage){
     
-    if (! isset($_POST["register"])){
+    if (! isset($_POST["register"]))
+    {
         return null;
     } 
         
@@ -122,56 +116,50 @@ function registerCustomer(&$errorMessageTable, &$successMessage, $connection){
     
     $newCustomer = new Customer();
 
-    $errorMessageTable["firstname"] = $newCustomer->setFirstname($firstname) == true 
+    $errorMessageTable["firstname"] = $newCustomer->setFirstname($firstname) 
         ? $newCustomer->setFirstname($firstname) : "";
-    $errorMessageTable["lastname"] = $newCustomer->setLastname($lastname) == true 
+    $errorMessageTable["lastname"] = $newCustomer->setLastname($lastname)
         ? $newCustomer->setLastname($lastname) : "";
-    $errorMessageTable["address"] = $newCustomer->setAddress($address) == true 
+    $errorMessageTable["address"] = $newCustomer->setAddress($address) 
         ? $newCustomer->setAddress($address) : "";
-    $errorMessageTable["city"] = $newCustomer->setCity($city) == true 
+    $errorMessageTable["city"] = $newCustomer->setCity($city)
         ? $newCustomer->setCity($city) : "";
-    $errorMessageTable["province"] = $newCustomer->setProvince($province) == true 
+    $errorMessageTable["province"] = $newCustomer->setProvince($province)
         ? $newCustomer->setProvince($province) : "";
-    $errorMessageTable["postalcode"] = $newCustomer->setPostalcode($postalcode) == true 
+    $errorMessageTable["postalcode"] = $newCustomer->setPostalcode($postalcode)
         ? $newCustomer->setPostalcode($postalcode) : "";
-    $errorMessageTable["username"] = $newCustomer->setUsername($username) == true 
+    $errorMessageTable["username"] = $newCustomer->setUsername($username)
         ? $newCustomer->setUsername($username) : "";
-    $errorMessageTable["user_password"] = $newCustomer->setUser_password($user_password) == true
-        ? $newCustomer->setUser_password($user_password) : "";
-    $errorMessageTable["picture"] = $newCustomer->setPicture($picture) == true 
-        ? $newCustomer->setPicture($picture) : "";
     
-    $usernameIsDuplicate = false;
-
-    $SQLquery = Database2135020_Procedures_Customers::SELECT_ONE_FROM_USERNAME . "(:username)";
-    $rows = $connection->prepare($SQLquery);
-    $rows->bindParam(":username", $username, PDO::PARAM_STR);
-
-    if ($rows->execute()) {
-        while ($row = $rows->fetch()) {
-            if ($row["username"] == $username && !empty($row["username"])) 
-            {
-                $newCustomer->setId($row["id"]);
-                $errorMessageTable["username"] = "Username already exists";
-                $usernameIsDuplicate = true;
-            }
-        }
+    //checking if username is a duplicate ;)
+    if ($newCustomer->isUsernameDuplicate())
+    {
+        $errorMessageTable["username"] = "This username is already registered";
     }
     
-    $rows->closeCursor();
-        
-    if (checkForErrorsInArray($errorMessageTable) || $usernameIsDuplicate) {
+    $errorMessageTable["user_password"] = $newCustomer->setUser_password($user_password)
+        ? $newCustomer->setUser_password($user_password) : "";
+    $errorMessageTable["picture"] = $newCustomer->setPicture($picture)
+        ? $newCustomer->setPicture($picture) : "";
+    
+    if (checkForErrorsInArray($errorMessageTable)) {
         return null;
     }
     
     $hashedPassword = password_hash($user_password, PASSWORD_DEFAULT);
-    
     $newCustomer->setUser_password($hashedPassword);
-    
-    $newCustomer->save($connection);
-    
+    $newCustomer->save();
     $successMessage = "Registration completed successfully!";
+    $_POST = [];
     
-    header("Location: " . FILE_PAGE_INDEX);
-    
+}
+
+function checkForErrorsInArray($errorMessageTable)
+{
+    foreach ($errorMessageTable as $value) {
+        if (!empty($value)) {
+            return true;
+        }
+    }
+    return false;
 }
