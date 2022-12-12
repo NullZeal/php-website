@@ -8,7 +8,7 @@
 #-------------------------------------------------------------------
 
 require_once CONSTANTS_GLOBAL;
-require_once FILE_CONNECTION;
+require_once FILE_BUSINESS_CONNECTION;
 
 class DatabaseConnectedObject
 {

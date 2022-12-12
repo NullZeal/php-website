@@ -12,21 +12,24 @@ const DEBUGGING = false;
 
 const LOGGIN_ERROR_MESSAGE = "Please login before accessing this page";
 
-
 #################################
 #           URI              
 #################################
 
-##FOLDERS
+####FOLDERS####
+
 const FOLDER_CSS = 'Css/';
 const FOLDER_MEDIA = 'Media/';
 const FOLDER_IMAGE = 'Image/'; 
 const FOLDER_TXT = 'Txt/';
 const FOLDER_TXT_ERRORS = FOLDER_TXT . 'Errors/';
 CONST FOLDER_PHP = "Php/";
-CONST FOLDER_CLASSES = FOLDER_PHP . 'Classes/';
+    CONST FOLDER_DATA_ACCESS = FOLDER_PHP . 'Data_Access/';
+    CONST FOLDER_UI = FOLDER_PHP . 'UI/';
+    CONST FOLDER_BUSINESS = FOLDER_PHP . 'Business/';
+        CONST FOLDER_CLASSES = FOLDER_BUSINESS . 'Classes/';
 
-##FILES
+####FILES####
 
 #PAGES
 const FILE_PAGE_INDEX = 'index.php';
@@ -35,20 +38,30 @@ const FILE_PAGE_ORDERS = "orders.php";
 const FILE_PAGE_REGISTER = "register.php"; 
 const FILE_PAGE_ACCOUNT = "account.php";
 
-#PHP
-const FILE_CONNECTION = FOLDER_PHP . 'dbConnection.php';
-const FUNCTIONS_VALIDATION = FOLDER_PHP . 'functionsValidation.php';
-const FUNCTIONS_PAGE_CONFIG = FOLDER_PHP . 'functionsPageConfig.php';
-const FUNCTIONS_PAGE_CONTENT_GENERATION = FOLDER_PHP . 'functionsPageContentGeneration.php';
-const FUNCTIONS_SESSION_HANDLING = FOLDER_PHP . 'functionsSessionHandling.php';
+#DATA_ACCESS
+const FILE_BUSINESS_CONNECTION = FOLDER_DATA_ACCESS . 'dbConnection.php';
+
+#GLOBAL PHP FUNCTIONS
+const FILE_BUSINESS_VALIDATIONS = FOLDER_BUSINESS . 'validation.php';
+const FILE_BUSINESS_PAGE_CONFIG = FOLDER_BUSINESS . 'pageConfig.php';
+const FILE_BUSINESS_PAGE_CONTENT_GENERATION = FOLDER_BUSINESS . 'pageContentGeneration.php';
+const FILE_BUSINESS_SESSION_HANDLING = FOLDER_BUSINESS . 'sessionHandling.php';
+
+#UI
+const FILE_UI_INDEX = FOLDER_UI . 'indexUI.php';
+const FILE_UI_BUYING = FOLDER_UI . 'buyingUI.php';
+const FILE_UI_ORDERS = FOLDER_UI . 'ordersUI.php';
+const FILE_UI_REGISTER = FOLDER_UI . 'registerUI.php';
+const FILE_UI_ACCOUNT = FOLDER_UI . 'accountUI.php';
+const FILE_UI_GLOBAL = FOLDER_UI . 'globalUI.php';
 
 #CLASSES
-const FILE_CLASSES_CUSTOMER = FOLDER_CLASSES . 'customer.php';
-const FILE_CLASSES_PRODUCT = FOLDER_CLASSES . 'product.php';
-const FILE_CLASSES_PRODUCTS = FOLDER_CLASSES . 'products.php';
-const FILE_CLASSES_COLLECTION = FOLDER_CLASSES . 'collection.php';
-const FILE_CLASSES_ORDER = FOLDER_CLASSES . 'order.php';
-const FILE_CLASSES_DATABASE_CONNECTED_OBJECT = FOLDER_CLASSES . 'databaseConnectedObject.php';
+const FILE_CLASSES_CUSTOMER = FOLDER_CLASSES . 'customerClass.php';
+const FILE_CLASSES_PRODUCT = FOLDER_CLASSES . 'productClass.php';
+const FILE_CLASSES_PRODUCTS = FOLDER_CLASSES . 'productsClass.php';
+const FILE_CLASSES_COLLECTION = FOLDER_CLASSES . 'collectionClass.php';
+const FILE_CLASSES_ORDER = FOLDER_CLASSES . 'orderClass.php';
+const FILE_CLASSES_DATABASE_CONNECTED_OBJECT = FOLDER_CLASSES . 'databaseConnectedObjectClass.php';
 
 #CSS
 const FILE_CSS_INDEX = FOLDER_CSS . 'index.css';

@@ -17,8 +17,7 @@
 #Julien Pontbriand (2135020)    Nov. 29, 2022    Added the forcehttps function.
 #-------------------------------------------------------------------
 
-const INIT  = 'php/init.php';
-
+const INIT = 'php/business/init.php';
 require_once INIT;
 
 executePageInitializationFunctions();

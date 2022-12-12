@@ -1,6 +1,6 @@
 <?php
 
-const INIT  = 'php/init.php';
+const INIT = 'php/business/init.php';
 require_once INIT;
 
 executePageInitializationFunctions();

@@ -1,5 +1,6 @@
 <?php
 
+
 function generatePageTop($title, $cssFile)
 {
     openDoctypeTag();

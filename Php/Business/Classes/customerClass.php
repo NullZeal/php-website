@@ -117,7 +117,7 @@ class Customer extends DatabaseConnectedObject
             return "The address cannot have over "
                 . $this::ADDRESS_MAX_LENGTH . " characters";
         } else {
-            $this->lastname = $input;
+            $this->address = $input;
             return false;
         }
     }
