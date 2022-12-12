@@ -1,8 +1,14 @@
 <?php
 
-class Collection
-{
+require_once FILE_CLASSES_DATABASE_CONNECTED_OBJECT;
 
+class Collection extends DatabaseConnectedObject
+{
+    public function __construct()
+    {
+        parent::__construct();
+    }
+    
     public $items = array();
 
     public function add($primaryKey, $item)

@@ -27,7 +27,7 @@ $errorMessage = "";
 
 generatePageTop($pageTitle, FILE_CSS_ORDERS);
 
-generateLoginLogout($connection);
+generateLoginLogout();
 generateSearchForm();
 generateOrdersPage($errorMessage);
 generateErrorMessageDiv($errorMessage);

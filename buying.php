@@ -23,7 +23,9 @@ const INIT = 'php/business/init.php';
 require_once INIT;
 
 require_once FILE_UI_BUYING;
+require_once FILE_CLASSES_PRODUCT;
 require_once FILE_CLASSES_PRODUCTS;
+require_once FILE_CLASSES_ORDER;
 
 executePageInitializationFunctions();
 
@@ -35,9 +37,9 @@ $errorMessageArray = array(
     "quantity" => ""
 );
 
-insertOrderToCustomer($errorMessageArray, $connection);
+insertOrderToCustomer($errorMessageArray);
 generatePageTop($pageTitle, FILE_CSS_BUYING);
-generateLoginLogout($connection);
+generateLoginLogout();
 generateBuyingPage($errorMessageArray);
 generateErrorMessageDiv($errorMessageArray["login"]);
 generatePageBottom();
@@ -46,14 +48,15 @@ generatePageBottom();
 # PAGE-SPECIFIC FUNCTIONS BELOW
 ########################################################################
 
-function insertOrderToCustomer(&$errorMessageArray, $connection)
+function insertOrderToCustomer(&$errorMessageArray)
 {
-    if (isset($_POST["buy"]) && isset($_SESSION["connectedUser"])) 
+    if (isset($_POST["purchaseSubmitted"]) && isset($_SESSION["connectedUser"])) 
     {
         $comments = htmlspecialchars($_POST["comments"]);
         $quantity = htmlspecialchars($_POST["quantity"]);
-        $price = getProductPrice($_POST["product"], $connection) 
-            ? getProductPrice($_POST["product"], $connection) : -1;
+        
+        $price = Product::getProductPrice($_POST["product"]);
+             
         $order = new order();
         $errorMessageArray["comments"] = $order->setComments($comments);
         $errorMessageArray["quantity"] = $order->setQuantity($quantity);
@@ -70,29 +73,9 @@ function insertOrderToCustomer(&$errorMessageArray, $connection)
             $order->setSubtotal();
             $order->setTaxAmount();
             $order->setTotal();
-            $order->save($connection);
+            $order->save();
             
             header("Location: " . FILE_PAGE_ORDERS);
         }
     }
 }
-
-function getProductPrice($productId, $connection)
-{
-    $SQLquery = Database2135020_Procedures_Products::SELECT_ONE
-        . "(:id)";
-    $rows = $connection->prepare($SQLquery);
-    $rows->bindParam(":id", $productId, PDO::PARAM_STR);
-    
-    if ($rows->execute()) 
-    {
-        while ($row = $rows->fetch()) {
-            if ($row["id"] == $productId) {
-                return $row["price"];
-            }
-        }
-    }
-    return false;
-}
-
-

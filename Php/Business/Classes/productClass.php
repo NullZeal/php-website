@@ -1,4 +1,4 @@
-t<?php
+<?php
 #-------------------------------------------------------------------
 #Revision History
 #
@@ -7,7 +7,9 @@ t<?php
 #
 #-------------------------------------------------------------------
 
-class Product
+require_once FILE_CLASSES_DATABASE_CONNECTED_OBJECT;
+
+class Product extends DatabaseConnectedObject
 {
     private $id = "";
     private $pcode = "";
@@ -28,6 +30,7 @@ class Product
         $datetime_updated = ""
     )
     {
+        parent::__construct();
         $this->setId($id);
         $this->setPdocde($pcode);
         $this->setPdescription($pdescription);
@@ -105,5 +108,23 @@ class Product
     function setDatetime_updated($input)
     {
         $this->datetime_updated = $input;
+    }
+    
+    static function getProductPrice($productId)
+    {
+        global $currentDatabaseConnection;
+        $SQLquery = Database2135020_Procedures_Products::SELECT_ONE
+            . "(:id)";
+        $rows = $currentDatabaseConnection->prepare($SQLquery);
+        $rows->bindParam(":id", $productId, PDO::PARAM_STR);
+
+        if ($rows->execute()) {
+            while ($row = $rows->fetch()) {
+                if ($row["id"] == $productId) {
+                    return $row["price"];
+                }
+            }
+        }
+        return false;
     }
 }

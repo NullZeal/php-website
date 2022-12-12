@@ -11,8 +11,9 @@ require_once FILE_CLASSES_DATABASE_CONNECTED_OBJECT;
 
 class Customer extends DatabaseConnectedObject
 {
-    
     //class constants
+    const ID_MIN_LENGTH = 36;
+    const ID_MAX_LENGTH = 36;
     const FIRSTNAME_MAX_LENGTH = 20;
     const LASTNAME_MAX_LENGTH = 20;
     const ADDRESS_MAX_LENGTH = 25;
@@ -24,7 +25,7 @@ class Customer extends DatabaseConnectedObject
     const PICTURE_MAX_SIZE = 20000;
     
     //variables
-    
+    private $id = "";
     private $firstname = "";
     private $lastname = "";
     private $address = "";
@@ -54,7 +55,8 @@ class Customer extends DatabaseConnectedObject
         $datetime_updated = ""
     )
     {
-        parent::__construct($id, $connection);
+        parent::__construct();
+        $this->setId($id);
         $this->setFirstname($firstname);
         $this->setLastname($lastname);
         $this->setAddress($address);
@@ -66,6 +68,27 @@ class Customer extends DatabaseConnectedObject
         $this->setPicture($picture);
         $this->setDatetime_created($datetime_created);
         $this->setDatetime_updated($datetime_updated);
+    }
+    
+    function getId()
+    {
+        return $this->id;
+    }
+    
+    function setId($input)
+    {
+        if (empty($input)) {
+            return "The id cannot be empty";
+        } elseif (mb_strlen($input) > $this::ID_MAX_LENGTH) {
+            return "The id cannot have over "
+                . $this::ID_MAX_LENGTH . " characters";
+        } elseif (mb_strlen($input) < $this::ID_MAX_LENGTH) {
+            return "The id cannot have under "
+                . $this::ID_MAX_LENGTH . " characters";
+        } else {
+            $this->id = $input;
+            return null;
+        }
     }
 
     function getFirstname()

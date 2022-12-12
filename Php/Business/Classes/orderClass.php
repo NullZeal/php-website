@@ -6,9 +6,12 @@
 #Julien Pontbriand (2135020)    Nov. 29, 2022     File creation.
 #
 #-------------------------------------------------------------------
-require_once FUNCTIONS_VALIDATION;
 
-class order 
+require_once FILE_CLASSES_DATABASE_CONNECTED_OBJECT;
+
+require_once FILE_BUSINESS_VALIDATIONS;
+
+class order extends DatabaseConnectedObject
 {
     //class constants
 
@@ -48,6 +51,7 @@ class order
         $datetime_upadated = ""
     )
     {
+        parent::__construct();
         $this->setId($id);
         $this->setId_customer($id_customer);
         $this->setId_product($id_product);
@@ -237,7 +241,7 @@ class order
         }
     }
     
-    function save($connection)
+    function save()
     {
         $SQLquery = Database2135020_Procedures_Orders::INSERT_ONE
             . "(:id_customer,"
@@ -249,7 +253,7 @@ class order
             . ":total,"
             . ":comments)";
 
-        $rows = $connection->prepare($SQLquery);
+        $rows = $this->getConnection()->prepare($SQLquery);
 
         $rows->bindParam(":id_customer", $this->id_customer, PDO::PARAM_STR);
         $rows->bindParam(":id_product", $this->id_product, PDO::PARAM_STR);

@@ -6,20 +6,17 @@
 #Julien Pontbriand (2135020)    Nov. 29, 2022     File creation.
 #
 #-------------------------------------------------------------------
-require_once FILE_CONNECTION;
-require_once FILE_PRODUCT;
-require_once FILE_COLLECTION;
+require_once FILE_CLASSES_PRODUCT;
+require_once FILE_CLASSES_COLLECTION;
 
 class Products extends Collection
 {
     public function __construct(){
         
-        global $currentDatabaseConnection;
-        
+        parent::__construct();
+
         $SQLquery = Database2135020_Procedures_Products::SELECT_ALL . "();";
-        
-        $rows = $currentDatabaseConnection->prepare($SQLquery);
-        
+        $rows = $this->getConnection()->prepare($SQLquery);
         if($rows->execute())
         {
             while($row = $rows->fetch())

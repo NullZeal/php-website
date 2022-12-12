@@ -56,7 +56,7 @@ function generateBuyingPage(&$errorMessageArray)
                 <label for="quantity"><?php 
                     echo $errorMessageArray["quantity"]; ?></label>
                 <br>
-                <button id="buyButton" type="submit" name="buy">Buy</button>
+                <button id="buyButton" type="submit" name="purchaseSubmitted">Buy</button>
             </form>
         </div>
     <?php
