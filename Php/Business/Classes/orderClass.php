@@ -267,6 +267,13 @@ class Order extends DatabaseConnectedObject
         $rows->execute();
     }
     
+    function delete(){
+        $SQLquery = Database2135020_Procedures_Orders::DELETE_ONE . "(:id)";
+        $rows = $this->getConnection()->prepare($SQLquery);
+        $rows->bindParam(":id", $this->id, PDO::PARAM_STR);
+        $rows->execute();
+    }
+    
     function calculateSubtotal($quantity, $productPrice)
     {
         return ((float) $quantity) * ((float) $productPrice);

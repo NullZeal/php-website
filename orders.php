@@ -20,6 +20,7 @@
 const INIT = 'php/business/init.php';
 require_once INIT;
 require_once FILE_UI_ORDERS;
+require_once FILE_CLASSES_ORDER;
 require_once FILE_CLASSES_ORDERS;
 
 executePageInitializationFunctions();
@@ -27,7 +28,7 @@ executePageInitializationFunctions();
 $pageTitle = "Orders Page";
 $errorMessage = "";
 
-if (!isset($_POST["searchedDate"])) 
+if (! isset($_POST["searchedDate"]) && ! isset($_POST["orderToDelete"])) 
 {
     generatePageTop($pageTitle, FILE_CSS_ORDERS, true);
     generateLoginLogout();
@@ -40,7 +41,14 @@ if (!isset($_POST["searchedDate"]))
     generateErrorMessageDiv($errorMessage);
     generatePageBottom();
 }
-else 
+elseif (isset($_POST["orderToDelete"]) )
+{
+    $newOrder = new Order();
+    $newOrder->setId($_POST["orderToDelete"]);
+    $newOrder->delete();
+    attemptOrdersTableGeneration($errorMessage);
+}
+else
 {
     attemptOrdersTableGeneration($errorMessage);
 }
