@@ -38,7 +38,7 @@ $errorMessageArray = array(
 );
 
 insertOrderToCustomer($errorMessageArray);
-generatePageTop($pageTitle, FILE_CSS_BUYING);
+generatePageTop($pageTitle, FILE_CSS_BUYING, false);
 generateLoginLogout();
 generateBuyingPage($errorMessageArray);
 generateErrorMessageDiv($errorMessageArray["login"]);
@@ -57,7 +57,7 @@ function insertOrderToCustomer(&$errorMessageArray)
         
         $price = Product::getProductPrice($_POST["product"]);
              
-        $order = new order();
+        $order = new Order();
         $errorMessageArray["comments"] = $order->setComments($comments);
         $errorMessageArray["quantity"] = $order->setQuantity($quantity);
         if

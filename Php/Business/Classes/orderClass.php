@@ -11,7 +11,7 @@ require_once FILE_CLASSES_DATABASE_CONNECTED_OBJECT;
 
 require_once FILE_BUSINESS_VALIDATIONS;
 
-class order extends DatabaseConnectedObject
+class Order extends DatabaseConnectedObject
 {
     //class constants
 

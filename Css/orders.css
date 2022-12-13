@@ -11,6 +11,11 @@
 
 */ 
 
+#timePicker{
+    margin-left: 30vw;
+    margin-bottom: 5vh;
+}
+
 #noOrdersFound{
     width: 100vw;
     text-align: center;

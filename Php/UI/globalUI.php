@@ -1,11 +1,16 @@
 <?php
 
 
-function generatePageTop($title, $cssFile)
+function generatePageTop($title, $cssFile, $withAjax)
 {
     openDoctypeTag();
     openHtmlTag();
-    generateHead($title, $cssFile);
+    if($withAjax){
+        generateHeadWithAjax($title, $cssFile);
+    }
+    else{
+        generateHead($title, $cssFile);
+    }
     openBodyTag();
     generateNavigationMenu();
 }
@@ -37,6 +42,25 @@ function generateHead($title, $cssFile)
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
             <link rel="stylesheet" type="text/css" href="<?php echo FILE_CSS_GLOBAL; ?>">
             <link rel="stylesheet" type="text/css" href="<?php echo $cssFile; ?>">
+        </head>
+    <?php
+}
+
+function generateHeadWithAjax($title, $cssFile)
+{
+    ?>  
+        <head>
+            <meta charset="UTF-8">
+            <meta title="Home Page"><title><?php echo $title; ?></title>
+            <meta http-equiv="X-UA-Compatible" content="IE=edge">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <link rel="stylesheet" type="text/css" href="<?php echo FILE_CSS_GLOBAL; ?>">
+            <link rel="stylesheet" type="text/css" href="<?php echo $cssFile; ?>">
+            <script 
+                language="javascript" 
+                type="text/javascript" 
+                src="<?php echo FILE_AJAX; ?>" >
+            </script>
         </head>
     <?php
 }

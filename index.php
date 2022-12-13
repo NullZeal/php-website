@@ -35,7 +35,7 @@ $pageTitle = "Home Page";
 # PAGE-GENERATION
 ########################################################################
 
-generatePageTop($pageTitle, FILE_CSS_INDEX);
+generatePageTop($pageTitle, FILE_CSS_INDEX, false);
 generateLoginLogout();
 generateIndexPage($productsArray);
 generatePageBottom();

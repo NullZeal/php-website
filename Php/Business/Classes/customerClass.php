@@ -322,7 +322,7 @@ class Customer extends DatabaseConnectedObject
             . ":postalcode,"
             . ":username,"
             . ":user_password,"
-            . ":picture )";
+            . ":picture)";
 
         $rows = $this->getConnection()->prepare($SQLquery);
 
@@ -347,7 +347,9 @@ class Customer extends DatabaseConnectedObject
 
         if ($rows->execute()) {
             while ($row = $rows->fetch()) {
-                if ($row["username"] == $this->username && password_verify($this->user_password, $row["user_password"]))                {
+                if ($row["username"] == $this->username 
+                    && password_verify($this->user_password, $row["user_password"]))                
+                {
                     $this->setId($row["id"]);
                     return true;
                 }

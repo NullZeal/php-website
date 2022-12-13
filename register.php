@@ -32,7 +32,7 @@ $successMessage = "";
 # PAGE-GENERATION
 ########################################################################
 
-generatePageTop($pageTitle, FILE_CSS_REGISTER);
+generatePageTop($pageTitle, FILE_CSS_REGISTER, false);
 generateLogo();
 attemptToRegisterCustomer($errorMessageTable, $successMessage);
 generateRegisterForm($errorMessageTable, isset($successMessage) ? $successMessage : "");

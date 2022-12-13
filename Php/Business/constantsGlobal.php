@@ -23,6 +23,7 @@ const FOLDER_MEDIA = 'Media/';
 const FOLDER_IMAGE = 'Image/'; 
 const FOLDER_TXT = 'Txt/';
 const FOLDER_TXT_ERRORS = FOLDER_TXT . 'Errors/';
+const FOLDER_JS = "Js/";
 CONST FOLDER_PHP = "Php/";
     CONST FOLDER_DATA_ACCESS = FOLDER_PHP . 'Data_Access/';
     CONST FOLDER_UI = FOLDER_PHP . 'UI/';
@@ -47,6 +48,9 @@ const FILE_BUSINESS_PAGE_CONFIG = FOLDER_BUSINESS . 'pageConfig.php';
 const FILE_BUSINESS_PAGE_CONTENT_GENERATION = FOLDER_BUSINESS . 'pageContentGeneration.php';
 const FILE_BUSINESS_SESSION_HANDLING = FOLDER_BUSINESS . 'sessionHandling.php';
 
+#JS
+const FILE_AJAX = FOLDER_JS . 'ajax.js';
+
 #UI
 const FILE_UI_INDEX = FOLDER_UI . 'indexUI.php';
 const FILE_UI_BUYING = FOLDER_UI . 'buyingUI.php';
@@ -61,6 +65,7 @@ const FILE_CLASSES_PRODUCT = FOLDER_CLASSES . 'productClass.php';
 const FILE_CLASSES_PRODUCTS = FOLDER_CLASSES . 'productsClass.php';
 const FILE_CLASSES_COLLECTION = FOLDER_CLASSES . 'collectionClass.php';
 const FILE_CLASSES_ORDER = FOLDER_CLASSES . 'orderClass.php';
+const FILE_CLASSES_ORDERS = FOLDER_CLASSES . 'ordersClass.php';
 const FILE_CLASSES_DATABASE_CONNECTED_OBJECT = FOLDER_CLASSES . 'databaseConnectedObjectClass.php';
 
 #CSS
@@ -119,6 +124,8 @@ abstract class Database2135020_Procedures_Orders
     public const SELECT_ALL = 'CALL procedure_orders_select_all';
     public const SELECT_ONE = 'CALL procedure_orders_select_one';
     public const UPDATE_ONE = 'CALL procedure_orders_update_one';
-    public const SELECT_CUSTOMER_ORDERS = 'CALL procedure_select_customer_orders';
+    public const SELECT_ALL_WITH_OPTIONAL_FILTERS = 'CALL procedure_orders_select_all_with_optional_filters';
+    
     
 }
+

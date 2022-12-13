@@ -19,26 +19,38 @@
 
 const INIT = 'php/business/init.php';
 require_once INIT;
+require_once FILE_UI_ORDERS;
+require_once FILE_CLASSES_ORDERS;
 
 executePageInitializationFunctions();
 
 $pageTitle = "Orders Page";
 $errorMessage = "";
 
-generatePageTop($pageTitle, FILE_CSS_ORDERS);
+if (!isset($_POST["searchedDate"])) 
+{
+    generatePageTop($pageTitle, FILE_CSS_ORDERS, true);
+    generateLoginLogout();
+    generateLogo();
 
-generateLoginLogout();
-generateSearchForm();
-generateOrdersPage($errorMessage);
-generateErrorMessageDiv($errorMessage);
+    attemptSearchFormGeneration($errorMessage);
 
-generatePageBottom();
+    generateOrdersTable();
+
+    generateErrorMessageDiv($errorMessage);
+    generatePageBottom();
+}
+else 
+{
+    attemptOrdersTableGeneration($errorMessage);
+}
+
 
 ########################################################################
 # PAGE-SPECIFIC FUNCTIONS BELOW
 ########################################################################
 
-function generateSearchForm()
+function attemptSearchFormGeneration(&$errorMessage)
 {
     if (!isUserConnected()) 
     {
@@ -47,46 +59,19 @@ function generateSearchForm()
     }
     else 
     {
-        ?>
-            <div>
-                <form action="orders.php" method="POST" id="searchForm">
-                    <input type="date" name="date" />
-                    <button name="searchForm">Search</button>
-                    </form>
-            </div>
-        <?php
+        generateSearchForm();
     }
 }
 
-function generateOrdersPage(&$errorMessage) 
+function attemptOrdersTableGeneration($errorMessage)
 {
-    if(isset($_POST["searchForm"]))
-    {
-        ?>
-            <div class="ordersTable">
-                <?php generateLogo() ?>
-                <table>
-                        <tr>
-                            <th>Delete</th>
-                            <th>Date</th>
-                            <th>Product<br>ID</th>
-                            <th>First<br>Name</th>
-                            <th>Last<br>Name</th>
-                            <th>City</th>
-                            <th>Comments</th>
-                            <th>Qty</th>
-                            <th>Subtotal</th>
-                            <th>Taxes</th>
-                            <th>Total</th>
-                        </tr>
-                        <?php generateOrderRows(); ?>
-                </table>
-            </div>
-        <?php
-    }
-}
+    $ordersObject = new Orders(
+            
+        $_SESSION["connectedUser"],
+        isset($_POST["searchedDate"]) ? $_POST["searchedDate"] : ""
+        );
         
-function generateOrderRows() #This function generates the table rows (tr)
-{
-    
+    $ordersArray = $ordersObject->items;
+    generateOrdersPage($ordersArray, $errorMessage);
 }
+

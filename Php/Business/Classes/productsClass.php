@@ -14,8 +14,9 @@ class Products extends Collection
     public function __construct(){
         
         parent::__construct();
-
+        
         $SQLquery = Database2135020_Procedures_Products::SELECT_ALL . "();";
+        
         $rows = $this->getConnection()->prepare($SQLquery);
         if($rows->execute())
         {
