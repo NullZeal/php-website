@@ -4,12 +4,12 @@ function generateBuyingPage(&$errorMessageArray)
 {
     if (!isUserConnected()) 
     {
-        $errorMessageArray["login"] = LOGGIN_ERROR_MESSAGE;
+        $errorMessageArray["loginErrorMessage"] = LOGIN_ERROR_NO_USER_CONNECTED;
         return null;
     } 
     else 
     {
-        $errorMessageArray["login"] = "";
+        $errorMessageArray["loginErrorMessage"] = "";
     }?>  
         <div class="formSection"><?php generateLogo() ?>
             <span id="required">* = required</span>

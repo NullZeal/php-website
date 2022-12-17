@@ -10,7 +10,8 @@ const DEBUGGING = false;
 #           LOGGING          
 #################################
 
-const LOGGIN_ERROR_MESSAGE = "Please login before accessing this page";
+const LOGIN_ERROR_NO_USER_CONNECTED = "Please login before accessing this page";
+const LOGIN_ERROR_INVALID_PASSWORD = "Invalid credentials";
 
 #################################
 #           URI              
@@ -74,6 +75,7 @@ const FILE_CSS_BUYING = FOLDER_CSS . 'buying.css';
 const FILE_CSS_ORDERS = FOLDER_CSS . 'orders.css';
 const FILE_CSS_GLOBAL = FOLDER_CSS . 'global.css';
 const FILE_CSS_REGISTER = FOLDER_CSS . 'register.css';
+const FILE_CSS_ACCOUNT = FOLDER_CSS . 'account.css';
 
 
 #TXT
@@ -114,7 +116,6 @@ abstract class Database2135020_Procedures_Products
     public const SELECT_ALL = 'CALL procedure_products_select_all';
     public const SELECT_ONE = 'CALL procedure_products_select_one';
     public const UPDATE_ONE = 'CALL procedure_products_update_one';
-    
 }
 
 abstract class Database2135020_Procedures_Orders
@@ -125,7 +126,4 @@ abstract class Database2135020_Procedures_Orders
     public const SELECT_ONE = 'CALL procedure_orders_select_one';
     public const UPDATE_ONE = 'CALL procedure_orders_update_one';
     public const SELECT_ALL_WITH_OPTIONAL_FILTERS = 'CALL procedure_orders_select_all_with_optional_filters';
-    
-    
 }
-

@@ -2,14 +2,8 @@
 
 require_once FILE_CLASSES_CUSTOMER;
 
-$errorMessage = "Invalid credentials";
-
 function generateLoginLogout()
 {
-    //Setting up the 2 possible login error messages
-    global $errorMessage;
-    $emptyString = "";
-    
     //Checking if a customer is logged in
     if (isUserConnected()) 
     {
@@ -31,7 +25,7 @@ function generateLoginLogout()
             $_SESSION = [];
             $_POST = [];
             
-            generateLoginForm($emptyString, FILE_PAGE_REGISTER);
+            generateLoginForm("", FILE_PAGE_REGISTER);
         }
         return null;
     }
@@ -45,20 +39,21 @@ function generateLoginLogout()
     if (! isset($_POST["login"]))
     {
         //Pushing back the user login WITHOUT an error message
-        generateLoginForm($emptyString, FILE_PAGE_REGISTER);
+        generateLoginForm("", FILE_PAGE_REGISTER);
         return null;
     }
+    
+
     
     if ($_POST["username"] == "" || $_POST["password"] == "" )
     {
         //Pushing back the user login WITH an error message
-        generateLoginForm($errorMessage, FILE_PAGE_REGISTER);
+        generateLoginForm(LOGIN_ERROR_INVALID_PASSWORD, FILE_PAGE_REGISTER);
         return null;
     }
     
     #At this point we know that a user tried to log in and has filled the form
     
-
     $username = htmlspecialchars($_POST["username"]);
     $password = htmlspecialchars($_POST["password"]);
     
@@ -84,7 +79,7 @@ function generateLoginLogout()
     //On failed validation, we reload the login with an error message
     else 
     {
-        generateLoginForm($errorMessage, FILE_PAGE_REGISTER);
+        generateLoginForm(LOGIN_ERROR_INVALID_PASSWORD, FILE_PAGE_REGISTER);
     }
 }   
 

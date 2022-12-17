@@ -14,22 +14,26 @@
 #Julien Pontbriand (2135020)    Nov. 29, 2022    Added the forcehttps function.
 #-------------------------------------------------------------------
 
-#Importing global functions from the relative path given in $globalFunctions
+########################################################################
+# PAGE-CONFIGURATION
+########################################################################
+
 const INIT = 'php/business/init.php';
+
 require_once INIT;
 require_once FILE_UI_INDEX;
 
+$pageTitle = "Home Page";
+$productsArray = array(
+FILE_MEDIA_IMAGE_ADBLOCK,
+FILE_MEDIA_IMAGE_DISK,
+FILE_MEDIA_IMAGE_ENCRYPTION,
+FILE_MEDIA_IMAGE_PROTOCOL,
+FILE_MEDIA_IMAGE_SERVER,
+);
+
 #See function details for more info
 executePageInitializationFunctions();
-
-$productsArray = array(
-    FILE_MEDIA_IMAGE_ADBLOCK,
-    FILE_MEDIA_IMAGE_DISK,
-    FILE_MEDIA_IMAGE_ENCRYPTION,
-    FILE_MEDIA_IMAGE_PROTOCOL,
-    FILE_MEDIA_IMAGE_SERVER);
-
-$pageTitle = "Home Page";
 
 ########################################################################
 # PAGE-GENERATION

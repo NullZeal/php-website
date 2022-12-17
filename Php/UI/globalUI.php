@@ -1,6 +1,5 @@
 <?php
 
-
 function generatePageTop($title, $cssFile, $withAjax)
 {
     openDoctypeTag();
@@ -112,7 +111,7 @@ function generateRedStar()
     echo "<span class='red'>*</span>";
 }
 
-function generateLoginForm($errorMessage, $registerUrl)
+function generateLoginForm($loginErrorMessage, $registerUrl)
 {
     ?>
         <div>
@@ -129,7 +128,7 @@ function generateLoginForm($errorMessage, $registerUrl)
                 <button id="loginButton" type="submit" name="login">Login</button>
             
                 <span class="formLoginSpan"><?php 
-                    echo $errorMessage; ?> - <a href="<?php 
+                    echo $loginErrorMessage; ?> - <a href="<?php 
                     echo FILE_PAGE_REGISTER ?>">Register</a></span>
                 <br>
             </form>

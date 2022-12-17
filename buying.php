@@ -17,53 +17,56 @@
 #Julien Pontbriand (2135020)    Nov. 29, 2022    Added the forcehttps function.
 #                                                Money values will now always register with 2 decimals.
 #-------------------------------------------------------------------
-#Importing global functions from the relative path given in $globalFunctions
+
+########################################################################
+# PAGE-CONFIGURATION 
+########################################################################
 
 const INIT = 'php/business/init.php';
-require_once INIT;
 
+require_once INIT;
 require_once FILE_UI_BUYING;
 require_once FILE_CLASSES_PRODUCT;
 require_once FILE_CLASSES_PRODUCTS;
 require_once FILE_CLASSES_ORDER;
 
+$pageTitle = "Buying Page";
+$errMsgArray = array(
+    "comments" => "",
+    "quantity" => "",
+    "loginErrorMessage" => ""
+    );
+
+#See function details for more info
 executePageInitializationFunctions();
 
-$pageTitle = "Buying Page";
+########################################################################
+# PAGE-GENERATION
+########################################################################
 
-$errorMessageArray = array(
-    "login" => "",
-    "comments" => "",
-    "quantity" => ""
-);
-
-insertOrderToCustomer($errorMessageArray);
+insertOrderToCustomer($errMsgArray);
 generatePageTop($pageTitle, FILE_CSS_BUYING, false);
 generateLoginLogout();
-generateBuyingPage($errorMessageArray);
-generateErrorMessageDiv($errorMessageArray["login"]);
+generateBuyingPage($errMsgArray);
+generateErrorMessageDiv($errMsgArray["loginErrorMessage"]);
 generatePageBottom();
 
 ########################################################################
-# PAGE-SPECIFIC FUNCTIONS BELOW
+# PAGE-SPECIFIC FUNCTIONS
 ########################################################################
 
 function insertOrderToCustomer(&$errorMessageArray)
 {
-    if (isset($_POST["purchaseSubmitted"]) && isset($_SESSION["connectedUser"])) 
+    if (isset($_POST["purchaseSubmitted"]) && isset($_SESSION["connectedUser"]))
     {
         $comments = htmlspecialchars($_POST["comments"]);
         $quantity = htmlspecialchars($_POST["quantity"]);
-        
         $price = Product::getProductPrice($_POST["product"]);
-             
         $order = new Order();
-        $errorMessageArray["comments"] = $order->setComments($comments);
-        $errorMessageArray["quantity"] = $order->setQuantity($quantity);
-        if
-        (
-            $errorMessageArray["comments"] == ""
-            && $errorMessageArray["quantity"] == ""
+        $errMsgArray["comments"] = $order->setComments($comments);
+        $errMsgArray["quantity"] = $order->setQuantity($quantity);
+        if ($errMsgArray["comments"] == "" 
+            && $errMsgArray["quantity"] == "" 
             && $price != -1
         )
         {

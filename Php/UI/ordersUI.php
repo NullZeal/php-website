@@ -20,8 +20,6 @@ function generateOrdersPage($ordersArray)
                         <th>Delete</th>
                         <th>Date</th>
                         <th>Product<br>ID</th>
-                        <th>First<br>Name</th>
-                        <th>Last<br>Name</th>
                         <th>City</th>
                         <th>Comments</th>
                         <th>Qty</th>
@@ -51,8 +49,6 @@ function generateOrderRow($orderRowId, $orderRowArray)
             <td><Button id="deleteButton" onclick="deleteOrder(<?php echo "'" . $orderRowId . "'" ?>)">Delete me</Button></td>
             <td><?php echo $orderRowArray["orderCreated"] ?></td>
             <td><?php echo $orderRowArray["productCode"] ?></td>
-            <td><?php echo $orderRowArray["firstname"] ?></td>
-            <td><?php echo $orderRowArray["lastname"] ?></td>
             <td><?php echo $orderRowArray["city"] ?></td>
             <td><?php echo $orderRowArray["comments"] ?></td>
             <td><?php echo $orderRowArray["quantity"] ?></td>
@@ -65,9 +61,8 @@ function generateOrderRow($orderRowId, $orderRowArray)
     <?php
 }
 
-function generateOrdersTable()
-{
+function generateOrderTableContainer(){
     ?>
-        <div id="ordersTable"></div>
+        <div id="ordersTable">
     <?php
 }

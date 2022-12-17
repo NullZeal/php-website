@@ -25,61 +25,57 @@ require_once FILE_CLASSES_ORDERS;
 
 executePageInitializationFunctions();
 
+checkForDeleteOrderRequest() ? fullfillOrderDeletionRequest() : null;
+checkForSearchRequest() ? drawOrdersTableInTableContainer() : null;
+
 $pageTitle = "Orders Page";
-$errorMessage = "";
+$loginErrorMessage = "";
 
-if (! isset($_POST["searchedDate"]) && ! isset($_POST["orderToDelete"])) 
-{
-    generatePageTop($pageTitle, FILE_CSS_ORDERS, true);
-    generateLoginLogout();
-    generateLogo();
-
-    attemptSearchFormGeneration($errorMessage);
-
-    generateOrdersTable();
-
-    generateErrorMessageDiv($errorMessage);
-    generatePageBottom();
-}
-elseif (isset($_POST["orderToDelete"]) )
-{
-    $newOrder = new Order();
-    $newOrder->setId($_POST["orderToDelete"]);
-    $newOrder->delete();
-    attemptOrdersTableGeneration($errorMessage);
-}
-else
-{
-    attemptOrdersTableGeneration($errorMessage);
-}
-
+generatePageTop($pageTitle, FILE_CSS_ORDERS, true);
+generateLoginLogout();
+generateLogo();
+generateOrdersPageLogic($loginErrorMessage);
+generateOrderTableContainer();
+generateErrorMessageDiv($loginErrorMessage);
+generatePageBottom();
 
 ########################################################################
 # PAGE-SPECIFIC FUNCTIONS BELOW
 ########################################################################
 
-function attemptSearchFormGeneration(&$errorMessage)
+function generateOrdersPageLogic(&$loginErrorMessage)
 {
     if (!isUserConnected()) 
     {
-        $errorMessage = LOGGIN_ERROR_MESSAGE;
+        $loginErrorMessage = LOGIN_ERROR_NO_USER_CONNECTED;
         return null;
     }
-    else 
-    {
-        generateSearchForm();
-    }
+    generateSearchForm();
 }
 
-function attemptOrdersTableGeneration($errorMessage)
+function checkForDeleteOrderRequest()
 {
-    $ordersObject = new Orders(
-            
-        $_SESSION["connectedUser"],
-        isset($_POST["searchedDate"]) ? $_POST["searchedDate"] : ""
-        );
-        
-    $ordersArray = $ordersObject->items;
-    generateOrdersPage($ordersArray, $errorMessage);
+    return isset($_POST["orderToDelete"]);
 }
 
+function checkForSearchRequest()
+{
+    return isset($_POST["searchedDate"]);
+}
+
+function fullfillOrderDeletionRequest()
+{
+    $orderToDelete = new Order();
+    $orderToDelete->setId($_POST["orderToDelete"]);
+    $orderToDelete->delete();
+    drawOrdersTableInTableContainer();
+    die;
+}
+
+function drawOrdersTableInTableContainer()
+{
+    $ordersObject = new Orders($_SESSION["connectedUser"], isset($_POST["searchedDate"]) 
+        ? $_POST["searchedDate"] : "");
+    generateOrdersPage($ordersObject->items);
+    die;
+}
