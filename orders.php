@@ -28,7 +28,7 @@ require_once FILE_UI_ORDERS;
 require_once FILE_CLASSES_ORDER;
 require_once FILE_CLASSES_ORDERS;
 
-$pageTitle = "Orders Page";
+$pageTitle = "Orders";
 $loginErrorMessage = "";
 
 executePageInitializationFunctions();

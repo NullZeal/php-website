@@ -30,7 +30,7 @@ require_once FILE_CLASSES_PRODUCT;
 require_once FILE_CLASSES_PRODUCTS;
 require_once FILE_CLASSES_ORDER;
 
-$pageTitle = "Buying Page";
+$pageTitle = "Buying";
 $errMsgArray = array(
     "comments"          => "",
     "quantity"          => "",
@@ -46,6 +46,7 @@ executePageInitializationFunctions();
 insertOrderToCustomer($errMsgArray);
 generatePageTop($pageTitle, FILE_CSS_BUYING, false);
 generateLoginLogout();
+generateLogo();
 generateBuyingPage($errMsgArray);
 generateErrorMessageDiv($errMsgArray["loginErrorMessage"]);
 generatePageBottom();

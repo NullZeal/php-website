@@ -10,8 +10,9 @@ require_once INIT;
 require_once FILE_UI_ACCOUNT;
 require_once FILE_CLASSES_CUSTOMER;
 
-$pageTitle = "Account Page";
+$pageTitle = "Account";
 $loginErrorMessage = "";
+$successMessage = "";
 $errorMessageTable = array(
     "firstname"     => "",
     "lastname"      => "",
@@ -31,9 +32,10 @@ executePageInitializationFunctions();
 ########################################################################
 
 generatePageTop($pageTitle, FILE_CSS_ACCOUNT, false);
+generateAccountPage($errorMessage, $errorMessageTable, $successMessage);
 generateLoginLogout();
-generateAccountForm($errorMessageTable, isset($successMessage) ? $successMessage : "");
-generateAccountPage($errorMessage);
+generateLogo();
+generateAccountForm($errorMessageTable, $successMessage);
 generateErrorMessageDiv($errorMessage);
 generatePageBottom();
 
@@ -41,14 +43,14 @@ generatePageBottom();
 # PAGE-SPECIFIC FUNCTIONS
 ########################################################################
 
-function generateAccountPage(&$loginErrorMessage)
+function generateAccountPage(&$loginErrorMessage, &$errorMessageTable, &$successMessage)
 {
     if (!isUserConnected()) {
         $loginErrorMessage = LOGIN_ERROR_NO_USER_CONNECTED;
         return null;
     }
     
-    if (! isset($_POST["register"])) {
+    if (! isset($_POST["update"])) {
         return null;
     } 
     
@@ -64,7 +66,7 @@ function generateAccountPage(&$loginErrorMessage)
 
     if ($_FILES["picture"]["error"] == UPLOAD_ERR_OK && is_uploaded_file($_FILES["picture"]["tmp_name"])) {
         $picture = file_get_contents($_FILES["picture"]["tmp_name"]);
-    } 
+    }
     
     $newCustomer = new Customer();
 
@@ -83,9 +85,16 @@ function generateAccountPage(&$loginErrorMessage)
     $errorMessageTable["username"] = $newCustomer->setUsername($username)
         ? $newCustomer->setUsername($username)      : "";
     
-    //checking if username is a duplicate ;)
+    
+    
+    //checking if username is a duplicate)
     if ($newCustomer->isUsernameDuplicate()) {
-        $errorMessageTable["username"] = "This username is already registered";
+        #This time it's ok to be a duplicate only if it's the customer's previous username
+        $currenCustomer = new Customer();
+        $currenCustomer->load($_SESSION["connectedUser"]);
+        if($currenCustomer->getUsername() != $username){
+            $errorMessageTable["username"] = "Username already registered";
+        }
     }
     
     $errorMessageTable["user_password"] = $newCustomer->setUser_password($user_password)
@@ -99,9 +108,10 @@ function generateAccountPage(&$loginErrorMessage)
     
     $hashedPassword = password_hash($user_password, PASSWORD_DEFAULT);
     $newCustomer->setUser_password($hashedPassword);
-    $newCustomer->save();
-    $successMessage = "Registration completed successfully!";
-    $_POST = [];
+    $newCustomer->setId($_SESSION["connectedUser"]); 
+    
+    $newCustomer->update();
+    $successMessage = "Update completed successfully!";
 }
 
 function checkForErrorsInArray($errorMessageTable) {

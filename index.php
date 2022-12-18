@@ -24,7 +24,7 @@ const INIT = 'php/business/init.php';
 require_once INIT;
 require_once FILE_UI_INDEX;
 
-$pageTitle = "Home Page";
+$pageTitle = "Home";
 
 #Contains references to product images
 $productImages = array( 
