@@ -50,7 +50,7 @@ function generateRegisterField($fieldName, $label, $placeholder, $errorMessageTa
                accept="<?php echo $accept?>"
                value="<?php 
                             if(isset($_POST["update"])){
-                                if(isset($_POST[$fieldName]) && $_POST[$fieldName] != "password"){
+                                if(isset($_POST[$fieldName]) && $fieldName != "user_password"){
                                     echo $_POST[$fieldName];
                                 }
                                 $formImage = base64_encode($currentCustomer->getPicture());
