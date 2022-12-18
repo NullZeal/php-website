@@ -100,16 +100,16 @@ function generateRedStar() {
 
 function generateLoginForm($loginErrorMessage, $registerUrl) {
     ?>
-        <div>
+        <div id="loginContainer">
             <form id="loginForm" method="post">
-                <label for="username">Username: </label>
+                <span class="formLoginSpan"><?php
+                echo $loginErrorMessage; ?> <a href="<?php
+                echo FILE_PAGE_REGISTER ?>">Register</a></span>
+                <label for="username">- Username: </label>
                 <input id="username" type="text" name="username" placeholder="Username">
                 <label for="password">Password: </label>
                 <input id="password" type="password" name="password" placeholder="Password">
                 <button id="loginButton" type="submit" name="login">Login</button>
-                <span class="formLoginSpan"><?php
-                echo $loginErrorMessage; ?> - <a href="<?php
-                echo FILE_PAGE_REGISTER ?>">Register</a></span>
                 <br>
             </form>
         </div>
@@ -118,17 +118,17 @@ function generateLoginForm($loginErrorMessage, $registerUrl) {
 
 function generateLogoutForm($firstname, $lastname, $picture) {
     ?>
-    <div>
-        <form id="logoutForm" method="post">
-            <img 
-                class="profilePicture" 
-                id="customerImage" 
-                src="data:image;base64,<?php echo base64_encode($picture) ?>">
-            <h4 class="welcome">Welcome <?php echo $firstname . " " . $lastname . "!" ?> </h4>
-            <label for="customerImage"></label>
-            <button id="btnLogout" type="submit" name="logout">Logout</button>
-        </form>
-    </div>
+        <div id="logoutContainer">
+            <form id="logoutForm" method="post">
+                <img 
+                    class="profilePicture" 
+                    id="customerImage" 
+                    src="data:image;base64,<?php echo base64_encode($picture) ?>">
+                <h4 class="welcome">Welcome <?php echo $firstname . " " . $lastname . "!" ?> </h4>
+                <label for="customerImage"></label>
+                <button id="btnLogout" type="submit" name="logout">Logout</button>
+            </form>
+        </div>
     <?php
 }
 

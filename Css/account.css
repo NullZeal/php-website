@@ -10,13 +10,9 @@
 #Julien Pontbriand (2135020)    Oct. 30, 2022    Final indentation touch up
 
 */ 
-
-html body {
-    font-size: 1.2rem;
-}
  
 body {
-    background-color: rgba(133,86,176, 0.2);
+    background-color: rgba(230,86,176, 0.2);
 }
 
 #registerForm {
@@ -27,14 +23,14 @@ body {
     border-radius: 10px;
 }
 
-label {
+#registerForm label {
     display:inline-block;
     margin: 20px 0 0 50px;
     vertical-align: top;
-    font-size:1.5rem;
+    font-size:1rem;
 }
 
-input, textarea{
+#registerForm input, textarea{
     margin-top:20px;
 }
 

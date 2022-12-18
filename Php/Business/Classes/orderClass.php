@@ -3,8 +3,14 @@
 #Revision History
 #
 #DEVELOPER                      DATE             COMMENTS
-#Julien Pontbriand (2135020)    Nov. 29, 2022     File creation.
-#
+#Julien Pontbriand (2135020)    Dec. 5, 2022     File creation.
+#Julien Pontbriand (2135020)    Dec. 7, 2022     Copied most content from the customer class
+#Julien Pontbriand (2135020)    Dec. 8, 2022     Modified the code to make it unique to an order
+#Julien Pontbriand (2135020)    Dec. 9, 2022     Added features to support the subtotal, tax amount and total fields
+#                                                Now gets the validations file functions
+#Julien Pontbriand (2135020)    Dec. 12, 2022     Now get connection from a parent class, Class name change
+#Julien Pontbriand (2135020)    Dec. 13, 2022     Added a delete function
+#Julien Pontbriand (2135020)    Dec. 18, 2022     Style refactoring
 #-------------------------------------------------------------------
 
 require_once FILE_CLASSES_DATABASE_CONNECTED_OBJECT;

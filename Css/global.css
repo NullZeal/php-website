@@ -64,12 +64,13 @@
 }
 
 footer {
-    position:relative;
+    position:fixed;
     bottom: 0;
+    right: 0;
     margin-top: 150px;
     padding: 15px;
     text-align: right;
-    font-size: 2rem;
+    font-size: 1rem;
 }
 
 body {
@@ -83,9 +84,39 @@ body {
     color:red;
 }
 
-#loginForm {
-    margin-left: calc(45% - 300px);
+#loginContainer {
+    width:100%;
+    height: 5vh;
+    positon:relative;
+    margin-bottom: 5vh;
     margin-top:4vh;
+}
+
+#logoutContainer {
+    width:100%;
+    height: 5vh;
+    positon:relative;
+    margin-bottom: 5vh;
+    margin-top:4vh;
+}
+
+#loginForm {
+    position:absolute;
+    right:0;
+    margin-right: 2vw;
+    height:5vh;
+}
+
+#logoutForm {
+    position:absolute;
+    right:0;
+    margin-right: 2vw;
+}
+
+.profilePicture{
+    width: 100px;
+    height:100px;
+    border-radius: 30px;
 }
 
 #loginButton {
@@ -96,23 +127,9 @@ body {
     border-radius: 10px;
 }
 
-.profilePicture{
-    width: 100px;
-    height:100px;
-    margin-left: calc(70% - 100px);
-    
-    display:inline-block;
-}
-
-#logoutForm {
-    padding-top: 3vh;
-    paddding-bottomL: 3vh;
-    background-color: rgba(14,14,14,0.5);
-}
-
 .welcome {
     display:inline-block;
-    color: white;
+    color: black;
     font-size: 2rem;
 }
 
@@ -130,5 +147,6 @@ body {
 
 #pageLoginErrorMessage {
     margin-top: 5vh;
-    margin-left: calc(50% - 100px);
+    margin-left: calc(50% - 175px);
+    font-weight: bold;
 }

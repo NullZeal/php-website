@@ -1,3 +1,14 @@
+//-------------------------------------------------------------------
+//Revision History
+//
+//DEVELOPER                      DATE             COMMENTS
+//Julien Pontbriand (2135020)    Dec. 12, 2022     File creation. Added the searchOrders function
+//Julien Pontbriand (2135020)    Dec. 13, 2022     Added the deleteOrder function
+//Julien Pontbriand (2135020)    Dec. 17, 2022     Style refactoring
+//Julien Pontbriand (2135020)    Dec. 18, 2022     Style refactoring
+//-------------------------------------------------------------------
+
+
 function searchOrders() {
     var searchedDateTime = document.getElementById("dateTime").value;
     var xmlhttp = new XMLHttpRequest();

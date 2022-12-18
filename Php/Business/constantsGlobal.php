@@ -11,7 +11,7 @@ const DEBUGGING = false;
 #################################
 
 const LOGIN_ERROR_NO_USER_CONNECTED = "Please login before accessing this page";
-const LOGIN_ERROR_INVALID_PASSWORD = "Invalid credentials";
+const LOGIN_ERROR_INVALID_PASSWORD = "Invalid credentials - ";
 
 #################################
 #           URI              

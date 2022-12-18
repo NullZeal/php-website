@@ -4,7 +4,15 @@
 #
 #DEVELOPER                      DATE             COMMENTS
 #Julien Pontbriand (2135020)    Nov. 29, 2022     File creation.
-#
+#Julien Pontbriand (2135020)    Dec. 6, 2022     Added a load function
+#                                                Added date fields getters and setters
+#                                                Added a setId func to the constructor
+#Julien Pontbriand (2135020)    Dec. 8, 2022     Added a save function     
+#Julien Pontbriand (2135020)    Dec. 9, 2022     Now extends the database connected object to get a connection       
+#Julien Pontbriand (2135020)    Dec. 12, 2022     Fixed a major typo
+#                                                 Added features to support the id field for the customer
+#Julien Pontbriand (2135020)    Dec. 18, 2022     Code refactoring to make it more aesthetically pleasing
+#                                                 Added an Update function                             
 #-------------------------------------------------------------------
 
 require_once FILE_CLASSES_DATABASE_CONNECTED_OBJECT;
@@ -327,6 +335,7 @@ class Customer extends DatabaseConnectedObject {
         $rows->execute();
     }
     
+    #validates if the username and password match a user in the db
     function validateCredentials() {
         $SQLquery = Database2135020_Procedures_Customers::SELECT_ONE_FROM_USERNAME . "(:username)";
         $rows = $this->getConnection()->prepare($SQLquery);

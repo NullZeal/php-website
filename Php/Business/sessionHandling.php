@@ -58,7 +58,7 @@ function generateLoginLogout() {
             $newCustomer->getLastname(),
             $newCustomer->getPicture());
     } 
-    //On failed validation, we reload the login with an error message
+    //On failed validation, reload the login with an error message
     else {
         generateLoginForm(LOGIN_ERROR_INVALID_PASSWORD, FILE_PAGE_REGISTER);
     }

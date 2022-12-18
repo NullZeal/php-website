@@ -3,8 +3,9 @@
 #Revision History
 #
 #DEVELOPER                      DATE             COMMENTS
-#Julien Pontbriand (2135020)    Nov. 29, 2022     File creation.
-#
+#Julien Pontbriand (2135020)    Dec. 5, 2022     File creation.
+#Julien Pontbriand (2135020)    Dec. 12, 2022     Added content to the class
+#Julien Pontbriand (2135020)    Dec. 18, 2022     Style refactoring
 #-------------------------------------------------------------------
 require_once FILE_CLASSES_ORDERS;
 require_once FILE_CLASSES_COLLECTION;

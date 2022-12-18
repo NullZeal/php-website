@@ -9,7 +9,7 @@ function generateBuyingPage(&$errorMessageArray)
         $errorMessageArray["loginErrorMessage"] = "";
     }
     ?>  
-        <div class="formSection"><?php generateLogo() ?>
+        <div class="formSection">
             <span id="required">* = required</span>
             <form action="buying.php" method="POST" id="buyingForm">
                 <label for="products"><?php generateRedStar(); ?>Product:</label>

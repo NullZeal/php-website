@@ -20,9 +20,12 @@ function generateIndexPage($productsArray) {
                  title="Encryption">
             </iframe> 
         <?php generateImageSection($productsArray); ?></div>
-        <a id="downloadButtonContainer" href="Txt/cheat-sheet.html" download="CheatSheet.html">
-            <button id="btnDownload">Download the CheatSheet!</button>
-        </a>
+        <div id="downloadButtonContainer">
+            <a href="Txt/cheat-sheet.html" download="CheatSheet.html">
+                <button id="btnDownload">Download the CheatSheet!</button>
+            </a>
+        </div>
+        
     <?php
 }
 

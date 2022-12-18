@@ -1,4 +1,12 @@
 <?php
+#-------------------------------------------------------------------
+#Revision History
+#
+#DEVELOPER                      DATE             COMMENTS
+#Julien Pontbriand (2135020)    Dec. 8, 2022     Page creation
+#Julien Pontbriand (2135020)    Dec. 12, 2022     Added a constructor for the parent to get the connection from
+#Julien Pontbriand (2135020)    Dec. 17, 2022     Code refactoring                                    
+#-------------------------------------------------------------------
 
 ########################################################################
 # PAGE-CONFIGURATION
@@ -45,6 +53,7 @@ generatePageBottom();
 
 function generateAccountPage(&$loginErrorMessage, &$errorMessageTable, &$successMessage)
 {
+    
     if (!isUserConnected()) {
         $loginErrorMessage = LOGIN_ERROR_NO_USER_CONNECTED;
         return null;
@@ -84,8 +93,6 @@ function generateAccountPage(&$loginErrorMessage, &$errorMessageTable, &$success
         ? $newCustomer->setPostalcode($postalcode)  : "";
     $errorMessageTable["username"] = $newCustomer->setUsername($username)
         ? $newCustomer->setUsername($username)      : "";
-    
-    
     
     //checking if username is a duplicate)
     if ($newCustomer->isUsernameDuplicate()) {

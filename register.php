@@ -1,4 +1,27 @@
 <?php
+#-------------------------------------------------------------------
+#Revision History
+#
+#DEVELOPER                      DATE             COMMENTS
+#Julien Pontbriand (2135020)    Dec. 1, 2022     File creation
+#Julien Pontbriand (2135020)    Dec. 3, 2022     Added page logic and UI generation
+#Julien Pontbriand (2135020)    Dec. 4, 2022     Completed the register.
+#                                                Entries are now validated
+#                                                Now checks for username duplicates
+#                                                Pictures can now be loaded successfully
+#                                                
+#Julien Pontbriand (2135020)    Dec. 5, 2022     Global functions are now loaded from the INIT file
+#Julien Pontbriand (2135020)    Dec. 6, 2022     Merged initialization functions
+#                                                Some minor refactoring
+#                                                
+#Julien Pontbriand (2135020)    Dec. 7, 2022     Merged pagetop and pagebottom functions
+#Julien Pontbriand (2135020)    Dec. 8, 2022     Split the function to generate the register form
+#                                                Code refactoring
+#                                                
+#Julien Pontbriand (2135020)    Dec. 12, 2022     Moved the UI part of the page to another file
+##Julien Pontbriand (2135020)    Dec. 18, 2022     Code refactoring                                               
+#-------------------------------------------------------------------
+
 
 ########################################################################
 # PAGE-CONFIGURATION
@@ -12,6 +35,8 @@ require_once FILE_CLASSES_CUSTOMER;
 
 $pageTitle = "Register";
 $successMessage = "";
+
+#Contains errors for all fields of the register form
 $errorMessageTable = array(
     "firstname"     => "",
     "lastname"      => "",
@@ -43,11 +68,11 @@ generatePageBottom();
 ########################################################################
 
 function attemptToRegisterCustomer(&$errorMessageTable, &$successMessage) {
-    
+    #Checks if there has been an attempt to register. If Not, exits
     if (! isset($_POST["register"])) {
         return null;
     }
-    
+    #Fetch all customer inputs
     $firstname = htmlspecialchars($_POST["firstname"]);
     $lastname = htmlspecialchars($_POST["lastname"]);
     $address = htmlspecialchars($_POST["address"]);
@@ -57,13 +82,16 @@ function attemptToRegisterCustomer(&$errorMessageTable, &$successMessage) {
     $username = htmlspecialchars($_POST["username"]);
     $user_password = htmlspecialchars($_POST["user_password"]);
     $picture = "";
-
+    
+    #Attempt to fetch the picture input
     if ($_FILES["picture"]["error"] == UPLOAD_ERR_OK && is_uploaded_file($_FILES["picture"]["tmp_name"])) {
         $picture = file_get_contents($_FILES["picture"]["tmp_name"]);
     } 
     
     $newCustomer = new Customer();
 
+    #Fill the error message table with possible errors
+    #Also attempts to load the newCustomer object with customer inputs
     $errorMessageTable["firstname"] = $newCustomer->setFirstname($firstname) 
         ? $newCustomer->setFirstname($firstname)    : "";
     $errorMessageTable["lastname"] = $newCustomer->setLastname($lastname)
@@ -89,18 +117,21 @@ function attemptToRegisterCustomer(&$errorMessageTable, &$successMessage) {
     $errorMessageTable["picture"] = $newCustomer->setPicture($picture)
         ? $newCustomer->setPicture($picture)                : "";
     
+    #Check for errors
     if (checkForErrorsInArray($errorMessageTable)) {
         return null;
     }
     
     $hashedPassword = password_hash($user_password, PASSWORD_DEFAULT);
     $newCustomer->setUser_password($hashedPassword);
+    #Insert a new user
     $newCustomer->save();
     $successMessage = "Registration completed successfully!";
     $_POST = [];
 }
 
 function checkForErrorsInArray($errorMessageTable) {
+    #Checks for errors in the error table
     foreach ($errorMessageTable as $value) {
         if (!empty($value)) {
             return true;

@@ -46,7 +46,8 @@ function manageError($errorNumber, $errorString, $errorFile, $errorLineNumber) {
 }
 
 function manageException($errorObject) {
-    if (DEBUGGING) { #detailled ERROR
+    if (DEBUGGING) { 
+        #detailled ERROR
         echo "An exception has occured on the line "
         . $errorObject->getLine()
         . " of the file "
@@ -58,7 +59,8 @@ function manageException($errorObject) {
         . ")"
         . " at time "
         . date("Y/m/d/ h:i:sa");
-    } else { #generic ERROR
+    } else {
+        #generic ERROR
         echo "An exception has occured! The exception has been reported and the IT team will look into it shortly. Thank you for your patience! :)";
     }
     $orderArray = Array(
@@ -69,6 +71,7 @@ function manageException($errorObject) {
         $errorObject->getLine(),
     );
     $orderArrayJson = json_encode($orderArray);
+    #Put content of error in a file
     file_put_contents(FILE_TXT_ERRORS_EXCEPTIONS_LOG, $orderArrayJson . PHP_EOL, FILE_APPEND);
     die();
 }
