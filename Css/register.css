@@ -11,15 +11,15 @@
 
 */ 
 
-html body{
+html body {
     font-size: 1.2rem;
 }
  
-body{
+body {
     background-color: rgba(133,86,176, 0.2);
 }
 
-#registerForm{
+#registerForm {
     margin-top:5vh;
     margin-left:20vw;
     margin-right:20vw;
@@ -27,18 +27,18 @@ body{
     border-radius: 10px;
 }
 
-label{
+label {
     display:inline-block;
     margin: 20px 0 0 50px;
     vertical-align: top;
     font-size:1.5rem;
 }
 
-input, textarea{
+input, textarea {
     margin-top:20px;
 }
 
-#submitButton{
+#submitButton {
     margin-left: calc(50vw - 150px - 20vw);
     margin-top:20px;
     height: 150px;
@@ -49,7 +49,7 @@ input, textarea{
     color: rgba(222,222,222,0.9);
 }
 
-#successMessage{
+#successMessage {
     text-align: center;
     margin-left: 10vw;
     margin-right: 10vw;
@@ -57,11 +57,11 @@ input, textarea{
     color: rgba(133,86,176, 1);
 }
 
-.red{
+.red {
     color:red;
 }
 
-#required{
+#required {
     display:block;
     color:red;
     margin-left:20vw;

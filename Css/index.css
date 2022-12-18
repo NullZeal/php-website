@@ -10,40 +10,40 @@
 #Julien Pontbriand (2135020)    Oct. 30, 2022    Final indentation, minor comment adjustment
 */
 
-body{
+body {
     background-color: rgba(122,122,122,0.2);
 }
 
-h1, h2, p{
+h1, h2, p {
     text-align: center;
     margin-top: 10px;
 }
 
-h1{
+h1 {
     font-size: 5rem;
 }
 
-h2{
+h2 {
     font-size: 2rem;
 }
 
-p{
+p {
     font-size: 1rem;
     max-width: 800px;
     margin-left: 30vw;
     margin-right:30vw;
 }
 
-.companyDescription{
+.companyDescription {
     margin-top: 5vh;
 }
 
-body{
+body {
     width:100vw;
     height:100vh;
 }
 
-.products{
+.products {
     width: 300px;
     height:300px;
     margin: 20px;
@@ -58,7 +58,7 @@ body{
     border-color: black;
 }
 
-.superProduct{
+.superProduct {
     width: 600px;
     height:600px;
     margin: 20px;
@@ -72,12 +72,12 @@ body{
     display:inline-block;
 }
 
-.title{
+.title {
     margin-top:100px;
     font-size: 2rem;
 }
 
-#btnDownload{
+#btnDownload {
     width: 30vw;
     position: absolute;
     margin-left: calc(50% - 15vw);
@@ -88,7 +88,7 @@ body{
     border-radius: 10px;
 }
 
-#videoEncryption{
+#videoEncryption {
     width : 532px;
     height: 300px;
     margin-left:calc(50% - 266px);

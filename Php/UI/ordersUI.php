@@ -1,7 +1,6 @@
 <?php
 
-function generateSearchForm()
-{
+function generateSearchForm() {
     ?>
         <div id="timePicker">
             <label for="datetime">Display orders equal to or newer than selected time:</label>
@@ -11,8 +10,7 @@ function generateSearchForm()
     <?php
 }
 
-function generateOrdersPage($ordersArray) 
-{
+function generateOrdersPage($ordersArray) {
     ?>
         <div class="ordersTable">
             <table>
@@ -34,15 +32,13 @@ function generateOrdersPage($ordersArray)
     <?php
 }
         
-function generateOrderRows($ordersArray)
-{
+function generateOrderRows($ordersArray) {
     foreach ($ordersArray as $orderRowId => $orderRowArray){
         generateOrderRow($orderRowId, $orderRowArray);
     }
 }
 
-function generateOrderRow($orderRowId, $orderRowArray) 
-{
+function generateOrderRow($orderRowId, $orderRowArray) {
     #This function generates the table rows (tr)
     ?>
         <tr>
@@ -61,7 +57,7 @@ function generateOrderRow($orderRowId, $orderRowArray)
     <?php
 }
 
-function generateOrderTableContainer(){
+function generateOrderTableContainer() {
     ?>
         <div id="ordersTable">
     <?php

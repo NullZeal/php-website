@@ -17,19 +17,27 @@
 #Julien Pontbriand (2135020)    Nov. 29, 2022    Added the forcehttps function.
 #-------------------------------------------------------------------
 
+########################################################################
+# PAGE-CONFIGURATION 
+########################################################################
+
 const INIT = 'php/business/init.php';
+
 require_once INIT;
 require_once FILE_UI_ORDERS;
 require_once FILE_CLASSES_ORDER;
 require_once FILE_CLASSES_ORDERS;
 
-executePageInitializationFunctions();
+$pageTitle = "Orders Page";
+$loginErrorMessage = "";
 
+executePageInitializationFunctions();
 checkForDeleteOrderRequest() ? fullfillOrderDeletionRequest() : null;
 checkForSearchRequest() ? drawOrdersTableInTableContainer() : null;
 
-$pageTitle = "Orders Page";
-$loginErrorMessage = "";
+########################################################################
+# PAGE-GENERATION
+########################################################################
 
 generatePageTop($pageTitle, FILE_CSS_ORDERS, true);
 generateLoginLogout();
@@ -43,28 +51,23 @@ generatePageBottom();
 # PAGE-SPECIFIC FUNCTIONS BELOW
 ########################################################################
 
-function generateOrdersPageLogic(&$loginErrorMessage)
-{
-    if (!isUserConnected()) 
-    {
+function generateOrdersPageLogic(&$loginErrorMessage) {
+    if (!isUserConnected()) {
         $loginErrorMessage = LOGIN_ERROR_NO_USER_CONNECTED;
         return null;
     }
     generateSearchForm();
 }
 
-function checkForDeleteOrderRequest()
-{
+function checkForDeleteOrderRequest() {
     return isset($_POST["orderToDelete"]);
 }
 
-function checkForSearchRequest()
-{
+function checkForSearchRequest() {
     return isset($_POST["searchedDate"]);
 }
 
-function fullfillOrderDeletionRequest()
-{
+function fullfillOrderDeletionRequest() {
     $orderToDelete = new Order();
     $orderToDelete->setId($_POST["orderToDelete"]);
     $orderToDelete->delete();
@@ -72,9 +75,8 @@ function fullfillOrderDeletionRequest()
     die;
 }
 
-function drawOrdersTableInTableContainer()
-{
-    $ordersObject = new Orders($_SESSION["connectedUser"], isset($_POST["searchedDate"]) 
+function drawOrdersTableInTableContainer() {
+    $ordersObject = new Orders($_SESSION["connectedUser"], isset($_POST["searchedDate"])
         ? $_POST["searchedDate"] : "");
     generateOrdersPage($ordersObject->items);
     die;

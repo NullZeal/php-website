@@ -10,18 +10,15 @@
 require_once CONSTANTS_GLOBAL;
 require_once FILE_BUSINESS_CONNECTION;
 
-class DatabaseConnectedObject
-{
+class DatabaseConnectedObject {
     private $connection = "";
     
-    public function __construct()
-    {
+    public function __construct() {
         global $currentDatabaseConnection;
         $this->connection = $currentDatabaseConnection;
     }
     
-    function getConnection()
-    {
+    function getConnection() {
         return $this->connection;
     }
     

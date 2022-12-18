@@ -81,8 +81,7 @@ const FILE_CSS_ACCOUNT = FOLDER_CSS . 'account.css';
 #TXT
 const FILE_TXT_ORDERS = FOLDER_TXT . "orders.txt";
 const FILE_TXT_CHEATSHEET = FOLDER_TXT . "cheatsheet.txt";
-const FILE_TXT_ERRORS_BUYINGPAGE_WRONGINPUT_LOG = FOLDER_TXT 
-    . "buyingpage_wronginput_log.txt";
+const FILE_TXT_ERRORS_BUYINGPAGE_WRONGINPUT_LOG = FOLDER_TXT . "buyingpage_wronginput_log.txt";
 const FILE_TXT_ERRORS_ERRORS_LOG = FOLDER_TXT_ERRORS . "error_logs.txt";
 const FILE_TXT_ERRORS_EXCEPTIONS_LOG = FOLDER_TXT_ERRORS . "exceptions_logs.txt";
 
@@ -98,8 +97,7 @@ const FILE_MEDIA_IMAGE_DISK = FOLDER_MEDIA . FOLDER_IMAGE . "disk.jpg";
 #           PROCEDURES
 #################################
 
-abstract class Database2135020_Procedures_Customers
-{
+abstract class Database2135020_Procedures_Customers {
     public const GET_USERNAME_PASSWORD = 'CALL procedure_customers_get_username_and_password';
     public const DELETE_ONE = 'CALL procedure_customers_delete_one';
     public const INSERT_ONE = 'CALL procedure_customers_insert_one';
@@ -109,8 +107,7 @@ abstract class Database2135020_Procedures_Customers
     public const UPDATE_ONE = 'CALL procedure_customers_update_one';
 }
 
-abstract class Database2135020_Procedures_Products
-{
+abstract class Database2135020_Procedures_Products {
     public const DELETE_ONE = 'CALL procedure_products_delete_one';
     public const INSERT_ONE = 'CALL procedure_products_insert_one';
     public const SELECT_ALL = 'CALL procedure_products_select_all';
@@ -118,8 +115,7 @@ abstract class Database2135020_Procedures_Products
     public const UPDATE_ONE = 'CALL procedure_products_update_one';
 }
 
-abstract class Database2135020_Procedures_Orders
-{
+abstract class Database2135020_Procedures_Orders {
     public const DELETE_ONE = 'CALL procedure_orders_delete_one';
     public const INSERT_ONE = 'CALL procedure_orders_insert_one';
     public const SELECT_ALL = 'CALL procedure_orders_select_all';

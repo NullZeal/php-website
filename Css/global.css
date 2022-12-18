@@ -14,15 +14,15 @@
 #Julien Pontbriand (2135020)    Nov. 29, 2022    Removed text decorations from the nav menu
 */
  
-*{
+* {
     font-family:monospace, arial, verdana;
 }
 
-#bodyPrint{
+#bodyPrint {
     background-color: white;
 }
 
-#logo, #logoPrint{
+#logo, #logoPrint {
     
     width: 100px;
     height:100px;
@@ -34,12 +34,12 @@
     margin-left: calc(50% - 50px);
 }
 
-#logoPrint{
+#logoPrint {
     opacity: 0.3;
     
 }
 
-.navigation{
+.navigation {
     right:0;
     top:0;
     height: 8vh;
@@ -49,10 +49,9 @@
     display: flex;
     background-color: rgba(166,166,166,1);
     border-bottom: 5px solid;
-    
 }
 
-.navigation a{
+.navigation a {
     height:4vh;
     text-align: center;
     display:inline-flex;
@@ -64,7 +63,7 @@
     text-decoration: none;
 }
 
-footer{
+footer {
     position:relative;
     bottom: 0;
     margin-top: 150px;
@@ -73,23 +72,23 @@ footer{
     font-size: 2rem;
 }
 
-body{
+body {
     width:100vw;
     height:100vh;
     padding:0;
     margin:0;
 }
 
-.red{
+.red {
     color:red;
 }
 
-#loginForm{
+#loginForm {
     margin-left: calc(45% - 300px);
     margin-top:4vh;
 }
 
-#loginButton{
+#loginButton {
     width: 10vw;
     font-weight: bolder;
     font-size:1.5rem;
@@ -105,32 +104,31 @@ body{
     display:inline-block;
 }
 
-#logoutForm{
+#logoutForm {
     padding-top: 3vh;
     paddding-bottomL: 3vh;
     background-color: rgba(14,14,14,0.5);
 }
 
-.welcome{
+.welcome {
     display:inline-block;
     color: white;
     font-size: 2rem;
 }
 
-#btnLogout{
+#btnLogout {
     display:inline-block;
     position:relative;
     top:0;
     width:6vw;
     height:6vh;
-    
 }
 
-.formLoginSpan a{
+.formLoginSpan a {
     text-decoration:none
 }
 
-#pageLoginErrorMessage{
+#pageLoginErrorMessage {
     margin-top: 5vh;
     margin-left: calc(50% - 100px);
 }

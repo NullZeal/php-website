@@ -18,21 +18,24 @@
 # PAGE-CONFIGURATION
 ########################################################################
 
+#Contains a reference to a file that all pages require
 const INIT = 'php/business/init.php';
 
 require_once INIT;
 require_once FILE_UI_INDEX;
 
 $pageTitle = "Home Page";
-$productsArray = array(
-FILE_MEDIA_IMAGE_ADBLOCK,
-FILE_MEDIA_IMAGE_DISK,
-FILE_MEDIA_IMAGE_ENCRYPTION,
-FILE_MEDIA_IMAGE_PROTOCOL,
-FILE_MEDIA_IMAGE_SERVER,
+
+#Contains references to product images
+$productImages = array( 
+    FILE_MEDIA_IMAGE_ADBLOCK,
+    FILE_MEDIA_IMAGE_DISK,
+    FILE_MEDIA_IMAGE_ENCRYPTION,
+    FILE_MEDIA_IMAGE_PROTOCOL,
+    FILE_MEDIA_IMAGE_SERVER,
 );
 
-#See function details for more info
+#Initializes functions that must be ran before generation of HTML content
 executePageInitializationFunctions();
 
 ########################################################################
@@ -41,5 +44,5 @@ executePageInitializationFunctions();
 
 generatePageTop($pageTitle, FILE_CSS_INDEX, false);
 generateLoginLogout();
-generateIndexPage($productsArray);
+generateIndexPage($productImages);
 generatePageBottom();

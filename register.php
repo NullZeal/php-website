@@ -1,32 +1,32 @@
 <?php
-#For bigger images : please set the [mysqld] max_allowed_packet setting to a higher limit in /etc/my.cnf
-#https://stackoverflow.com/questions/7942154/mysql-error-2006-mysql-server-has-gone-away#9479681
+
+########################################################################
+# PAGE-CONFIGURATION
+########################################################################
 
 const INIT = 'php/business/init.php';
-require_once INIT;
 
+require_once INIT;
 require_once FILE_UI_REGISTER;
 require_once FILE_CLASSES_CUSTOMER;
 
-#See function details for more info
-executePageInitializationFunctions();
-
-//Creating a title variable for this page
 $pageTitle = "Register";
-
+$successMessage = "";
 $errorMessageTable = array(
-    "firstname" => "",
-    "lastname" => "",
-    "address" => "",
-    "city" => "",
-    "province" => "",
-    "postalcode" => "",
-    "username" => "",
+    "firstname"     => "",
+    "lastname"      => "",
+    "address"       => "",
+    "city"          => "",
+    "province"      => "",
+    "postalcode"    => "",
+    "username"      => "",
     "user_password" => "",
-    "picture" => "",
+    "picture"       => "",
+    #For bigger images : please set the [mysqld] max_allowed_packet setting to a higher limit in /etc/my.cnf
+    #https://stackoverflow.com/questions/7942154/mysql-error-2006-mysql-server-has-gone-away#9479681
 );
 
-$successMessage = "";
+executePageInitializationFunctions();
 
 ########################################################################
 # PAGE-GENERATION
@@ -39,16 +39,15 @@ generateRegisterForm($errorMessageTable, isset($successMessage) ? $successMessag
 generatePageBottom();
 
 ########################################################################
-# PAGE-SPECIFIC FUNCTIONS BELOW
+# PAGE-SPECIFIC FUNCTIONS
 ########################################################################
 
-function attemptToRegisterCustomer(&$errorMessageTable, &$successMessage){
+function attemptToRegisterCustomer(&$errorMessageTable, &$successMessage) {
     
-    if (! isset($_POST["register"]))
-    {
+    if (! isset($_POST["register"])) {
         return null;
-    } 
-        
+    }
+    
     $firstname = htmlspecialchars($_POST["firstname"]);
     $lastname = htmlspecialchars($_POST["lastname"]);
     $address = htmlspecialchars($_POST["address"]);
@@ -59,38 +58,36 @@ function attemptToRegisterCustomer(&$errorMessageTable, &$successMessage){
     $user_password = htmlspecialchars($_POST["user_password"]);
     $picture = "";
 
-    if ($_FILES["picture"]["error"] == UPLOAD_ERR_OK && is_uploaded_file($_FILES["picture"]["tmp_name"])) 
-    {
+    if ($_FILES["picture"]["error"] == UPLOAD_ERR_OK && is_uploaded_file($_FILES["picture"]["tmp_name"])) {
         $picture = file_get_contents($_FILES["picture"]["tmp_name"]);
     } 
     
     $newCustomer = new Customer();
 
     $errorMessageTable["firstname"] = $newCustomer->setFirstname($firstname) 
-        ? $newCustomer->setFirstname($firstname) : "";
+        ? $newCustomer->setFirstname($firstname)    : "";
     $errorMessageTable["lastname"] = $newCustomer->setLastname($lastname)
-        ? $newCustomer->setLastname($lastname) : "";
+        ? $newCustomer->setLastname($lastname)      : "";
     $errorMessageTable["address"] = $newCustomer->setAddress($address) 
-        ? $newCustomer->setAddress($address) : "";
+        ? $newCustomer->setAddress($address)        : "";
     $errorMessageTable["city"] = $newCustomer->setCity($city)
-        ? $newCustomer->setCity($city) : "";
+        ? $newCustomer->setCity($city)              : "";
     $errorMessageTable["province"] = $newCustomer->setProvince($province)
-        ? $newCustomer->setProvince($province) : "";
+        ? $newCustomer->setProvince($province)      : "";
     $errorMessageTable["postalcode"] = $newCustomer->setPostalcode($postalcode)
-        ? $newCustomer->setPostalcode($postalcode) : "";
+        ? $newCustomer->setPostalcode($postalcode)  : "";
     $errorMessageTable["username"] = $newCustomer->setUsername($username)
-        ? $newCustomer->setUsername($username) : "";
+        ? $newCustomer->setUsername($username)      : "";
     
     //checking if username is a duplicate ;)
-    if ($newCustomer->isUsernameDuplicate())
-    {
+    if ($newCustomer->isUsernameDuplicate()) {
         $errorMessageTable["username"] = "This username is already registered";
     }
     
     $errorMessageTable["user_password"] = $newCustomer->setUser_password($user_password)
-        ? $newCustomer->setUser_password($user_password) : "";
+        ? $newCustomer->setUser_password($user_password)    : "";
     $errorMessageTable["picture"] = $newCustomer->setPicture($picture)
-        ? $newCustomer->setPicture($picture) : "";
+        ? $newCustomer->setPicture($picture)                : "";
     
     if (checkForErrorsInArray($errorMessageTable)) {
         return null;
@@ -103,8 +100,7 @@ function attemptToRegisterCustomer(&$errorMessageTable, &$successMessage){
     $_POST = [];
 }
 
-function checkForErrorsInArray($errorMessageTable)
-{
+function checkForErrorsInArray($errorMessageTable) {
     foreach ($errorMessageTable as $value) {
         if (!empty($value)) {
             return true;

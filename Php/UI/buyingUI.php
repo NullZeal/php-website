@@ -2,15 +2,13 @@
 
 function generateBuyingPage(&$errorMessageArray)
 {
-    if (!isUserConnected()) 
-    {
+    if (!isUserConnected()) {
         $errorMessageArray["loginErrorMessage"] = LOGIN_ERROR_NO_USER_CONNECTED;
         return null;
-    } 
-    else 
-    {
+    } else {
         $errorMessageArray["loginErrorMessage"] = "";
-    }?>  
+    }
+    ?>  
         <div class="formSection"><?php generateLogo() ?>
             <span id="required">* = required</span>
             <form action="buying.php" method="POST" id="buyingForm">
@@ -42,8 +40,7 @@ function generateBuyingPage(&$errorMessageArray)
                     rows="4" 
                     cols="70"
                     maxlength="200"></textarea>
-                <label for="comments"><?php 
-                    echo $errorMessageArray["comments"]; ?></label>
+                <label for="comments"><?php echo $errorMessageArray["comments"]; ?></label>
                 <br>
                 <label><?php generateRedStar(); ?>Quantity:</label>
                 <input 

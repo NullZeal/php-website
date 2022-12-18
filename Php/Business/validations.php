@@ -16,11 +16,10 @@
 #Julien Pontbriand (2135020)    Nov. 29, 2022    Added the forcehttps function. 
 #-------------------------------------------------------------------
 
-function isCurrency($number)
-{
-    // function taken from 
-    // https://stackoverflow.com/questions/4982291/how-to-check-if-an-entered-value-is-currency
-    // Here I understand that:
+function isCurrency($number) {
+    # function taken from 
+    # https://stackoverflow.com/questions/4982291/how-to-check-if-an-entered-value-is-currency
+    # Here I understand that:
     #It starts with ^
     #It accepts 0 or 1 - character with -? 
     #It then accepts 1 or more of any of the chars inside the range [0-9] with : +
@@ -33,8 +32,7 @@ function isCurrency($number)
     return preg_match("/^-?[0-9]+(?:\.[0-9]{1,2})?$/", $number);
 }
 
-function isAnInt($number)
-{
+function isAnInt($number) {
     #This function validates if the given arg is = to 1 or or more of any chars
     # in range 0-9 (int only string)
     return preg_match("/^[0-9]+$/", $number);

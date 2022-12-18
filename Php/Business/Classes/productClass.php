@@ -9,27 +9,24 @@
 
 require_once FILE_CLASSES_DATABASE_CONNECTED_OBJECT;
 
-class Product extends DatabaseConnectedObject
-{
-    private $id = "";
-    private $pcode = "";
-    private $pdescription = "";
-    private $price = "";
-    private $cost = "";
-    private $datetime_created = "";
-    private $datetime_updated = "";
+class Product extends DatabaseConnectedObject {
+    private $id                 = "";
+    private $pcode              = "";
+    private $pdescription       = "";
+    private $price              = "";
+    private $cost               = "";
+    private $datetime_created   = "";
+    private $datetime_updated   = "";
     
-    public function __construct
-    (
-        $id = "",
-        $pcode = "",
-        $pdescription = "",
-        $price = "",
-        $cost = "",
-        $datetime_created = "",
-        $datetime_updated = ""
-    )
-    {
+    public function __construct (
+        $id                 = "",
+        $pcode              = "",
+        $pdescription       = "",
+        $price              = "",
+        $cost               = "",
+        $datetime_created   = "",
+        $datetime_updated   = ""
+    ) {
         parent::__construct();
         $this->setId($id);
         $this->setPdocde($pcode);
@@ -40,81 +37,65 @@ class Product extends DatabaseConnectedObject
         $this->setDatetime_updated($datetime_updated);
     }
     
-    function getId()
-    {
+    function getId() {
         return $this->id;
     }
     
-    function setId($input)
-    {
+    function setId($input) {
         $this->id = $input;
     }
 
-    function getPcode()
-    {
+    function getPcode() {
         return $this->pcode;
     }
     
-    function setPdocde($input)
-    {
+    function setPdocde($input) {
         $this->pcode = $input;
     }
     
-    function getPdescription()
-    {
+    function getPdescription() {
         return $this->pdescription;
     }   
     
-    function setPdescription($input)
-    {
+    function setPdescription($input) {
         $this->pdescription = $input;
     }
 
-    function getPrice()
-    {
+    function getPrice() {
         return $this->price;
     }
     
-    function setPrice($input)
-    {
+    function setPrice($input) {
         $this->price = $input;
     }
     
-    function getCost()
-    {
+    function getCost() {
         return $this->cost;
     }
     
-    function setCost($input)
-    {
+    function setCost($input) {
         $this->cost = $input;
     }
     
-    function getDatetime_created()
-    {
+    function getDatetime_created() {
         return $this->datetime_created;
     } 
     
-    function setDatetime_created($input)
-    {
+    function setDatetime_created($input) {
         $this->datetime_created = $input;
     } 
     
-    function getDatetime_updated()
-    {
+    function getDatetime_updated() {
         return $this->datetime_updated;
     } 
     
-    function setDatetime_updated($input)
-    {
+    function setDatetime_updated($input) {
         $this->datetime_updated = $input;
     }
     
-    static function getProductPrice($productId)
-    {
+    static function getProductPrice($productId) {
         global $currentDatabaseConnection;
-        $SQLquery = Database2135020_Procedures_Products::SELECT_ONE
-            . "(:id)";
+        $SQLquery = Database2135020_Procedures_Products::SELECT_ONE . "(:id)";
         $rows = $currentDatabaseConnection->prepare($SQLquery);
         $rows->bindParam(":id", $productId, PDO::PARAM_STR);
 

@@ -1,18 +1,15 @@
 <?php
 
 
-function generateRegisterForm($errorMessageTable, $successMessage)
-{
+function generateRegisterForm($errorMessageTable, $successMessage) {
     ?>
         <div class="registerPage">
         <span id="required">* = required</span>
         <form id="registerForm" method="post" enctype="multipart/form-data">
             <p id="successMessage"><?php echo $successMessage ?></p>
-            <?php  
-            
+            <?php
                 $text = "text";
                 $password = "password";
-                
                 generateRegisterField("firstname", "First Name:", "My first name", $errorMessageTable, $text);
                 generateRegisterField("lastname", "Last Name:", "My last name", $errorMessageTable, $text);
                 generateRegisterField("address", "Address:", "My address", $errorMessageTable, $text);
@@ -26,19 +23,15 @@ function generateRegisterForm($errorMessageTable, $successMessage)
             <label for="picture">Picture: </label>
             <input id="picture" type="file" name="picture" placeholder="picture" accept="image/png, image/jpeg">
                 <?php echo generateRedStar() ?>
-            
             <span class="formErrorSpan"><?php echo $errorMessageTable["picture"]; ?></span>
-
             <br>
-
             <button id="submitButton" type="submit" name="register">Register</button>
-            
         </form>
     </div>
     <?php
 }
 
-function generateRegisterField($fieldName, $label, $placeholder, $errorMessageTable, $type){
+function generateRegisterField($fieldName, $label, $placeholder, $errorMessageTable, $type) {
     ?>
         <label for="<?php echo $fieldName?>"><?php echo $label?> </label>
         <input id="<?php echo $fieldName?>" 

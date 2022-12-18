@@ -32,12 +32,11 @@ require_once FILE_CLASSES_ORDER;
 
 $pageTitle = "Buying Page";
 $errMsgArray = array(
-    "comments" => "",
-    "quantity" => "",
-    "loginErrorMessage" => ""
-    );
+    "comments"          => "",
+    "quantity"          => "",
+    "loginErrorMessage" => "",
+);
 
-#See function details for more info
 executePageInitializationFunctions();
 
 ########################################################################
@@ -57,19 +56,18 @@ generatePageBottom();
 
 function insertOrderToCustomer(&$errorMessageArray)
 {
-    if (isset($_POST["purchaseSubmitted"]) && isset($_SESSION["connectedUser"]))
-    {
+    if (isset($_POST["purchaseSubmitted"]) && isset($_SESSION["connectedUser"])) {
         $comments = htmlspecialchars($_POST["comments"]);
         $quantity = htmlspecialchars($_POST["quantity"]);
         $price = Product::getProductPrice($_POST["product"]);
         $order = new Order();
         $errMsgArray["comments"] = $order->setComments($comments);
         $errMsgArray["quantity"] = $order->setQuantity($quantity);
-        if ($errMsgArray["comments"] == "" 
+        if (
+            $errMsgArray["comments"] == "" 
             && $errMsgArray["quantity"] == "" 
             && $price != -1
-        )
-        {
+        ) {
             $order->setId_customer($_SESSION["connectedUser"]);
             $order->setId_product($_POST["product"]);
             $order->setProductPrice($price);
@@ -77,7 +75,6 @@ function insertOrderToCustomer(&$errorMessageArray)
             $order->setTaxAmount();
             $order->setTotal();
             $order->save();
-            
             header("Location: " . FILE_PAGE_ORDERS);
         }
     }

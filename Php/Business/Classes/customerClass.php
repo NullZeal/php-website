@@ -9,52 +9,50 @@
 
 require_once FILE_CLASSES_DATABASE_CONNECTED_OBJECT;
 
-class Customer extends DatabaseConnectedObject
-{
-    //class constants
-    const ID_MIN_LENGTH = 36;
-    const ID_MAX_LENGTH = 36;
-    const FIRSTNAME_MAX_LENGTH = 20;
-    const LASTNAME_MAX_LENGTH = 20;
-    const ADDRESS_MAX_LENGTH = 25;
-    const CITY_MAX_LENGTH = 25;
-    const PROVINCE_MAX_LENGTH = 25;
-    const POSTALCODE_MAX_LENGTH = 7;
-    const USERNAME_MAX_LENGTH = 15;
-    const USER_PASSWORD_MAX_LENGTH = 255;
-    const PICTURE_MAX_SIZE = 20000;
+class Customer extends DatabaseConnectedObject {
+    
+//class constants
+    const ID_MIN_LENGTH             = 36;
+    const ID_MAX_LENGTH             = 36;
+    const FIRSTNAME_MAX_LENGTH      = 20;
+    const LASTNAME_MAX_LENGTH       = 20;
+    const ADDRESS_MAX_LENGTH        = 25;
+    const CITY_MAX_LENGTH           = 25;
+    const PROVINCE_MAX_LENGTH       = 25;
+    const POSTALCODE_MAX_LENGTH     = 7;
+    const USERNAME_MAX_LENGTH       = 15;
+    const USER_PASSWORD_MAX_LENGTH  = 255;
+    const PICTURE_MAX_SIZE          = 20000;
     
     //variables
-    private $id = "";
-    private $firstname = "";
-    private $lastname = "";
-    private $address = "";
-    private $city = "";
-    private $province = "";
-    private $postalcode = "";
-    private $username = "";
-    private $user_password = "";
-    private $picture = "";
+    private $id               = "";
+    private $firstname        = "";
+    private $lastname         = "";
+    private $address          = "";
+    private $city             = "";
+    private $province         = "";
+    private $postalcode       = "";
+    private $username         = "";
+    private $user_password    = "";
+    private $picture          = "";
     private $datetime_created = "";
     private $datetime_updated = "";
     
-    public function __construct
-    (
-        $id = "",
-        $connection = "",
-        $firstname = "",
-        $lastname = "",
-        $address = "",
-        $city = "",
-        $province = "",
-        $postalcode = "",
-        $username = "",
-        $user_password = "",
-        $picture = "",
+    public function __construct (
+        $id               = "",
+        $connection       = "",
+        $firstname        = "",
+        $lastname         = "",
+        $address          = "",
+        $city             = "",
+        $province         = "",
+        $postalcode       = "",
+        $username         = "",
+        $user_password    = "",
+        $picture          = "",
         $datetime_created = "",
         $datetime_updated = ""
-    )
-    {
+    ) {
         parent::__construct();
         $this->setId($id);
         $this->setFirstname($firstname);
@@ -70,223 +68,185 @@ class Customer extends DatabaseConnectedObject
         $this->setDatetime_updated($datetime_updated);
     }
     
-    function getId()
-    {
+    function getId() {
         return $this->id;
     }
     
-    function setId($input)
-    {
+    function setId($input) {
         if (empty($input)) {
-            return "The id cannot be empty";
+            return "Id cannot be empty";
         } elseif (mb_strlen($input) > $this::ID_MAX_LENGTH) {
-            return "The id cannot have over "
-                . $this::ID_MAX_LENGTH . " characters";
+            return "Id cannot have over " . $this::ID_MAX_LENGTH . " characters";
         } elseif (mb_strlen($input) < $this::ID_MAX_LENGTH) {
-            return "The id cannot have under "
-                . $this::ID_MAX_LENGTH . " characters";
+            return "Id cannot have under " . $this::ID_MAX_LENGTH . " characters";
         } else {
             $this->id = $input;
             return null;
         }
     }
 
-    function getFirstname()
-    {
+    function getFirstname() {
         return $this->firstname;
     }
     
-    function setFirstname($input)
-    {
+    function setFirstname($input) {
         if (empty($input)) {
-            return "The firstname cannot be empty";
+            return "Firstname cannot be empty";
         } elseif (mb_strlen($input) > $this::FIRSTNAME_MAX_LENGTH) {
-            return "The firstname cannot have over "
-                . $this::FIRSTNAME_MAX_LENGTH . " characters";
+            return "Firstname cannot have over " . $this::FIRSTNAME_MAX_LENGTH . " characters";
         } else {
             $this->firstname = $input;
             return null;
         }
     }
 
-    function getLastname()
-    {
+    function getLastname() {
         return $this->lastname;
     } 
 
-    function setLastname($input)
-    {
+    function setLastname($input) {
         if (empty($input)) {
-            return "The lastname cannot be empty";
+            return "Lastname cannot be empty";
         } elseif (mb_strlen($input) > $this::LASTNAME_MAX_LENGTH) {
-            return "The lastname cannot have over "
-                . $this::LASTNAME_MAX_LENGTH . " characters";
+            return ":Lastname cannot have over " . $this::LASTNAME_MAX_LENGTH . " characters";
         } else {
             $this->lastname = $input;
             return null;
         }
     }
 
-    function getAddress()
-    {
+    function getAddress() {
         return $this->address;
     }   
 
-    function setAddress($input)
-    {
+    function setAddress($input) {
         if (empty($input)) {
-            return "The address cannot be empty";
+            return "Address cannot be empty";
         } elseif (mb_strlen($input) > $this::ADDRESS_MAX_LENGTH) {
-            return "The address cannot have over "
-                . $this::ADDRESS_MAX_LENGTH . " characters";
+            return "Address cannot have over " . $this::ADDRESS_MAX_LENGTH . " characters";
         } else {
             $this->address = $input;
             return false;
         }
     }
     
-    function getCity()
-    {
+    function getCity() {
         return $this->city;
     } 
     
-    function setCity($input)
-    {
+    function setCity($input) {
         if (empty($input)) {
-            return "The city cannot be empty";
+            return "City cannot be empty";
         } elseif (mb_strlen($input) > $this::CITY_MAX_LENGTH) {
-            return "The city cannot have over "
-                . $this::CITY_MAX_LENGTH . " characters";
+            return "City cannot have over " . $this::CITY_MAX_LENGTH . " characters";
         } else {
             $this->city = $input;
             return false;
         }
     }
     
-    function getProvince()
-    {
+    function getProvince() {
         return $this->province;
     } 
     
-    function setProvince($input)
-    {
+    function setProvince($input) {
         if (empty($input)) {
-            return "The province cannot be empty";
+            return "Province cannot be empty";
         } elseif (mb_strlen($input) > $this::PROVINCE_MAX_LENGTH) {
-            return "The province cannot have over "
-                . $this::PROVINCE_MAX_LENGTH . " characters";
+            return "Province cannot have over " . $this::PROVINCE_MAX_LENGTH . " characters";
         } else {
             $this->province = $input;
             return false;
         }
     }
 
-    function getPostalcode()
-    {
+    function getPostalcode() {
         return $this->postalcode;
     }  
 
-    function setPostalcode($input)
-    {
+    function setPostalcode($input) {
         if (empty($input)) {
-            return "The postal code cannot be empty";
+            return "Postal code cannot be empty";
         } elseif (mb_strlen($input) > $this::POSTALCODE_MAX_LENGTH) {
-            return "The postal code cannot have over "
-                . $this::POSTALCODE_MAX_LENGTH. " characters";
+            return "Postal code cannot have over " . $this::POSTALCODE_MAX_LENGTH. " characters";
         } else {
             $this->postalcode = $input;
             return false;
         }
     }
     
-    function getUsername()
-    {
+    function getUsername() {
         return $this->username;
     } 
 
-    function setUsername($input)
-    {
-        if (empty($input)) 
-        {
-            return "The username code cannot be empty";
+    function setUsername($input) {
+        if (empty($input)) {
+            return "Username code cannot be empty";
         } 
-        elseif (mb_strlen($input) > $this::USERNAME_MAX_LENGTH) 
-        {
-            return "The username code cannot have over "
-                . $this::USERNAME_MAX_LENGTH. " characters";
+        elseif (mb_strlen($input) > $this::USERNAME_MAX_LENGTH) {
+            return "Username code cannot have over " . $this::USERNAME_MAX_LENGTH. " characters";
         }
-        else
-        {
+        else {
             $this->username = $input;
             return false;
         }
     }
 
-    function getUser_password()
-    {
+    function getUser_password() {
         return $this->user_password;
     } 
     
-    function setUser_password($input)
-    {
+    function setUser_password($input) {
         if (empty($input)) {
-            return "The password code cannot be empty";
+            return "Password code cannot be empty";
         } elseif (mb_strlen($input) > $this::USER_PASSWORD_MAX_LENGTH) {
-            return "The password code cannot have over "
-                . $this::USER_PASSWORD_MAX_LENGTH. " characters";
+            return "Password code cannot have over " . $this::USER_PASSWORD_MAX_LENGTH. " characters";
         } else {
             $this->user_password = $input;
             return false;
         }
     }
     
-    function getPicture()
-    {
+    function getPicture() {
         return $this->picture;
     } 
     
-    function setPicture($input)
-    {
+    function setPicture($input) {
         if (empty($input)) {
-        return "Please upload your profile picture";
+            return "Profile picture required.";
         }
-        else{
+        else {
             $this->picture = $input;
         }
     }
 
-    function getDatetime_created()
-    {
+    function getDatetime_created() {
         return $this->datetime_created;
     } 
     
-        function setDatetime_created($input)
-    {
+    function setDatetime_created($input) {
         if (empty($input)) {
-            return "The datetime cannot be empty";
+            return "Datetime cannot be empty";
         } else {
             $this->datetime_created = $input;
             return false;
         }
     }
     
-    function getDatetime_updated()
-    {
+    function getDatetime_updated() {
         return $this->datetime_updated;
     } 
     
-        function setDatetime_updated($input)
-    {
+    function setDatetime_updated($input) {
         if (empty($input)) {
-            return "The datetime cannot be empty";
+            return "Datetime cannot be empty";
         } else {
             $this->datetime_updated = $input;
             return false;
         }
     }
 
-    function load($id)
-    {
+    function load($id) {
         $SQLquery = Database2135020_Procedures_Customers::SELECT_ONE_FROM_ID . "(:id)";
         $rows = $this->getConnection()->prepare($SQLquery);
         $rows->bindParam(":id", $id, PDO::PARAM_STR);
@@ -311,8 +271,7 @@ class Customer extends DatabaseConnectedObject
         }
     }
     
-    function save()
-    {
+    function save() {
         $SQLquery = Database2135020_Procedures_Customers::INSERT_ONE
             . "(:firstname,"
             . ":lastname,"
@@ -339,17 +298,14 @@ class Customer extends DatabaseConnectedObject
         $rows->execute();
     }
     
-    function validateCredentials()
-    {
+    function validateCredentials() {
         $SQLquery = Database2135020_Procedures_Customers::SELECT_ONE_FROM_USERNAME . "(:username)";
         $rows = $this->getConnection()->prepare($SQLquery);
         $rows->bindParam(":username", $this->username, PDO::PARAM_STR);
 
         if ($rows->execute()) {
             while ($row = $rows->fetch()) {
-                if ($row["username"] == $this->username 
-                    && password_verify($this->user_password, $row["user_password"]))                
-                {
+                if ($row["username"] == $this->username && password_verify($this->user_password, $row["user_password"])) {
                     $this->setId($row["id"]);
                     return true;
                 }
@@ -358,8 +314,7 @@ class Customer extends DatabaseConnectedObject
         return false;
     }
     
-    function isUsernameDuplicate()
-    {
+    function isUsernameDuplicate() {
         $SQLquery = Database2135020_Procedures_Customers::SELECT_ONE_FROM_USERNAME . "(:username)";
         $rows = $this->getConnection()->prepare($SQLquery);
         $rows->bindParam(":username", $this->username, PDO::PARAM_STR);
