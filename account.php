@@ -40,8 +40,8 @@ executePageInitializationFunctions();
 ########################################################################
 
 generatePageTop($pageTitle, FILE_CSS_ACCOUNT, false);
-generateAccountPage($errorMessage, $errorMessageTable, $successMessage);
 generateLoginLogout();
+generateAccountPage($errorMessage, $errorMessageTable, $successMessage);
 generateLogo();
 generateAccountForm($errorMessageTable, $successMessage);
 generateErrorMessageDiv($errorMessage);
@@ -57,6 +57,9 @@ function generateAccountPage(&$loginErrorMessage, &$errorMessageTable, &$success
     if (!isUserConnected()) {
         $loginErrorMessage = LOGIN_ERROR_NO_USER_CONNECTED;
         return null;
+    }
+    else{
+        $loginErrorMessage = "";
     }
     
     if (! isset($_POST["update"])) {

@@ -14,6 +14,14 @@ body {
     background-color: #0074b7;
 }
 
+.formLoginSpan p {
+    color: #75E6DA;
+}
+
+.formLoginSpan a {
+    color: #ECF87F;
+}
+
 h1, h2, .companyDescription p {
     text-align: center;
     margin-top: 10px;
