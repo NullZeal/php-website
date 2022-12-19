@@ -50,7 +50,7 @@ function generateBuyingPage(&$errorMessageArray)
                     placeholder="Input quantity here!"
                     size="30"
                     maxlength="20">
-                <label for="quantity"><?php 
+                <label id="errorLabel" for="quantity"><?php 
                     echo $errorMessageArray["quantity"]; ?></label>
                 <br>
                 <button id="buyButton" type="submit" name="purchaseSubmitted">Buy</button>

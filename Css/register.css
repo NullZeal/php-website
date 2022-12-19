@@ -58,11 +58,15 @@ input, textarea {
 }
 
 .red {
-    color:red;
+    color: #cc0000;
 }
 
 #required {
     display:block;
     color:red;
     margin-left:20vw;
+}
+
+.formErrorSpan{
+    color: #cc0000;
 }

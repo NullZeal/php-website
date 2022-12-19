@@ -142,7 +142,12 @@ body {
 }
 
 .formLoginSpan a {
-    text-decoration:none
+    text-decoration:none;
+    color: green;
+}
+
+.formLoginSpan p {
+    color: #cc0000;
 }
 
 #pageLoginErrorMessage {

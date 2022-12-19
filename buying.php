@@ -76,7 +76,7 @@ generatePageBottom();
 # PAGE-SPECIFIC FUNCTIONS
 ########################################################################
 
-function insertOrderToCustomer(&$errorMessageArray)
+function insertOrderToCustomer(&$errMsgArray)
 {
     #Check if a purchase has been submitted and if a customer is connected
     if (isset($_POST["purchaseSubmitted"]) && isset($_SESSION["connectedUser"])) {

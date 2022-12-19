@@ -14,7 +14,7 @@ body {
     background-color: rgba(122,122,122,0.2);
 }
 
-h1, h2, p {
+h1, h2, .companyDescription p {
     text-align: center;
     margin-top: 10px;
 }
@@ -27,7 +27,7 @@ h2 {
     font-size: 2rem;
 }
 
-p {
+.companyDescription p {
     font-size: 1rem;
     max-width: 800px;
     margin-left: 30vw;

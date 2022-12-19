@@ -102,8 +102,8 @@ function generateLoginForm($loginErrorMessage, $registerUrl) {
     ?>
         <div id="loginContainer">
             <form id="loginForm" method="post">
-                <span class="formLoginSpan"><?php
-                echo $loginErrorMessage; ?> <a href="<?php
+                <span class="formLoginSpan"><p><?php
+                echo $loginErrorMessage; ?></p><a href="<?php
                 echo FILE_PAGE_REGISTER ?>">Register</a></span>
                 <label for="username">- Username: </label>
                 <input id="username" type="text" name="username" placeholder="Username">

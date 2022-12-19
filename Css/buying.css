@@ -48,6 +48,10 @@ buyingForm input, textarea {
     margin-top:20px;
 }
 
+#errorLabel {
+    color: #cc0000;
+}
+
 .confirmation {
     color: green;
     background-color: rgba(222,222,40,0.8);

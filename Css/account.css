@@ -62,3 +62,7 @@ body {
     color:red;
     margin-left:20vw;
 }
+
+.formErrorSpan {
+    color: #cc0000;
+}
