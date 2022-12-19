@@ -14,7 +14,6 @@ class notes since it can store pictures and files as well, is Open Source and
 manages all of my devices. I then transfered everything here on the 
  29th of october. 
 
-
 #DEVELOPER                      DATE             Comments
 #Julien Pontbriand (2135020)    Sept. 2, 2022    Added content for class 1
 #
@@ -41,8 +40,42 @@ manages all of my devices. I then transfered everything here on the
 #
 #DEVELOPER                      DATE             Comments
 #Julien Pontbriand (2135020)    Oct. 17, 2022    Added content for class 9
-
-------------------------------------------------------------------------------
+#
+#DEVELOPER                      DATE             Comments
+#Julien Pontbriand (2135020)    Oct. 21, 2022    Added content for class 10
+#
+#DEVELOPER                      DATE             Comments
+#Julien Pontbriand (2135020)    Oct. 24, 2022    Added content for class 11
+#
+#DEVELOPER                      DATE             Comments
+#Julien Pontbriand (2135020)    Oct. 28, 2022    Added content for class 12
+#
+#DEVELOPER                      DATE             Comments
+#Julien Pontbriand (2135020)    Oct. 31, 2022    Added content for class 13
+#
+#DEVELOPER                      DATE             Comments
+#Julien Pontbriand (2135020)    Nov. 04, 2022    Added content for class 14
+#
+#DEVELOPER                      DATE             Comments
+#Julien Pontbriand (2135020)    Nov. 07, 2022    Added content for class 15
+#
+#DEVELOPER                      DATE             Comments
+#Julien Pontbriand (2135020)    Nov. 11, 2022    Added content for class 16
+#
+#DEVELOPER                      DATE             Comments
+#Julien Pontbriand (2135020)    Nov. 14, 2022    Added content for class 17
+#
+#DEVELOPER                      DATE             Comments
+#Julien Pontbriand (2135020)    Nov. 18, 2022    Added content for class 18
+#
+#DEVELOPER                      DATE             Comments
+#Julien Pontbriand (2135020)    Nov. 21, 2022    Added content for class 19
+#
+#DEVELOPER                      DATE             Comments
+#Julien Pontbriand (2135020)    Nov. 25, 2022    Added content for class 20
+#
+####################################################################################
+####################################################################################
 
 Class 1:
 
@@ -65,7 +98,8 @@ https://sourceforge.net/projects/rhash-for-windows/
 
 I found out I'd rather use the Get-Hash function of Powershell
 
-------------------------------------------------------------------------------
+####################################################################################
+####################################################################################
 
 Class 2:
 
@@ -103,7 +137,8 @@ Keep index name the same so the user don't have to click anything (uses default 
 
 Bad html can lead to low SSO optimization
 
-------------------------------------------------------------------------------
+####################################################################################
+####################################################################################
 
 Class 3:
 
@@ -124,7 +159,8 @@ Utf-8 (UNICODE) = Good encoding for letters. Only special characters will use 2 
 (MUST CREATE HEADERS BEFORE THE DOCUMENT HTML IS BEING SENT)
 3- (auto) meta charset = utf-8 (add it to the header of the html)
 
-------------------------------------------------------------------------------
+####################################################################################
+####################################################################################
 
 Class 4:
 
@@ -173,7 +209,8 @@ mb_substr exists (multi byte, takes special characters as regular characters for
 strpos and stripos
 
 
-------------------------------------------------------------------------------
+####################################################################################
+####################################################################################
 
 Class 5:
 
@@ -184,7 +221,8 @@ Round function exsists : ex round($x * $y, 2)
 
 The 2 in the previous example tells us to floor ater the 2nd digit.
 
-------------------------------------------------------------------------------
+####################################################################################
+####################################################################################
 
 Class 6:
 
@@ -225,7 +263,8 @@ Whan a ref starts with a /, it means RIGHT THERE relative to this files location
 
 : ex -> /test.txt
 
-------------------------------------------------------------------------------
+####################################################################################
+####################################################################################
 
 Class 7:
 
@@ -239,7 +278,8 @@ It is important to check if vs code copy automatically to htdocs
 
 in : C:\xampp\htdocs
 
-------------------------------------------------------------------------------
+####################################################################################
+####################################################################################
 
 Class 8:
 
@@ -276,7 +316,8 @@ POST
 1. Nothing is saved in the history
 2. Secure for forms inputs
 
-------------------------------------------------------------------------------
+####################################################################################
+####################################################################################
 
 Class 9:
 
@@ -312,8 +353,8 @@ echo "<br>#3 " . htmlspecialchars($make);
 4 htmlentities
 echo "<br>#4 " . htmlentities($make);
 
-------------------------------------------------------------------------------
-
+####################################################################################
+####################################################################################
 Class 10:
 
 Types of errors
@@ -376,4 +417,512 @@ quirk mode :
 XSLT :
 
 eXtensible StyleSheet language
+
+####################################################################################
+####################################################################################
+
+Class 11:
+
+Today we will see more off the superGlobals
+
+$_ENV
+
+Environment variables are system wide (OS)
+
+Language of the machine, etc.
+
+PATH environments
+
+To Use Encryption
+
+Certificate = Public key?
+
+OpenSSL : if u are inside the command, do not look at the parameters
+
+openssl req -x509 -newkey rsa:4096 -keyout jf-private-key.key -out jf-certificate.crt -days 365
+
+on mac you have to trust it
+
+//var_dump($_server);
+
+if(  ! isset($_SERVER["HTTPS"]) || $_SERVER["HTTPS"] != "on"){
+        #in the project this is good
+        header('Location: https://' . $_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"]);
+        
+        #if you have a port different than 443
+        #header('Location: https://' . $_SERVER["HTTP_HOST"] . ":4433" . $_SERVER["REQUEST_URI"]);
+        
+        #if you are using .....different than 80
+        #header('Location: https://' . str_replace("8000", "4433", $_SERVER["HTTP_HOST"]);
+        
+        exit();
+}
+
+On the workplace, if you have multiple sites hosted, you want to do it globally
+
+OR write a file htaccess (apache config) if you dont have access to the system itself
+
+httpd-vhosts.com in the apache/conf/extra :L
+
+RewriteCond %{HTTPS} != on
+
+
+####################################################################################
+####################################################################################
+
+Class 12:
+
+Open SSL
+
+cygwin - kinda like chocolatey, more static (ff you don't know Chocolatey JF, you should check it out :)
+
+https = secure socket layer
+
+Very important to keep prevent middleman out
+
+You can force your clients to access the https version of your website
+
+####################################################################################
+####################################################################################
+
+Class 13:
+
+A database is text only at its core
+
+Any other editions could do it
+
+Teacher doesnt like PHPMyAdmin as a database editor
+
+HeidiSQL as the editor, but any editor could do it
+
+The text appliccation is always present
+
+A big security flaw for a database is an empty password
+
+Microsoft SQL Server : default admin name = sa
+
+MySql default admin user name : root
+
+Careful it can be confusing with linux's root user
+
+Rather separate the Database and OS\
+
+1st step : make sure username password is not empty
+
+
+Get-FileHash -Path E:\linuxhint.txt -Algorithm SHA512 | Format-List
+
+Should never have a root user with an empty password
+
+Should never use root for your code
+
+1 set a passwprd
+
+2 select a good collation setting
+
+to change the root pw in mariadb, first use mysql
+
+use mysql; (use the database that runs databases, in Sql server its the master db)
+
+ALTER USER ROOT@localhost IDENTIFIED BY 'new password';
+
+flush privileges; #reload the config, to avoir a stop/start of the database
+
+I have more notes in the form of image that I cannot display here!
+
+
+--------------------------------
+
+HEIDI SQL
+
+Session manager : can connect as many users
+
+CREATE NEW DATABASE:
+
+name a database : en
+
+ci  = case insensitive
+
+ai = accent insensitive
+
+UUID instead of INT, 128 bitr, hexa decimal num
+
+SELECT UUID();
+
+Unique in space and time
+
+It uses the mac address
+
+AND the date and time of the creation of the key
+
+AND a RANDOM NUM
+
+ip link (console)
+
+choose the perfect type(varchar) and size(20 chars)
+
+BINARY would be perfect, but its hard to use it
+
+USE CHAR and
+
+BINARY(16) 16 bytes would be the best (128 bits), but too advanced for our class atm
+
+each row is like a page in a book
+
+An index : Like a chapter in a book, for speed purpose
+
+PK = NULL,
+
+TABLE SCAN - Nightly work
+
+####################################################################################
+####################################################################################
+
+Class 14:
+
+More than 1 table at the end of the class
+
+You should know how to backup a database
+
+DATABASE
+
+2 ways to backup a database
+
+1.  binary file
+
+**2) txt file containing sql code (recommended)**
+
+**its more flexible, version wise**
+
+**only one that works with mariadb**
+
+security-wise, they are more or less the same
+
+if you really need security, put it in a zip file with a password
+
+He gives points for creating data (ROWS)
+
+
+DECIMALS :
+
+Internally, its complex : 12.99 -> 12.99000000000001
+
+Decimals 4 bytes for every 9 digits (WAY more precise than double or float)
+
+When using decimal, you have to determine 2 numbers ;
+
+1.  how many numbers
+    
+2.  how many decimals
+    
+
+CHECK FOR MINUS
+
+check max value
+
+We can add constraints
+
+
+DATE :
+
+1 field, dont split those
+
+DATETIME : yyyy-mm-dd-hh-mm-ss- etc
+
+SELECT NOW = GETS TODAYS DATE
+
+put now() in the expression
+
+it changes to current_timestamp when you save
+
+TIMESTAMP : More efficient, # of seconds since x
+
+[] means optional in the now() condition
+
+Add update for modification
+
+BINARY TYPE:
+
+for the very big sufff ( an image, a pdf, etc.)
+
+BLOB : Thats the real binary in MYSQL
+
+------------
+
+Creating a primary key :
+
+Speed
+
+1- NOT NULL
+
+2-UNIQUE
+
+3-
+
+UNIQUE:
+
+Can be empty
+
+EMAIL = UNIQUE
+
+KEY:
+
+Just index it
+
+REINDEX : FILL FACTOR 50 (80 IS USUALLY THE MAGIC NUMBER)
+
+If you write A LOT, 20 would be better
+
+the number is the amount of data
+
+(50 data, 50 empty)
+
+Book:
+
+C#: Page 2
+
+Linux: page 345
+
+Datrabase:
+
+C#: Page 2
+
+Linux: page 345
+
+---
+
+If you type explain before a query, it tells you
+
+
+SQL INJECTION -
+
+parameters
+
+create a strored procedure
+
+write lots of comments INSIDE THE PROCEDURE
+
+####################################################################################
+####################################################################################
+
+Class 14:
+
+
+Resultset = row
+
+Result = int,varchat, etc.
+
+PURE SQL :
+
+commands that are true for all sql databases engines
+
+SPECIFIC SQL:
+
+Microsoft sql language : T-SQL is has some differences
+
+ORACLE : plsql
+
+Postgres : pgplsql
+
+Etc
+
+The specific advanced stuff is different on the database engines
+
+if, else, loops, variables,
+
+var := 2
+
+var = 2
+
+Call is different than SELECT * FROM ...
+
+------
+
+The trick is to COMMENT the procedure to save it and check the value types
+
+Deterministic = no table received?
+
+\
+
+--
+
+Restric is impoortant
+
+No action is the same
+
+Cascade is verrrryy dangerous
+
+INNER JOIN = BOTH TABLE ARE IMPORTANT, they must both have data
+
+LEFT JOIN = TABLE TO THE LEFT OF THE JOIN IS IMPORTANT
+
+RIGHT JOIN = TABLE TO THE RIGHT OF THE JOIN IS IMPORTANT
+FULL JOIN = The `FULL OUTER JOIN` keyword returns all records when there is a match in left (table1) or right (table2) table records.
+
+--
+
+Comments arte never saved with view
+
+indentation is never saved with the views
+
+the * is replaces with `table`.`field`
+
+suggest to create the from from a procedure first to debug and then do the view
+
+####################################################################################
+####################################################################################
+
+Class 16:
+
+Its a very bad idea to use the root account to access the database
+
+Even more so for a website
+
+1.  Create a MariaDB user account
+
+(Click the 2 faces)
+
+Dont touch the default accs
+
+2.  Give it a password
+    
+3.  Give basic permission to store procedures and views
+    
+
+a) Add object
+
+b) Give execute for procedures or SELECT for view
+
+DO NOT TOUCH GLOBAL PRIVILEGES
+
+Its not a class about database, but every website needs one with good security
+
+Permissions are outside of the database
+
+since its outside, its not BACKED UP by default
+
+SHOW GRANTS FOR php_en@ localhost
+
+THen copy all the grants: COPY AS DELIMITED TEXT
+
+Wayss to connect to MySql from PHP:
+
+1.  PDO (Php Data Objects)
+
+-Connect to 12 diffferent database engines (MySql/MariaDB, PostGreSQL, SQL Server, Oracle .. )
+
+-It uses named parameters (passwoed, player_name, XP, etc.)
+
+-Throws exceptions when something occurs (detected automatically by error_handle/exc_handler
+
+Expresss versions : free, limited # of connections: 10, 20
+
+Windows server + SQL Server Corporate : 9000$
+
+2.  mySQLi (Object oriented one)
+    
+3.  mySQLi (procedural/functions)
+    
+4.  mySQL (do NOT use that one)
+    
+
+Connection = null MEANS closes the connection
+
+
+####################################################################################
+####################################################################################
+
+Class 17:
+
+Bad idea to store a password in plain text for the users
+
+select for pdo
+
+**Many screenshots taken that I cant display in this document**
+
+I saved them in Joplin
+
+everytime you see QUERY, you are vulnerable
+
+use a parameter to make a difference between code that must be executed and data input from unkown people from the internet
+
+for the project :
+
+Revision history and comments in the database
+
+
+####################################################################################
+####################################################################################
+
+Class 18:
+
+I mostly took screenshots this class
+
+SQL prepared statementss with stored procedures and permissions is a good way to go to be secure and maintainable
+
+
+####################################################################################
+####################################################################################
+
+Class 20:
+
+I mostly took screenshots this class
+
+SQL prepared statementss with stored procedures and permissions is a good way to go to be secure and maintainable
+
+webpage since the start of the session, but sometimes you are viewing a pdf
+
+to see a pdf
+
+websites take a key
+
+a connection
+
+a select with played id
+
+an id
+
+a header for pdf : header('Content-Type:application/pdf);
+
+you can send another header :
+
+header('Content-Disposition: attachment; filename=" lasallecollegePDFTest.pdf);
+
+ifram html for a page within a page
+
+(dowloads automatically)
+
+you cannot hardcode a pointer?
+
+----------
+
+passwords
+
+bad to know for interpersonal relations
+
+bad to know for security reasons
+
+encrypted vs hash
+
+encrypted = depends on a private key
+
+hash = translated from a formula
+
+ccrypto currency using body data to mine
+
+password should always have 255 varchars
+
+to verify a password, we need to call : if (password_+]
+
+no clear password data in the DB
+
+---------
+
+MVC
+
+dll (business rule)
+
+make sure id does not exceeed 36 chars
+
 -->
+

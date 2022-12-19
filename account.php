@@ -51,9 +51,10 @@ generatePageBottom();
 # PAGE-SPECIFIC FUNCTIONS
 ########################################################################
 
+#This function has a lot in common with the attemptToRegisterCustomer() function in the
+#register page. See that one for more comments
 function generateAccountPage(&$loginErrorMessage, &$errorMessageTable, &$successMessage)
 {
-    
     if (!isUserConnected()) {
         $loginErrorMessage = LOGIN_ERROR_NO_USER_CONNECTED;
         return null;
