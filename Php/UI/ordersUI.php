@@ -42,7 +42,7 @@ function generateOrderRow($orderRowId, $orderRowArray) {
     #This function generates the table rows (tr)
     ?>
         <tr>
-            <td><Button id="deleteButton" onclick="deleteOrder(<?php echo "'" . $orderRowId . "'" ?>)">Delete me</Button></td>
+            <td><Button id="deleteButton" onclick="deleteOrder(<?php echo "'" . $orderRowId . "'" ?>)">Delete Order</Button></td>
             <td><?php echo $orderRowArray["orderCreated"] ?></td>
             <td><?php echo $orderRowArray["productCode"] ?></td>
             <td><?php echo $orderRowArray["city"] ?></td>

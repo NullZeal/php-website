@@ -11,12 +11,13 @@
 */
 
 body {
-    background-color: rgba(122,122,122,0.2);
+    background-color: #0074b7;
 }
 
 h1, h2, .companyDescription p {
     text-align: center;
     margin-top: 10px;
+    color: #b1d4e0;
 }
 
 h1 {
@@ -92,10 +93,15 @@ body {
     background-color: rgba(44,44,44,0.3);
     border-radius: 10px;
     margin-bottom: 3vh;
+    color: #b1d4e0;
 }
 
 #videoEncryption {
     width : 532px;
     height: 300px;
     margin-left:calc(50% - 266px);
+}
+
+.welcome {
+    color: #b1d4e0;
 }

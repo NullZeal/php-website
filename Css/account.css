@@ -15,6 +15,22 @@ body {
     background-color: rgba(230,86,176, 0.2);
 }
 
+.welcome {
+    color: #003b73;
+}
+
+#loginForm label{
+    color: #0c2d48;
+}
+
+#loginForm a {
+    color: #145da0;
+}
+
+#loginButton{
+    color: #145da0;
+}
+
 #registerForm {
     margin-top:5vh;
     margin-left:20vw;
