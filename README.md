@@ -1,6 +1,6 @@
 # php-website
 
-A php website created for eduacation purpose. 
+A php website created for educational purposes. 
 
 The goal of this project was to practice the implementation of php code as a revision for what we learned in a online class.
 
